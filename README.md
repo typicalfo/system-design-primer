@@ -1,3 +1,37 @@
+# Enterprise working fork of the System Design Primer
+
+> This repository is an enterprise-augmented fork of [donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer) by Donne Martin. The original work is copyright 2017 Donne Martin and is licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/). The same grant is stated in [LICENSE.txt](LICENSE.txt), including the note that the license is from the author and not from the author's employer (named there as Facebook). Changes were made, as CC BY 4.0 requires: an enterprise guide, pattern cards, copyable templates, reference architectures, grounding for the AI skills pack under `pack/`, and agent entry points (`AGENTS.md`, `llms.txt`, `catalog.json`). The original Primer prose is preserved below.
+
+## How to use this repo to design and build a system (for humans and AI agents)
+
+Use this repository as a working kit for designing and building production systems. The original study and interview material is unchanged under [Original study guide](#original-study-guide).
+
+### Quick start
+
+1. Write requirements, estimates, and a component sketch with the [system-architect](pack/skills/system-architect/SKILL.md) skill. Start from the [design doc template](templates/design-doc.md).
+2. Review the design with the [design-reviewer](pack/skills/design-reviewer/SKILL.md) skill and its [checklist](pack/skills/design-reviewer/checklist.md).
+3. Record each durable tradeoff with the [adr-writer](pack/skills/adr-writer/SKILL.md) skill. The canonical outline is [template.md](pack/skills/adr-writer/template.md).
+4. Pull a [pattern card](patterns/README.md) or an [enterprise page](enterprise/README.md) for each decision the design actually makes, and copy a [template](templates/README.md) instead of starting from a blank page.
+
+### Map
+
+| Start here | What it is |
+|---|---|
+| [AGENTS.md](AGENTS.md) | How any coding agent should use the repo: workflow, which files to load, conventions. |
+| [llms.txt](llms.txt) | Short index of the key docs for language models. |
+| [catalog.json](catalog.json) | Machine-readable index of every new doc, pattern, skill, template, and reference architecture. Regenerate with `python3 scripts/build_catalog.py`. |
+| [enterprise/](enterprise/README.md) | Identity, security, tenancy, compliance, operations, data, APIs, delivery, cost, and organization. |
+| [patterns/](patterns/README.md) | One card per pattern: problem, when to use, when not to, tradeoffs, failure modes. |
+| [templates/](templates/README.md) | Design doc, ADR pointer, threat model, SLO, runbook, postmortem, capacity worksheet. |
+| [Reference architectures](enterprise/reference-architectures/README.md) | Four end-to-end designs with estimates and a design-review pass. |
+| [pack/](pack/README.md) | Tool-agnostic skills: architect, reviewer, ADR writer. |
+| [What's dated](enterprise/whats-dated.md) | Where the Primer's advice has aged, and the current equivalent. |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Pull requests only. GitHub Issues are off. |
+
+## Original study guide
+
+The original System Design Primer (study and interview material) by Donne Martin follows unchanged below, except for short callouts marked `Enterprise update (fork)`.
+
 *[English](README.md) ∙ [日本語](README-ja.md) ∙ [简体中文](README-zh-Hans.md) ∙ [繁體中文](README-zh-TW.md) | [العَرَبِيَّة‎](https://github.com/donnemartin/system-design-primer/issues/170) ∙ [বাংলা](https://github.com/donnemartin/system-design-primer/issues/220) ∙ [Português do Brasil](https://github.com/donnemartin/system-design-primer/issues/40) ∙ [Deutsch](https://github.com/donnemartin/system-design-primer/issues/186) ∙ [ελληνικά](https://github.com/donnemartin/system-design-primer/issues/130) ∙ [עברית](https://github.com/donnemartin/system-design-primer/issues/272) ∙ [Italiano](https://github.com/donnemartin/system-design-primer/issues/104) ∙ [한국어](https://github.com/donnemartin/system-design-primer/issues/102) ∙ [فارسی](https://github.com/donnemartin/system-design-primer/issues/110) ∙ [Polski](https://github.com/donnemartin/system-design-primer/issues/68) ∙ [русский язык](https://github.com/donnemartin/system-design-primer/issues/87) ∙ [Español](https://github.com/donnemartin/system-design-primer/issues/136) ∙ [ภาษาไทย](https://github.com/donnemartin/system-design-primer/issues/187) ∙ [Türkçe](https://github.com/donnemartin/system-design-primer/issues/39) ∙ [tiếng Việt](https://github.com/donnemartin/system-design-primer/issues/127) ∙ [Français](https://github.com/donnemartin/system-design-primer/issues/250) | [Add Translation](https://github.com/donnemartin/system-design-primer/issues/28)*
 
 **Help [translate](TRANSLATIONS.md) this guide!**
@@ -437,6 +471,8 @@ Generally, you should aim for **maximal throughput** with **acceptable latency**
 
 ## Availability vs consistency
 
+> **Enterprise update (fork):** The standing "pick two" reading of CAP is dated. During a partition, choose consistency or availability, and while the network is healthy also trade latency against consistency (PACELC). See [what's dated](enterprise/whats-dated.md#cap-and-pacelc) and [consistency patterns](patterns/consistency-patterns.md).
+
 ### CAP theorem
 
 <p align="center">
@@ -472,6 +508,8 @@ AP is a good choice if the business needs to allow for [eventual consistency](#e
 
 ## Consistency patterns
 
+> **Enterprise update (fork):** Name weak, eventual, or strong per path, and do not give the whole system one label. The operational card is [consistency patterns](patterns/consistency-patterns.md).
+
 With multiple copies of the same data, we are faced with options on how to synchronize them so clients have a consistent view of the data.  Recall the definition of consistency from the [CAP theorem](#cap-theorem) - Every read receives the most recent write or an error.
 
 ### Weak consistency
@@ -497,6 +535,8 @@ This approach is seen in file systems and RDBMSes.  Strong consistency works wel
 * [Transactions across data centers](http://snarfed.org/transactions_across_datacenters_io.html)
 
 ## Availability patterns
+
+> **Enterprise update (fork):** Active-passive and active-active still describe failover. New designs say leader-follower instead of master-slave, and they pair the topology with an RPO, an RTO, and a tested promotion. See [availability and failover](patterns/availability-failover.md) and [multi-region](enterprise/reliability/multi-region.md).
 
 There are two complementary patterns to support high availability: **fail-over** and **replication**.
 
@@ -618,6 +658,8 @@ Services such as [CloudFlare](https://www.cloudflare.com/dns/) and [Route 53](ht
 
 ## Content delivery network
 
+> **Enterprise update (fork):** Push versus pull is still the right question. Do not cache authenticated or tenant-specific responses on a shared edge key. Card: [CDN](patterns/cdn.md).
+
 <p align="center">
   <img src="images/h9TAuGI.jpg">
   <br/>
@@ -658,6 +700,8 @@ Sites with heavy traffic work well with pull CDNs, as traffic is spread out more
 * [Wikipedia](https://en.wikipedia.org/wiki/Content_delivery_network)
 
 ## Load balancer
+
+> **Enterprise update (fork):** Run more than one balancer, and keep application instances stateless. The usual implementation now is a cloud load balancer or an Envoy or nginx-class proxy. Card: [load balancing](patterns/load-balancing.md).
 
 <p align="center">
   <img src="images/h81n9iK.png">
@@ -784,11 +828,15 @@ Workers in the application layer also help enable [asynchronism](#asynchronism).
 
 ### Microservices
 
+> **Enterprise update (fork):** Split a service when a team, a scale number, or an isolation requirement is already real. Until then a modular monolith is the default. See [modular monolith](enterprise/modernization/modular-monolith.md) and [strangler fig](patterns/strangler-fig.md).
+
 Related to this discussion are [microservices](https://en.wikipedia.org/wiki/Microservices), which can be described as a suite of independently deployable, small, modular services.  Each service runs a unique process and communicates through a well-defined, lightweight mechanism to serve a business goal. <sup><a href=https://smartbear.com/learn/api-design/what-are-microservices>1</a></sup>
 
 Pinterest, for example, could have the following microservices: user profile, follower, feed, search, photo upload, etc.
 
 ### Service Discovery
+
+> **Enterprise update (fork):** Consul, etcd, and ZooKeeper still work. On Kubernetes, Service DNS and readiness probes cover the common case. Health checks remain mandatory. See [what's dated](enterprise/whats-dated.md#service-discovery).
 
 Systems such as [Consul](https://www.consul.io/docs/index.html), [Etcd](https://coreos.com/etcd/docs/latest), and [Zookeeper](http://www.slideshare.net/sauravhaloi/introduction-to-apache-zookeeper) can help services find each other by keeping track of registered names, addresses, and ports.  [Health checks](https://www.consul.io/intro/getting-started/checks.html) help verify service integrity and are often done using an [HTTP](#hypertext-transfer-protocol-http) endpoint.  Both Consul and Etcd have a built in [key-value store](#key-value-store) that can be useful for storing config values and other shared data.
 
@@ -827,6 +875,8 @@ A relational database like SQL is a collection of data items organized in tables
 There are many techniques to scale a relational database: **master-slave replication**, **master-master replication**, **federation**, **sharding**, **denormalization**, and **SQL tuning**.
 
 #### Master-slave replication
+
+> **Enterprise update (fork):** Prefer the name leader-follower or primary-replica. The failure modes (lag, lost writes on promotion, followers spending capacity on replay) are unchanged. Card: [leader-follower replication](patterns/replication-leader-follower.md).
 
 The master serves reads and writes, replicating writes to one or more slaves, which serve only reads.  Slaves can also replicate to additional slaves in a tree-like fashion.  If the master goes offline, the system can continue to operate in read-only mode until a slave is promoted to a master or a new master is provisioned.
 
@@ -873,6 +923,8 @@ Both masters serve reads and writes and coordinate with each other on writes.  I
 
 #### Federation
 
+> **Enterprise update (fork):** Functional partitioning is still how you give domains their own store. The card, including when a split is premature, is [federation](patterns/federation.md).
+
 <p align="center">
   <img src="images/U3qV33e.png">
   <br/>
@@ -893,6 +945,8 @@ Federation (or functional partitioning) splits up databases by function.  For ex
 * [Scaling up to your first 10 million users](https://www.youtube.com/watch?v=kKjm4ehYiMs)
 
 #### Sharding
+
+> **Enterprise update (fork):** Shard when one dataset's size or write rate no longer fits one primary, and put the shard key on every query. Hot keys and resharding are the failure modes. Card: [sharding](patterns/sharding.md).
 
 <p align="center">
   <img src="images/wU8x5Id.png">
@@ -978,6 +1032,8 @@ Benchmarking and profiling might point you to the following optimizations.
 * Break up a table by putting hot spots in a separate table to help keep it in memory.
 
 ##### Tune the query cache
+
+> **Enterprise update (fork):** The MySQL query cache this section links to was removed in MySQL 8.0. Use the buffer pool plus an application or CDN cache. Notes: [what's dated](enterprise/whats-dated.md#query-cache-and-sql-folklore).
 
 * In some cases, the [query cache](https://dev.mysql.com/doc/refman/5.7/en/query-cache.html) could lead to [performance issues](https://www.percona.com/blog/2016/10/12/mysql-5-7-performance-tuning-immediately-after-installation/).
 
@@ -1198,6 +1254,8 @@ Suggestions of what to cache:
 
 ### When to update the cache
 
+> **Enterprise update (fork):** Cache-aside, write-through, write-behind, and refresh-ahead are [pattern cards](patterns/README.md), with invalidation called out separately in [cache invalidation](patterns/cache-invalidation.md).
+
 Since you can only store a limited amount of data in cache, you'll need to determine which cache update strategy works best for your use case.
 
 #### Cache-aside
@@ -1332,6 +1390,8 @@ Refresh-ahead can result in reduced latency vs read-through if the cache can acc
 Asynchronous workflows help reduce request times for expensive operations that would otherwise be performed in-line.  They can also help by doing time-consuming work in advance, such as periodic aggregation of data.
 
 ### Message queues
+
+> **Enterprise update (fork):** At-least-once delivery is the contract to design for. A durable log or a transactional outbox is the usual equivalent when the job must not disappear. See [message queues](patterns/message-queues.md) and [what's dated](enterprise/whats-dated.md#queues).
 
 Message queues receive, hold, and deliver messages.  If an operation is too slow to perform inline, you can use a message queue with the following workflow:
 
@@ -1503,6 +1563,8 @@ HTTP APIs following **REST** tend to be used more often for public APIs.
 
 ### Representational state transfer (REST)
 
+> **Enterprise update (fork):** REST remains a good public HTTP default. Internal calls are often gRPC, and a backend-for-frontend exists so clients do not fan out. See [API styles](enterprise/apis/styles.md) and [what's dated](enterprise/whats-dated.md#rpc-rest-and-clients).
+
 REST is an architectural style enforcing a client/server model where the client acts on a set of resources managed by the server.  The server provides a representation of resources and actions that can either manipulate or get a new representation of resources.  All communication must be stateless and cacheable.
 
 There are four qualities of a RESTful interface:
@@ -1558,6 +1620,8 @@ REST is focused on exposing data.  It minimizes the coupling between client/serv
 * [Why REST for internal use and not RPC](http://arstechnica.com/civis/viewtopic.php?t=1190508)
 
 ## Security
+
+> **Enterprise update (fork):** The notes below are a floor, not a design. Identity, ASVS, supply chain, and audit live in the [enterprise security guide](enterprise/security/threat-modeling.md). See also [what's dated](enterprise/whats-dated.md#security).
 
 This section could use some updates.  Consider [contributing](#contributing)!
 

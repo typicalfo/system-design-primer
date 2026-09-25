@@ -1,0 +1,185 @@
+#!/usr/bin/env python3
+"""Regenerate catalog.json and llms-full.txt from Markdown frontmatter.
+
+Standard library only. Run from anywhere:
+
+    python3 scripts/build_catalog.py
+"""
+
+from __future__ import annotations
+
+import json
+import re
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+MAX_FULL = 1_000_000
+
+SCAN_ROOTS = ("enterprise", "patterns", "templates", "pack")
+EXTRA = ("AGENTS.md", "CONTRIBUTING.md")
+
+
+def split_frontmatter(text: str) -> tuple[dict[str, str | list[str]], str]:
+    if not text.startswith("---\n"):
+        return {}, text
+    end = text.find("\n---\n", 4)
+    if end == -1:
+        return {}, text
+    raw = text[4:end]
+    body = text[end + 5 :]
+    data: dict[str, str | list[str]] = {}
+    key: str | None = None
+    items: list[str] | None = None
+    for line in raw.splitlines():
+        if items is not None and line.startswith("  - "):
+            items.append(line[4:].strip().strip("\"'"))
+            continue
+        if items is not None and key:
+            data[key] = items
+            items = None
+            key = None
+        if not line.strip() or line.strip().startswith("#"):
+            continue
+        if ":" not in line:
+            continue
+        k, v = line.split(":", 1)
+        k = k.strip()
+        v = v.strip()
+        if v == "" or v == "|" or v == ">":
+            key = k
+            items = []
+            continue
+        if v.startswith("[") and v.endswith("]"):
+            inner = v[1:-1].strip()
+            data[k] = (
+                [p.strip().strip("\"'") for p in inner.split(",") if p.strip()]
+                if inner
+                else []
+            )
+            key = None
+            items = None
+            continue
+        if (v.startswith('"') and v.endswith('"')) or (
+            v.startswith("'") and v.endswith("'")
+        ):
+            v = v[1:-1]
+        data[k] = v
+        key = None
+        items = None
+    if items is not None and key:
+        data[key] = items
+    return data, body
+
+
+def first_heading(body: str) -> str:
+    for line in body.splitlines():
+        if line.startswith("# "):
+            return line[2:].strip()
+    return ""
+
+
+def first_paragraph(body: str) -> str:
+    buf: list[str] = []
+    for line in body.splitlines():
+        if line.startswith("#"):
+            if buf:
+                break
+            continue
+        if not line.strip():
+            if buf:
+                break
+            continue
+        if line.startswith("---"):
+            continue
+        buf.append(line.strip())
+    text = re.sub(r"\s+", " ", " ".join(buf)).strip()
+    return text[:400]
+
+
+def classify(rel: str) -> str:
+    if rel.startswith("pack/skills/") and rel.endswith("/SKILL.md"):
+        return "skill"
+    if rel.startswith("pack/examples/"):
+        return "example"
+    if rel.startswith("enterprise/reference-architectures/") and not rel.endswith(
+        "/README.md"
+    ):
+        return "reference-architecture"
+    if rel.startswith("templates/") and not rel.endswith("/README.md"):
+        return "template"
+    if rel.startswith("patterns/") and not rel.endswith("/README.md"):
+        return "pattern"
+    return "doc"
+
+
+def entry_for(path: Path) -> dict:
+    rel = path.relative_to(ROOT).as_posix()
+    text = path.read_text(encoding="utf-8")
+    meta, body = split_frontmatter(text)
+    kind = classify(rel)
+    if kind == "skill":
+        title = str(meta.get("name") or first_heading(body) or path.stem)
+        summary = str(meta.get("description") or first_paragraph(body))
+        tags = meta.get("tags") if isinstance(meta.get("tags"), list) else ["skill"]
+        if "skill" not in tags:
+            tags = ["skill", *tags]
+    else:
+        title = str(meta.get("title") or first_heading(body) or path.stem)
+        summary = str(meta.get("summary") or first_paragraph(body))
+        tags_raw = meta.get("tags")
+        tags = tags_raw if isinstance(tags_raw, list) else []
+    return {
+        "path": rel,
+        "type": kind,
+        "title": title,
+        "tags": tags,
+        "summary": summary,
+    }
+
+
+def iter_docs() -> list[Path]:
+    found: list[Path] = []
+    for root_name in SCAN_ROOTS:
+        base = ROOT / root_name
+        if base.exists():
+            found.extend(p for p in base.rglob("*.md") if p.is_file())
+    for name in EXTRA:
+        p = ROOT / name
+        if p.exists():
+            found.append(p)
+    return sorted(found, key=lambda p: p.relative_to(ROOT).as_posix())
+
+
+def main() -> None:
+    docs = iter_docs()
+    catalog = [entry_for(p) for p in docs]
+    out = ROOT / "catalog.json"
+    out.write_text(json.dumps(catalog, indent=2) + "\n", encoding="utf-8")
+    print(f"wrote {out.relative_to(ROOT)} ({len(catalog)} entries)")
+
+    parts: list[str] = [
+        "# llms-full.txt\n\n",
+        "Concatenation of the enterprise guide, pattern cards, templates, and pack docs.\n",
+        "Generated by scripts/build_catalog.py. Do not edit by hand.\n\n",
+    ]
+    for path in docs:
+        rel = path.relative_to(ROOT).as_posix()
+        parts.append(f"\n\n---\n\n# Source: {rel}\n\n")
+        parts.append(path.read_text(encoding="utf-8"))
+        if not parts[-1].endswith("\n"):
+            parts.append("\n")
+    blob = "".join(parts)
+    full = ROOT / "llms-full.txt"
+    if len(blob.encode("utf-8")) > MAX_FULL:
+        if full.exists():
+            full.unlink()
+        print(
+            f"skipped llms-full.txt ({len(blob.encode('utf-8'))} bytes exceeds {MAX_FULL})"
+        )
+        return
+    full.write_text(blob, encoding="utf-8")
+    print(f"wrote llms-full.txt ({len(blob.encode('utf-8'))} bytes)")
+
+
+if __name__ == "__main__":
+    main()
