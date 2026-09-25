@@ -5,15 +5,12 @@ tags: [reliability, cells, sharding, blast-radius]
 when_to_use: "Use when one bad deploy, overload, or tenant must not be able to take the whole product down, and you can run more than one copy of the stack."
 related:
   - multi-region.md
-  - disaster-recovery.md
-  - circuit-breaker-bulkhead.md
-  - ../observability/slos.md
   - ../tenancy/routing.md
   - ../tenancy/isolation-models.md
   - ../tenancy/noisy-neighbor.md
-  - ../compliance/residency.md
   - ../delivery/progressive-delivery.md
-  - ../../patterns/bulkhead.md
+  - ../../patterns/cell-based-architecture.md
+  - ../../patterns/shuffle-sharding.md
   - ../../patterns/sharding.md
 last_reviewed: 2026-09-25
 ---

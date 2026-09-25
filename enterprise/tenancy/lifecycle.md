@@ -11,6 +11,7 @@ related:
   - ../compliance/retention.md
   - ../compliance/privacy.md
   - ../cost/allocation.md
+  - ../identity/scim-provisioning.md
 last_reviewed: 2026-09-25
 ---
 

@@ -9,6 +9,7 @@ related:
   - ../delivery/cicd.md
   - ../delivery/iac-environments.md
   - ../../pack/corpora/INDEX.md
+  - post-quantum.md
 last_reviewed: 2026-09-25
 ---
 

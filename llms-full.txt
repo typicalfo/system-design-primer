@@ -6,12 +6,12 @@ primer.txt is the root README.md. The study guide in it is The System Design Pri
 
 Size cap: 1000000 bytes per file. The generator never deletes or skips a bundle for being large. If a file would exceed the cap, the command exits non-zero and names the file to split.
 
-Enterprise growth rule: the generator projects 40 additional enterprise docs, each the size of the largest current enterprise doc, plus the per-doc source header. When that projection exceeds the cap, it writes one file per enterprise subfolder (enterprise-<subfolder>.txt) instead of a single combined enterprise.txt. Files that sit directly in enterprise/ stay in enterprise.txt. A subfolder file that still exceeds the cap is an error.
+Enterprise stays one file, llms-full/enterprise.txt, while that rendered file is within the cap. If the rendered enterprise bundle would exceed the cap, the generator writes one file per enterprise subfolder (enterprise-<subfolder>.txt) and keeps docs that sit directly in enterprise/ in enterprise.txt. A file that still exceeds the cap is an error. Nothing is deleted to get under the cap.
 
 ## Files
 
-- [llms-full/enterprise.txt](llms-full/enterprise.txt): 72 docs
-- [llms-full/patterns.txt](llms-full/patterns.txt): 36 docs
-- [llms-full/templates.txt](llms-full/templates.txt): 8 docs
-- [llms-full/pack.txt](llms-full/pack.txt): 16 docs
+- [llms-full/enterprise.txt](llms-full/enterprise.txt): 94 docs
+- [llms-full/patterns.txt](llms-full/patterns.txt): 39 docs
+- [llms-full/templates.txt](llms-full/templates.txt): 12 docs
+- [llms-full/pack.txt](llms-full/pack.txt): 21 docs
 - [llms-full/primer.txt](llms-full/primer.txt): 1 doc

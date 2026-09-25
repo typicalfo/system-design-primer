@@ -9,6 +9,8 @@ related:
   - transactional-outbox.md
   - ../../patterns/saga.md
   - ../../patterns/transactional-outbox.md
+  - workflow-engines.md
+  - ../../patterns/durable-workflow.md
 last_reviewed: 2026-09-25
 ---
 

@@ -9,6 +9,8 @@ related:
   - ../tenancy/noisy-neighbor.md
   - ../cost/capacity.md
   - ../../patterns/rate-limiting.md
+  - ../ai/llm-app-architecture.md
+  - errors-pagination-async.md
 last_reviewed: 2026-09-25
 ---
 

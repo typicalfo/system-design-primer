@@ -50,9 +50,9 @@ The amendment keeps a general application date of 2 August 2026 (recital 40). It
 - 2 December 2027 for AI systems classified as high-risk under Article 6(2) and Annex III.
 - 2 August 2028 for AI systems classified as high-risk under Article 6(1) and Annex I.
 
-The amendment also sets 2 December 2026 for new Article 5(1a) and (1b), and 27 July 2026 for Articles 102 to 110. The Commission describes the Omnibus as prohibiting AI systems that generate non-consensual sexually explicit or intimate content or child sexual abuse material. The exact prohibition is in those article points.
+The amendment also sets 2 December 2026 for Article 5(1), first subparagraph, points (ba) and (bb), and for Article 5(1a) and (1b). Articles 102 to 110 apply from 27 July 2026. Point (ba) covers an AI system that generates or manipulates realistic intimate or sexually explicit material of an identifiable person without that person's consent. Point (bb) covers material or performance within Article 2, points (c) and (e), of Directive 2011/93/EU. Paragraphs 1a and 1b limit when placing on the market, putting into service, or use is actually prohibited. Read those points before you treat a generator as banned.
 
-As of 25 September 2026, the dates that were not deferred have passed: prohibited practices from 2 February 2025, the Chapter V general-purpose model slice from 2 August 2025, and the general application date of 2 August 2026. The deferred high-risk dates and the 2 December 2026 Article 5 points are still ahead. Read the consolidated text before you build a compliance program around a single sentence on this page.
+As of 25 September 2026, the dates that were not deferred have passed: prohibited practices from 2 February 2025, the Chapter V general-purpose model slice from 2 August 2025, and the general application date of 2 August 2026. The deferred high-risk dates and the 2 December 2026 Article 5 points, (ba), (bb), (1a), and (1b), are still ahead. Read the consolidated text before you build a compliance program around a single sentence on this page.
 
 ## DORA
 

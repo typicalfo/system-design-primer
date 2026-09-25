@@ -8,6 +8,7 @@ related:
   - write-behind.md
   - cache-invalidation.md
   - refresh-ahead.md
+  - ../enterprise/data/caching-at-scale.md
 last_reviewed: 2026-09-25
 ---
 

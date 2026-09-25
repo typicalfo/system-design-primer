@@ -10,6 +10,7 @@ related:
   - ../delivery/cicd.md
   - ../identity/authorization-models.md
   - ../../templates/runbook.md
+  - iso27001-fedramp.md
 last_reviewed: 2026-09-25
 ---
 

@@ -5,20 +5,13 @@ tags: [delivery, production-readiness, operations, release]
 when_to_use: "Use when a new service, or a large change to one, is about to take real traffic and you need a review instead of a launch checklist in someone's head."
 related:
   - cicd.md
-  - feature-flags.md
-  - progressive-delivery.md
   - testing-strategy.md
   - ../observability/slos.md
   - ../observability/alerting-oncall.md
   - ../observability/incidents.md
   - ../reliability/disaster-recovery.md
   - ../security/threat-modeling.md
-  - ../compliance/audit-logs.md
-  - ../cost/finops.md
   - ../../templates/production-readiness-review.md
-  - ../../templates/runbook.md
-  - ../../templates/slo.md
-  - ../../templates/threat-model.md
 last_reviewed: 2026-09-25
 ---
 

@@ -11,7 +11,7 @@ related:
   - ../security/owasp-asvs.md
   - ../apis/gateways.md
   - ../../patterns/api-gateway.md
-  - ../../templates/threat-model.md
+  - passkeys-mfa.md
 last_reviewed: 2026-09-25
 ---
 

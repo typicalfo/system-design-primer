@@ -11,6 +11,7 @@ related:
   - schema-evolution.md
   - ../../patterns/message-queues.md
   - ../../patterns/cqrs.md
+  - workflow-engines.md
 last_reviewed: 2026-09-25
 ---
 

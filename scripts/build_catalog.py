@@ -14,14 +14,12 @@ document the hash is updated with an 8-byte big-endian UTF-8 path length, the
 path, an 8-byte big-endian file length, and the raw file bytes. No commit id
 and no timestamp.
 
-Enterprise full text stays one file, llms-full/enterprise.txt, while the
-projected size stays under MAX_FULL bytes. The projection is the rendered
-enterprise bundle plus PLANNED_EXTRA_ENTERPRISE_DOCS additional documents,
-each budgeted at the largest current enterprise document plus the per-document
-source header. When that projection exceeds the cap, the generator writes
-llms-full/enterprise-<subfolder>.txt per subfolder instead, and keeps files
-that sit directly in enterprise/ in llms-full/enterprise.txt. A file that
-still exceeds the cap is an error. Nothing is deleted for size.
+Enterprise full text stays one file, llms-full/enterprise.txt, while that
+rendered file is at most MAX_FULL bytes. If the rendered enterprise bundle
+would exceed the cap, the generator writes llms-full/enterprise-<subfolder>.txt
+per subfolder instead, and keeps files that sit directly in enterprise/ in
+llms-full/enterprise.txt. A file that still exceeds the cap is an error.
+Nothing is deleted to get under the cap.
 """
 
 from __future__ import annotations
@@ -45,7 +43,6 @@ except ImportError:
 
 ROOT = Path(__file__).resolve().parents[1]
 MAX_FULL = 1_000_000
-PLANNED_EXTRA_ENTERPRISE_DOCS = 40
 SCAN_ROOTS = ("enterprise", "patterns", "templates", "pack")
 GITHUB = "https://github.com/typicalfo/system-design-primer"
 REPO_URL = re.compile(
@@ -529,17 +526,13 @@ def bundle(title: str, intro: list[str], docs: list[Path]) -> str:
     return "".join(parts)
 
 
-def source_wrapper_len() -> int:
-    sample = "\n\n---\n\n# Source: enterprise/planned/doc.md\n\n"
-    return len(sample.encode("utf-8"))
-
-
 def ensure_cap(name: str, text: str) -> None:
     size = len(text.encode("utf-8"))
     if size > MAX_FULL:
         err(
             name,
-            f"{size} bytes exceeds {MAX_FULL}; split this section and re-run",
+            f"{size} bytes exceeds the {MAX_FULL}-byte cap. "
+            "Refusing to write or drop this file. Split the section further and re-run.",
         )
 
 
@@ -547,54 +540,40 @@ def enterprise_files(docs: list[dict]) -> list[Path]:
     return [doc["path"] for doc in docs if doc["section"] == "enterprise"]
 
 
-def should_split_enterprise(files: list[Path]) -> tuple[bool, int, int, int]:
-    rendered = bundle(
+def render_enterprise(docs: list[dict]) -> tuple[dict[str, str], tuple[int, bool]]:
+    files = enterprise_files(docs)
+    combined = bundle(
         "Enterprise guide",
         ["Catalogued docs under enterprise/, in path order."],
         files,
     )
-    current = len(rendered.encode("utf-8"))
-    largest = max((path.stat().st_size for path in files), default=0)
-    projected = current + PLANNED_EXTRA_ENTERPRISE_DOCS * (largest + source_wrapper_len())
-    return projected > MAX_FULL or current > MAX_FULL, current, largest, projected
-
-
-def render_enterprise(docs: list[dict]) -> tuple[dict[str, str], tuple[int, int, int, bool]]:
-    files = enterprise_files(docs)
-    split, current, largest, projected = should_split_enterprise(files)
-    outputs: dict[str, str] = {}
-    if not split:
-        text = bundle(
-            "Enterprise guide",
-            ["Catalogued docs under enterprise/, in path order."],
-            files,
-        )
-        ensure_cap("llms-full/enterprise.txt", text)
-        outputs["enterprise.txt"] = text
-        return outputs, (current, largest, projected, False)
+    current = len(combined.encode("utf-8"))
+    if current <= MAX_FULL:
+        return {"enterprise.txt": combined}, (current, False)
     groups: dict[str, list[Path]] = {}
     for path in files:
         rel = path.relative_to(ROOT / "enterprise")
         key = rel.parts[0] if len(rel.parts) > 1 else ""
         groups.setdefault(key, []).append(path)
+    outputs: dict[str, str] = {}
     for key in sorted(groups):
         name = "enterprise.txt" if key == "" else f"enterprise-{key}.txt"
         if key == "":
             intro = [
                 "Catalogued docs that sit directly in enterprise/.",
-                "Subfolders are in llms-full/enterprise-<subfolder>.txt because the projected enterprise bundle exceeds the size cap.",
+                "Subfolders are in llms-full/enterprise-<subfolder>.txt because the rendered enterprise bundle exceeds the size cap.",
             ]
             heading = "Enterprise guide"
         else:
             intro = [
                 f"Catalogued docs under enterprise/{key}/, in path order.",
-                "Split from enterprise.txt because the projected bundle exceeds the size cap.",
+                "Split from the enterprise bundle because that rendered file exceeds the size cap.",
             ]
             heading = section_title(key)
         text = bundle(heading, intro, groups[key])
         ensure_cap(f"llms-full/{name}", text)
         outputs[name] = text
-    return outputs, (current, largest, projected, True)
+    return outputs, (current, True)
 
 
 def render_simple(docs: list[dict], section: str, filename: str, heading: str) -> dict[str, str]:
@@ -648,10 +627,9 @@ def full_index(files: dict[str, str], counts: dict[str, int]) -> str:
         "",
         f"Size cap: {MAX_FULL} bytes per file. The generator never deletes or skips a bundle for being large. If a file would exceed the cap, the command exits non-zero and names the file to split.",
         "",
-        "Enterprise growth rule: the generator projects "
-        f"{PLANNED_EXTRA_ENTERPRISE_DOCS} additional enterprise docs, each the size of the largest current enterprise doc, plus the per-doc source header. "
-        "When that projection exceeds the cap, it writes one file per enterprise subfolder (enterprise-<subfolder>.txt) instead of a single combined enterprise.txt. "
-        "Files that sit directly in enterprise/ stay in enterprise.txt. A subfolder file that still exceeds the cap is an error.",
+        "Enterprise stays one file, llms-full/enterprise.txt, while that rendered file is within the cap. "
+        "If the rendered enterprise bundle would exceed the cap, the generator writes one file per enterprise subfolder (enterprise-<subfolder>.txt) and keeps docs that sit directly in enterprise/ in enterprise.txt. "
+        "A file that still exceeds the cap is an error. Nothing is deleted to get under the cap.",
         "",
         "## Files",
         "",
@@ -686,17 +664,22 @@ def counts_inner(docs: list[dict]) -> str:
         return sum(1 for doc in docs if doc["rel"].startswith(prefix))
 
     rows = (
-        ("Enterprise docs", prefixed("enterprise/")),
-        ("AI docs", prefixed("enterprise/ai/")),
-        ("Reference architectures", sum(1 for doc in docs if doc["kind"] == "reference-architecture")),
-        ("Pattern cards", sum(1 for doc in docs if doc["kind"] == "pattern")),
-        ("Templates", sum(1 for doc in docs if doc["kind"] == "template")),
-        ("Skills", sum(1 for doc in docs if doc["kind"] == "skill")),
-        ("Total catalogued docs", len(docs)),
+        ("Enterprise docs", "enterprise/README.md", prefixed("enterprise/")),
+        ("AI docs", "enterprise/ai/README.md", prefixed("enterprise/ai/")),
+        (
+            "Reference architectures",
+            "enterprise/reference-architectures/README.md",
+            sum(1 for doc in docs if doc["kind"] == "reference-architecture"),
+        ),
+        ("Pattern cards", "patterns/README.md", sum(1 for doc in docs if doc["kind"] == "pattern")),
+        ("Templates", "templates/README.md", sum(1 for doc in docs if doc["kind"] == "template")),
+        ("Skills", "pack/README.md", sum(1 for doc in docs if doc["kind"] == "skill")),
+        ("Total catalogued docs", "", len(docs)),
     )
     lines = ["| Kind | Count |", "|---|---:|"]
-    for name, count in rows:
-        lines.append(f"| {name} | {count} |")
+    for name, href, count in rows:
+        label = f"[{name}]({href})" if href else name
+        lines.append(f"| {label} | {count} |")
     lines.append("")
     lines.append(
         "Enterprise docs count every catalogued file under `enterprise/`, including the AI docs and reference architectures listed on their own rows. Pattern cards omit `patterns/README.md`. Templates omit `templates/README.md`. Skills are the `SKILL.md` files."
@@ -722,7 +705,7 @@ def rewrite_readme(text: str, inner: str) -> str:
     )
 
 
-def build() -> tuple[dict[str, str], tuple[int, int, int, bool]]:
+def build() -> tuple[dict[str, str], tuple[int, bool]]:
     parsed: list[dict] = []
     for path in iter_docs():
         doc = parse_doc(path)
@@ -815,12 +798,10 @@ def main() -> int:
         help="compare generated outputs to the working tree and do not write",
     )
     args = parser.parse_args()
-    outputs, (current, largest, projected, split) = build()
+    outputs, (current, split) = build()
     print(
-        "enterprise projection: "
-        f"current={current} largest={largest} "
-        f"planned_extra={PLANNED_EXTRA_ENTERPRISE_DOCS} "
-        f"projected={projected} cap={MAX_FULL} split={'yes' if split else 'no'}"
+        "enterprise bundle: "
+        f"current={current} cap={MAX_FULL} split={'yes' if split else 'no'}"
     )
     if args.check:
         return check(outputs)

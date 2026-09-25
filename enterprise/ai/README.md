@@ -10,10 +10,8 @@ related:
   - llm-security.md
   - evals-and-observability.md
   - ../reference-architectures/rag-assistant.md
-  - ../tenancy/isolation-models.md
-  - ../compliance/privacy.md
+  - ../data/search.md
   - ../security/threat-modeling.md
-  - ../apis/rate-limiting.md
 last_reviewed: 2026-09-25
 ---
 
@@ -38,6 +36,7 @@ Then the worked design: [multi-tenant RAG assistant](../reference-architectures/
 - Tenancy: [isolation models](../tenancy/isolation-models.md), [data and keys](../tenancy/data-and-keys.md). A shared index is a pool. Say what a missing filter can leak.
 - Privacy and deletion: [GDPR and CCPA basics](../compliance/privacy.md), [retention and deletion](../compliance/retention.md). Chunks, embeddings, caches, and eval sets are copies.
 - Threats: [threat modeling](../security/threat-modeling.md), [ASVS chapter map](../security/owasp-asvs.md).
+- Retrieval indexes: [search](../data/search.md) for lexical and vector indexes, sync, and relevance. The RAG page is the permission and deletion problem on top of that.
 - Fairness of a shared provider quota: [rate limiting](../apis/rate-limiting.md), [noisy neighbors](../tenancy/noisy-neighbor.md).
 - Traces in general: [OpenTelemetry](../observability/opentelemetry.md). The GenAI attribute namespace is still Development status. Details are on the evals page.
 

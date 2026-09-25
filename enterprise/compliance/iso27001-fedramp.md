@@ -10,7 +10,6 @@ related:
   - privacy.md
   - eu-regulations.md
   - ../security/encryption-keys.md
-  - ../security/threat-modeling.md
   - ../delivery/cicd.md
   - ../observability/incidents.md
 last_reviewed: 2026-09-25
@@ -50,6 +49,7 @@ The program is mid-transition. On 25 June 2026 FedRAMP [wrote](https://www.fedra
 - 6 July 2026: marketplace listings for the initial implementation phase.
 - 28 July 2026: FedRAMP Ready submissions stop; the page points providers at 20x Class A instead.
 - 3 August 2026: 20x Class A pipeline opens.
+- 10 August 2026: temporary Rev5 pipelines (Ready Conversion and Lost Sponsor) open for Class B and Class C, for limited providers, without an agency sponsor.
 - 31 August 2026: 20x Class B and Class C pipelines open.
 - 1 January 2027: mandatory adoption of the consolidated rules, with the page's own caveat about applicability and effective dates inside specific areas.
 - 11 June 2027: no new Rev5 certification applications.

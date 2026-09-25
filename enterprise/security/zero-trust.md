@@ -10,6 +10,7 @@ related:
   - ../identity/authorization-models.md
   - ../tenancy/isolation-models.md
   - ../../patterns/sidecar-service-mesh.md
+  - ../identity/passkeys-mfa.md
 last_reviewed: 2026-09-25
 ---
 

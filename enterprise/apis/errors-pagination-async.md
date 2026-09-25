@@ -5,10 +5,8 @@ tags: [api, errors, pagination, async]
 when_to_use: "Use when you are fixing the contract for failures, list pages, or work that will not finish inside the request."
 related:
   - styles.md
-  - versioning.md
   - webhooks.md
   - rate-limiting.md
-  - gateways.md
   - realtime.md
   - ../data/idempotency.md
   - ../data/sagas.md

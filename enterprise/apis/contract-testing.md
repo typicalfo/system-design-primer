@@ -8,6 +8,7 @@ related:
   - styles.md
   - ../data/schema-evolution.md
   - ../delivery/cicd.md
+  - ../delivery/testing-strategy.md
 last_reviewed: 2026-09-25
 ---
 

@@ -6,6 +6,7 @@ when_to_use: "Use when a small set of keys is predictably hot and a miss would s
 related:
   - cache-aside.md
   - cache-invalidation.md
+  - ../enterprise/data/caching-at-scale.md
 last_reviewed: 2026-09-25
 ---
 

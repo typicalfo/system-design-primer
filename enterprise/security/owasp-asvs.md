@@ -11,7 +11,7 @@ related:
   - ../identity/authorization-models.md
   - ../compliance/audit-logs.md
   - ../../pack/skills/design-reviewer/checklist.md
-  - ../../pack/corpora/INDEX.md
+  - ../ai/llm-security.md
 last_reviewed: 2026-09-25
 ---
 

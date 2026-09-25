@@ -5,16 +5,12 @@ tags: [ai, rag, retrieval, embeddings]
 when_to_use: "Use when a model must answer from a corpus you control, and the answer has to respect tenant and document permissions."
 related:
   - README.md
-  - llm-app-architecture.md
   - llm-security.md
-  - evals-and-observability.md
   - ../compliance/privacy.md
   - ../compliance/retention.md
   - ../tenancy/data-and-keys.md
   - ../data/search.md
   - ../data/caching-at-scale.md
-  - ../../patterns/cache-aside.md
-  - ../../patterns/cache-invalidation.md
   - ../reference-architectures/rag-assistant.md
 last_reviewed: 2026-09-25
 ---

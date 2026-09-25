@@ -5,7 +5,6 @@ tags: [ai, evals, observability, opentelemetry]
 when_to_use: "Use when you need to know whether a prompt, model, or index change got better or worse, and what a production call cost."
 related:
   - README.md
-  - llm-app-architecture.md
   - rag.md
   - llm-security.md
   - ../observability/opentelemetry.md

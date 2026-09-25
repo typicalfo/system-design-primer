@@ -10,6 +10,7 @@ related:
   - ../tenancy/lifecycle.md
   - ../security/encryption-keys.md
   - ../data/governance.md
+  - ../ai/rag.md
 last_reviewed: 2026-09-25
 ---
 

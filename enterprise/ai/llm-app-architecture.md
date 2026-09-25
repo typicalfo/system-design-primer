@@ -8,12 +8,10 @@ related:
   - rag.md
   - agents-and-tools.md
   - llm-security.md
-  - evals-and-observability.md
   - ../apis/rate-limiting.md
   - ../reliability/retries-timeouts.md
   - ../data/idempotency.md
   - ../cost/unit-economics.md
-  - ../tenancy/noisy-neighbor.md
 last_reviewed: 2026-09-25
 ---
 

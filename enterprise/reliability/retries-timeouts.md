@@ -9,7 +9,9 @@ related:
   - ../data/idempotency.md
   - ../apis/rate-limiting.md
   - ../../patterns/retry-with-backoff.md
-  - ../../patterns/idempotency-keys.md
+  - ../data/workflow-engines.md
+  - ../apis/errors-pagination-async.md
+  - ../apis/realtime.md
 last_reviewed: 2026-09-25
 ---
 

@@ -5,9 +5,7 @@ tags: [reference-architecture, ai, rag, tenancy]
 when_to_use: "Use as a concrete baseline when designing a multi-tenant assistant grounded on customer documents."
 related:
   - README.md
-  - ../ai/README.md
   - ../ai/rag.md
-  - ../ai/llm-app-architecture.md
   - ../ai/llm-security.md
   - ../ai/evals-and-observability.md
   - ../tenancy/isolation-models.md

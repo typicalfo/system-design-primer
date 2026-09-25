@@ -10,7 +10,8 @@ related:
   - lifecycle.md
   - ../identity/authorization-models.md
   - ../compliance/residency.md
-  - ../../patterns/sharding.md
+  - ../ai/README.md
+  - ../reliability/cell-based-architecture.md
 last_reviewed: 2026-09-25
 ---
 

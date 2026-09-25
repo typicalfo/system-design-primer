@@ -11,7 +11,6 @@ related:
   - ../reliability/retries-timeouts.md
   - ../reliability/load-shedding.md
   - ../identity/oidc-oauth2.md
-  - ../../patterns/retry-with-backoff.md
   - ../../patterns/load-balancing.md
 last_reviewed: 2026-09-25
 ---

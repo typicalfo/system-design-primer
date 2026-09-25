@@ -5,14 +5,13 @@ tags: [ai, llm, security, owasp]
 when_to_use: "Use when a design adds a model, retrieval, or an agent and you need the abuse cases and the official risk ids to cite."
 related:
   - README.md
-  - llm-app-architecture.md
-  - rag.md
   - agents-and-tools.md
-  - evals-and-observability.md
+  - rag.md
   - ../security/threat-modeling.md
   - ../security/owasp-asvs.md
-  - ../security/supply-chain.md
   - ../compliance/privacy.md
+  - ../../pack/skills/threat-modeler/SKILL.md
+  - ../../pack/skills/threat-modeler/reference/ai-threats.md
 last_reviewed: 2026-09-25
 ---
 
@@ -76,7 +75,7 @@ OWASP GenAI LLM Top 10 2026, official titles, current release as of 2026-09. Ord
 | LLM09:2026 | Vector and Embedding Weaknesses |
 | LLM10:2026 | Improper Output Handling |
 
-OWASP Top 10 for Agentic Applications, 2026 edition (project page dated December 2025). Titles as printed in that publication:
+OWASP Top 10 for Agentic Applications 2026 (cover title of the December 2025 PDF; the project page titles the same document "OWASP Top 10 for Agentic Applications for 2026"). Names below are the glance-page forms. The PDF's section headings spell "and" in ASI02 and ASI03.
 
 | Id | Name |
 |---|---|

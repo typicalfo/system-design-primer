@@ -50,7 +50,8 @@ TIMEOUT = 20
 WORKERS = 8
 
 # Sites that answer a real page to browsers and reject this checker.
-IGNORE_HOSTS: set[str] = set()
+# example.com is the RFC 2606 documentation host used in sample payloads.
+IGNORE_HOSTS: set[str] = {"example.com"}
 
 
 def collect_urls() -> tuple[list[str], list[str]]:

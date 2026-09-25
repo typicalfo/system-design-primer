@@ -9,6 +9,8 @@ related:
   - idempotency.md
   - ../../patterns/transactional-outbox.md
   - ../../patterns/cdc.md
+  - search.md
+  - caching-at-scale.md
 last_reviewed: 2026-09-25
 ---
 

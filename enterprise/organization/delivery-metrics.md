@@ -16,7 +16,7 @@ last_reviewed: 2026-09-25
 
 DORA's current software delivery model has five metrics in two groups. The names below follow the [DORA metrics guide](https://dora.dev/guides/dora-metrics/) and the [history of those metrics](https://dora.dev/insights/dora-metrics-history). This page paraphrases them. It does not copy the reports.
 
-Attribution: DORA research program, <https://dora.dev/>, used under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Attribution: the metric names and groupings on this page follow the DORA metrics guide and the metrics history page on [dora.dev](https://dora.dev/). The site footer says all content on that site is licensed by Google LLC under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) unless otherwise specified. The [FAQ](https://dora.dev/faq/) separately says research methods and survey questions are available under a Creative Commons license, and that raw study data is not shared. This page paraphrases the two site pages. It does not copy them, and it does not use the reports or the raw data.
 
 Throughput:
 

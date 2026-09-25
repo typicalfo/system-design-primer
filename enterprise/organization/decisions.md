@@ -9,6 +9,8 @@ related:
   - ../../templates/adr.md
   - ../../pack/skills/adr-writer/SKILL.md
   - ../../pack/skills/adr-writer/template.md
+  - ../../templates/rfc.md
+  - build-vs-buy.md
 last_reviewed: 2026-09-25
 ---
 

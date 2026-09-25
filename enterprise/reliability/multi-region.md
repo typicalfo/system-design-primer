@@ -11,6 +11,7 @@ related:
   - ../data/idempotency.md
   - ../../patterns/availability-failover.md
   - ../../patterns/replication-multi-leader.md
+  - cell-based-architecture.md
 last_reviewed: 2026-09-25
 ---
 

@@ -10,6 +10,7 @@ related:
   - warehouse-lakehouse.md
   - ../../patterns/cdc.md
   - ../../patterns/transactional-outbox.md
+  - search.md
 last_reviewed: 2026-09-25
 ---
 

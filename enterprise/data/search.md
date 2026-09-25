@@ -7,13 +7,11 @@ related:
   - cdc.md
   - transactional-outbox.md
   - idempotency.md
-  - event-driven.md
   - ../tenancy/data-and-keys.md
   - ../tenancy/isolation-models.md
   - ../ai/README.md
+  - ../ai/rag.md
   - ../../patterns/cdc.md
-  - ../../patterns/cqrs.md
-  - ../../patterns/transactional-outbox.md
 last_reviewed: 2026-09-25
 ---
 

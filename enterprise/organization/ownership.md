@@ -9,6 +9,8 @@ related:
   - decisions.md
   - ../observability/alerting-oncall.md
   - ../data/governance.md
+  - delivery-metrics.md
+  - ../delivery/production-readiness.md
 last_reviewed: 2026-09-25
 ---
 

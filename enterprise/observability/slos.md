@@ -10,6 +10,8 @@ related:
   - ../reliability/disaster-recovery.md
   - ../../templates/slo.md
   - ../../pack/corpora/INDEX.md
+  - ../organization/delivery-metrics.md
+  - ../delivery/testing-strategy.md
 last_reviewed: 2026-09-25
 ---
 

@@ -9,6 +9,7 @@ related:
   - allocation.md
   - ../observability/slos.md
   - ../organization/ownership.md
+  - ../../pack/skills/cost-estimator/SKILL.md
 last_reviewed: 2026-09-25
 ---
 

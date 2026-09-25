@@ -10,6 +10,8 @@ related:
   - ../observability/telemetry.md
   - ../security/threat-modeling.md
   - ../../patterns/event-sourcing.md
+  - ../ai/agents-and-tools.md
+  - eu-regulations.md
 last_reviewed: 2026-09-25
 ---
 

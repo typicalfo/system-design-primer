@@ -10,6 +10,8 @@ related:
   - ../data/schema-evolution.md
   - ../../patterns/api-gateway.md
   - ../../patterns/backend-for-frontend.md
+  - errors-pagination-async.md
+  - realtime.md
 last_reviewed: 2026-09-25
 ---
 

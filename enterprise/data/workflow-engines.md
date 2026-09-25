@@ -7,12 +7,11 @@ related:
   - sagas.md
   - idempotency.md
   - event-driven.md
-  - transactional-outbox.md
   - ../reliability/retries-timeouts.md
   - ../apis/errors-pagination-async.md
   - ../../patterns/saga.md
   - ../../patterns/message-queues.md
-  - ../../patterns/idempotency-keys.md
+  - ../../patterns/durable-workflow.md
 last_reviewed: 2026-09-25
 ---
 

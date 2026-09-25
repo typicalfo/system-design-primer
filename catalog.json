@@ -1,21 +1,21 @@
 {
   "schema_version": 2,
-  "source_hash": "806d3bb72efa72e7cef46a0d42b37e6972a07675738fbebd3dca4eea234c2cb5",
+  "source_hash": "221bddb08ff7100fb7b08742c942eb61374844e5be0fa9b1fb83993444b7a82c",
   "counts": {
-    "total": 132,
+    "total": 166,
     "by_type": {
-      "doc": 80,
+      "doc": 104,
       "example": 3,
-      "pattern": 35,
-      "reference-architecture": 4,
-      "skill": 3,
-      "template": 7
+      "pattern": 38,
+      "reference-architecture": 5,
+      "skill": 5,
+      "template": 11
     },
     "by_section": {
-      "enterprise": 72,
-      "pack": 16,
-      "patterns": 36,
-      "templates": 8
+      "enterprise": 94,
+      "pack": 21,
+      "patterns": 39,
+      "templates": 12
     }
   },
   "entries": [
@@ -32,6 +32,7 @@
       "when_to_use": "Use when you are designing or reviewing a real system and the Primer chapter stops at the interview sketch.",
       "related": [
         "enterprise/whats-dated.md",
+        "enterprise/ai/README.md",
         "enterprise/reference-architectures/README.md",
         "patterns/README.md",
         "templates/README.md",
@@ -45,14 +46,147 @@
       "type": "doc",
       "section": "enterprise",
       "title": "AI systems",
-      "summary": "Placeholder for LLM application architecture, retrieval, agents, security, and evals.",
+      "summary": "How to put a model behind a gateway, ground it with retrieval, constrain tools, and score the result.",
       "tags": [
         "ai",
-        "llm"
+        "llm",
+        "index"
       ],
       "when_to_use": "Use when a design includes an LLM, a retrieval index, an agent, or an evaluation of model output.",
       "related": [
-        "enterprise/README.md"
+        "enterprise/ai/llm-app-architecture.md",
+        "enterprise/ai/rag.md",
+        "enterprise/ai/agents-and-tools.md",
+        "enterprise/ai/llm-security.md",
+        "enterprise/ai/evals-and-observability.md",
+        "enterprise/reference-architectures/rag-assistant.md",
+        "enterprise/data/search.md",
+        "enterprise/security/threat-modeling.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "enterprise/ai/agents-and-tools.md",
+      "type": "doc",
+      "section": "enterprise",
+      "title": "Agents and tools",
+      "summary": "Let an agent call tools only with the user's scoped credentials, a budget, and an audit record.",
+      "tags": [
+        "ai",
+        "agents",
+        "tools",
+        "mcp"
+      ],
+      "when_to_use": "Use when a model can call tools, run code, or reach an MCP server, and you must bound what those calls can do.",
+      "related": [
+        "enterprise/ai/README.md",
+        "enterprise/ai/llm-app-architecture.md",
+        "enterprise/ai/llm-security.md",
+        "enterprise/identity/authorization-models.md",
+        "enterprise/identity/service-to-service.md",
+        "enterprise/data/idempotency.md",
+        "enterprise/compliance/audit-logs.md",
+        "enterprise/security/zero-trust.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "enterprise/ai/evals-and-observability.md",
+      "type": "doc",
+      "section": "enterprise",
+      "title": "Evals and observability",
+      "summary": "Score model and retrieval changes on versioned sets, and trace them with OpenTelemetry GenAI attributes that are still Development status.",
+      "tags": [
+        "ai",
+        "evals",
+        "observability",
+        "opentelemetry"
+      ],
+      "when_to_use": "Use when you need to know whether a prompt, model, or index change got better or worse, and what a production call cost.",
+      "related": [
+        "enterprise/ai/README.md",
+        "enterprise/ai/rag.md",
+        "enterprise/ai/llm-security.md",
+        "enterprise/observability/opentelemetry.md",
+        "enterprise/observability/telemetry.md",
+        "enterprise/observability/slos.md",
+        "enterprise/delivery/cicd.md",
+        "enterprise/compliance/privacy.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "enterprise/ai/llm-app-architecture.md",
+      "type": "doc",
+      "section": "enterprise",
+      "title": "LLM application architecture",
+      "summary": "Put a gateway in front of model providers, and bound cost, latency, failover, and what data leaves the tenant.",
+      "tags": [
+        "ai",
+        "llm",
+        "gateway",
+        "cost"
+      ],
+      "when_to_use": "Use when a product calls a model provider and you must choose routing, fallbacks, budgets, caching, and what is logged.",
+      "related": [
+        "enterprise/ai/README.md",
+        "enterprise/ai/rag.md",
+        "enterprise/ai/agents-and-tools.md",
+        "enterprise/ai/llm-security.md",
+        "enterprise/apis/rate-limiting.md",
+        "enterprise/reliability/retries-timeouts.md",
+        "enterprise/data/idempotency.md",
+        "enterprise/cost/unit-economics.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "enterprise/ai/llm-security.md",
+      "type": "doc",
+      "section": "enterprise",
+      "title": "LLM security",
+      "summary": "Treat model input and output as untrusted, and map the failures you build for to the OWASP GenAI lists by id.",
+      "tags": [
+        "ai",
+        "llm",
+        "security",
+        "owasp"
+      ],
+      "when_to_use": "Use when a design adds a model, retrieval, or an agent and you need the abuse cases and the official risk ids to cite.",
+      "related": [
+        "enterprise/ai/README.md",
+        "enterprise/ai/agents-and-tools.md",
+        "enterprise/ai/rag.md",
+        "enterprise/security/threat-modeling.md",
+        "enterprise/security/owasp-asvs.md",
+        "enterprise/compliance/privacy.md",
+        "pack/skills/threat-modeler/SKILL.md",
+        "pack/skills/threat-modeler/reference/ai-threats.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "enterprise/ai/rag.md",
+      "type": "doc",
+      "section": "enterprise",
+      "title": "Retrieval-augmented generation",
+      "summary": "Index tenant documents into chunks and embeddings, retrieve with filters and hybrid search, and delete every copy.",
+      "tags": [
+        "ai",
+        "rag",
+        "retrieval",
+        "embeddings"
+      ],
+      "when_to_use": "Use when a model must answer from a corpus you control, and the answer has to respect tenant and document permissions.",
+      "related": [
+        "enterprise/ai/README.md",
+        "enterprise/ai/llm-security.md",
+        "enterprise/compliance/privacy.md",
+        "enterprise/compliance/retention.md",
+        "enterprise/tenancy/data-and-keys.md",
+        "enterprise/data/search.md",
+        "enterprise/data/caching-at-scale.md",
+        "enterprise/reference-architectures/rag-assistant.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -72,7 +206,33 @@
         "enterprise/apis/versioning.md",
         "enterprise/apis/styles.md",
         "enterprise/data/schema-evolution.md",
-        "enterprise/delivery/cicd.md"
+        "enterprise/delivery/cicd.md",
+        "enterprise/delivery/testing-strategy.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "enterprise/apis/errors-pagination-async.md",
+      "type": "doc",
+      "section": "enterprise",
+      "title": "Errors, pagination, and async operations",
+      "summary": "Return problem details with a stable type, page with opaque cursors, and point long work at a status resource.",
+      "tags": [
+        "api",
+        "errors",
+        "pagination",
+        "async"
+      ],
+      "when_to_use": "Use when you are fixing the contract for failures, list pages, or work that will not finish inside the request.",
+      "related": [
+        "enterprise/apis/styles.md",
+        "enterprise/apis/webhooks.md",
+        "enterprise/apis/rate-limiting.md",
+        "enterprise/apis/realtime.md",
+        "enterprise/data/idempotency.md",
+        "enterprise/data/sagas.md",
+        "enterprise/reliability/retries-timeouts.md",
+        "patterns/idempotency-keys.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -115,7 +275,34 @@
         "enterprise/reliability/load-shedding.md",
         "enterprise/tenancy/noisy-neighbor.md",
         "enterprise/cost/capacity.md",
-        "patterns/rate-limiting.md"
+        "patterns/rate-limiting.md",
+        "enterprise/ai/llm-app-architecture.md",
+        "enterprise/apis/errors-pagination-async.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "enterprise/apis/realtime.md",
+      "type": "doc",
+      "section": "enterprise",
+      "title": "Realtime delivery",
+      "summary": "Choose a connection style, fan out through gateways, and size memory and outbound messages per node.",
+      "tags": [
+        "api",
+        "realtime",
+        "websockets",
+        "sse"
+      ],
+      "when_to_use": "Use when the server must push events to a connected client, or a mobile OS must wake an app that is not connected.",
+      "related": [
+        "enterprise/apis/webhooks.md",
+        "enterprise/apis/gateways.md",
+        "enterprise/apis/rate-limiting.md",
+        "enterprise/apis/errors-pagination-async.md",
+        "enterprise/reliability/retries-timeouts.md",
+        "enterprise/reliability/load-shedding.md",
+        "enterprise/identity/oidc-oauth2.md",
+        "patterns/load-balancing.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -138,7 +325,9 @@
         "enterprise/apis/contract-testing.md",
         "enterprise/data/schema-evolution.md",
         "patterns/api-gateway.md",
-        "patterns/backend-for-frontend.md"
+        "patterns/backend-for-frontend.md",
+        "enterprise/apis/errors-pagination-async.md",
+        "enterprise/apis/realtime.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -180,7 +369,9 @@
         "enterprise/data/event-driven.md",
         "enterprise/reliability/retries-timeouts.md",
         "enterprise/security/encryption-keys.md",
-        "patterns/idempotency-keys.md"
+        "patterns/idempotency-keys.md",
+        "enterprise/apis/errors-pagination-async.md",
+        "enterprise/apis/realtime.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -202,7 +393,36 @@
         "enterprise/compliance/retention.md",
         "enterprise/observability/telemetry.md",
         "enterprise/security/threat-modeling.md",
-        "patterns/event-sourcing.md"
+        "patterns/event-sourcing.md",
+        "enterprise/ai/agents-and-tools.md",
+        "enterprise/compliance/eu-regulations.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "enterprise/compliance/eu-regulations.md",
+      "type": "doc",
+      "section": "enterprise",
+      "title": "EU regulations for engineering",
+      "summary": "Map the AI Act, DORA, NIS2, and the Cyber Resilience Act to logs, inventories, incident clocks, and tests, and separate adopted dates from the original calendar.",
+      "tags": [
+        "compliance",
+        "eu",
+        "ai-act",
+        "dora",
+        "nis2",
+        "cra"
+      ],
+      "when_to_use": "Use when a product may be offered in the EU and you need the engineering capabilities the current legal calendar implies.",
+      "related": [
+        "enterprise/compliance/privacy.md",
+        "enterprise/compliance/audit-logs.md",
+        "enterprise/compliance/residency.md",
+        "enterprise/compliance/iso27001-fedramp.md",
+        "enterprise/observability/incidents.md",
+        "enterprise/security/supply-chain.md",
+        "enterprise/data/governance.md",
+        "templates/dpia.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -230,6 +450,31 @@
       "last_reviewed": "2026-09-25"
     },
     {
+      "path": "enterprise/compliance/iso27001-fedramp.md",
+      "type": "doc",
+      "section": "enterprise",
+      "title": "ISO 27001 and FedRAMP",
+      "summary": "Treat ISO/IEC 27001:2022 as an ISMS with a statement of applicability, and treat FedRAMP as an authorization boundary with evidence that keeps moving.",
+      "tags": [
+        "compliance",
+        "iso27001",
+        "fedramp",
+        "security"
+      ],
+      "when_to_use": "Use when a customer asks for ISO/IEC 27001 or FedRAMP and you need the engineering consequences, not a legal opinion.",
+      "related": [
+        "enterprise/compliance/soc2.md",
+        "enterprise/compliance/audit-logs.md",
+        "enterprise/compliance/residency.md",
+        "enterprise/compliance/privacy.md",
+        "enterprise/compliance/eu-regulations.md",
+        "enterprise/security/encryption-keys.md",
+        "enterprise/delivery/cicd.md",
+        "enterprise/observability/incidents.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
       "path": "enterprise/compliance/privacy.md",
       "type": "doc",
       "section": "enterprise",
@@ -246,9 +491,11 @@
         "enterprise/compliance/retention.md",
         "enterprise/compliance/residency.md",
         "enterprise/compliance/audit-logs.md",
-        "enterprise/compliance/soc2.md",
         "enterprise/tenancy/lifecycle.md",
-        "enterprise/data/governance.md"
+        "enterprise/data/governance.md",
+        "enterprise/ai/rag.md",
+        "enterprise/compliance/eu-regulations.md",
+        "templates/dpia.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -270,7 +517,8 @@
         "enterprise/tenancy/routing.md",
         "enterprise/tenancy/data-and-keys.md",
         "enterprise/reliability/multi-region.md",
-        "enterprise/data/governance.md"
+        "enterprise/data/governance.md",
+        "enterprise/compliance/iso27001-fedramp.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -293,7 +541,8 @@
         "enterprise/compliance/residency.md",
         "enterprise/tenancy/lifecycle.md",
         "enterprise/security/encryption-keys.md",
-        "enterprise/data/governance.md"
+        "enterprise/data/governance.md",
+        "enterprise/ai/rag.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -315,7 +564,8 @@
         "enterprise/observability/alerting-oncall.md",
         "enterprise/delivery/cicd.md",
         "enterprise/identity/authorization-models.md",
-        "templates/runbook.md"
+        "templates/runbook.md",
+        "enterprise/compliance/iso27001-fedramp.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -358,7 +608,8 @@
         "enterprise/cost/unit-economics.md",
         "enterprise/reliability/load-shedding.md",
         "templates/capacity-estimate.md",
-        "pack/skills/system-architect/reference/estimates.md"
+        "pack/skills/system-architect/reference/estimates.md",
+        "pack/skills/cost-estimator/SKILL.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -378,7 +629,8 @@
         "enterprise/cost/unit-economics.md",
         "enterprise/cost/allocation.md",
         "enterprise/observability/slos.md",
-        "enterprise/organization/ownership.md"
+        "enterprise/organization/ownership.md",
+        "pack/skills/cost-estimator/SKILL.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -398,7 +650,34 @@
         "enterprise/cost/finops.md",
         "enterprise/cost/allocation.md",
         "enterprise/cost/capacity.md",
-        "enterprise/tenancy/noisy-neighbor.md"
+        "enterprise/tenancy/noisy-neighbor.md",
+        "enterprise/ai/llm-app-architecture.md",
+        "pack/skills/cost-estimator/SKILL.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "enterprise/data/caching-at-scale.md",
+      "type": "doc",
+      "section": "enterprise",
+      "title": "Caching at scale",
+      "summary": "Place cache tiers, stop stampedes and hot keys, and size a shared cache without pretending it is the database.",
+      "tags": [
+        "data",
+        "caching",
+        "stampede",
+        "capacity"
+      ],
+      "when_to_use": "Use when a cache is already the right basic pattern and the problem is fan-in, hot keys, invalidation, cold starts, or tenant fairness.",
+      "related": [
+        "enterprise/tenancy/data-and-keys.md",
+        "enterprise/tenancy/noisy-neighbor.md",
+        "enterprise/reliability/load-shedding.md",
+        "enterprise/data/transactional-outbox.md",
+        "patterns/cache-aside.md",
+        "patterns/cache-invalidation.md",
+        "patterns/cdn.md",
+        "enterprise/ai/rag.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -420,7 +699,8 @@
         "enterprise/data/schema-evolution.md",
         "enterprise/data/warehouse-lakehouse.md",
         "patterns/cdc.md",
-        "patterns/transactional-outbox.md"
+        "patterns/transactional-outbox.md",
+        "enterprise/data/search.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -443,7 +723,8 @@
         "enterprise/data/idempotency.md",
         "enterprise/data/schema-evolution.md",
         "patterns/message-queues.md",
-        "patterns/cqrs.md"
+        "patterns/cqrs.md",
+        "enterprise/data/workflow-engines.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -487,8 +768,10 @@
         "enterprise/data/transactional-outbox.md",
         "enterprise/data/event-driven.md",
         "enterprise/reliability/retries-timeouts.md",
-        "enterprise/apis/webhooks.md",
-        "patterns/idempotency-keys.md"
+        "patterns/idempotency-keys.md",
+        "enterprise/ai/agents-and-tools.md",
+        "enterprise/data/workflow-engines.md",
+        "enterprise/apis/errors-pagination-async.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -509,7 +792,9 @@
         "enterprise/data/idempotency.md",
         "enterprise/data/transactional-outbox.md",
         "patterns/saga.md",
-        "patterns/transactional-outbox.md"
+        "patterns/transactional-outbox.md",
+        "enterprise/data/workflow-engines.md",
+        "patterns/durable-workflow.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -535,6 +820,31 @@
       "last_reviewed": "2026-09-25"
     },
     {
+      "path": "enterprise/data/search.md",
+      "type": "doc",
+      "section": "enterprise",
+      "title": "Search",
+      "summary": "Run lexical search, vector search, or both as a rebuildable projection, with tenant filters and a ranking eval you can recompute.",
+      "tags": [
+        "data",
+        "search",
+        "relevance",
+        "indexing"
+      ],
+      "when_to_use": "Use when a user or a service queries by words or by similarity and the database query is no longer the right index.",
+      "related": [
+        "enterprise/data/cdc.md",
+        "enterprise/data/transactional-outbox.md",
+        "enterprise/data/idempotency.md",
+        "enterprise/tenancy/data-and-keys.md",
+        "enterprise/tenancy/isolation-models.md",
+        "enterprise/ai/README.md",
+        "enterprise/ai/rag.md",
+        "patterns/cdc.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
       "path": "enterprise/data/transactional-outbox.md",
       "type": "doc",
       "section": "enterprise",
@@ -551,7 +861,9 @@
         "enterprise/data/cdc.md",
         "enterprise/data/idempotency.md",
         "patterns/transactional-outbox.md",
-        "patterns/cdc.md"
+        "patterns/cdc.md",
+        "enterprise/data/search.md",
+        "enterprise/data/caching-at-scale.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -579,6 +891,31 @@
       "last_reviewed": "2026-09-25"
     },
     {
+      "path": "enterprise/data/workflow-engines.md",
+      "type": "doc",
+      "section": "enterprise",
+      "title": "Workflow engines",
+      "summary": "Choose durable execution, an orchestrated saga, choreography, a job queue, or cron from how long the process lives and who must remember the step.",
+      "tags": [
+        "data",
+        "workflow",
+        "orchestration",
+        "sagas"
+      ],
+      "when_to_use": "Use when a business process outlives one request and you are deciding whether a durable engine, a saga, a queue, or a clock should hold the state.",
+      "related": [
+        "enterprise/data/sagas.md",
+        "enterprise/data/idempotency.md",
+        "enterprise/data/event-driven.md",
+        "enterprise/reliability/retries-timeouts.md",
+        "enterprise/apis/errors-pagination-async.md",
+        "patterns/saga.md",
+        "patterns/message-queues.md",
+        "patterns/durable-workflow.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
       "path": "enterprise/delivery/cicd.md",
       "type": "doc",
       "section": "enterprise",
@@ -595,8 +932,9 @@
         "enterprise/delivery/progressive-delivery.md",
         "enterprise/security/supply-chain.md",
         "enterprise/observability/incidents.md",
-        "patterns/blue-green.md",
-        "patterns/canary.md"
+        "enterprise/delivery/production-readiness.md",
+        "enterprise/delivery/testing-strategy.md",
+        "enterprise/organization/delivery-metrics.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -664,6 +1002,31 @@
       "last_reviewed": "2026-09-25"
     },
     {
+      "path": "enterprise/delivery/production-readiness.md",
+      "type": "doc",
+      "section": "enterprise",
+      "title": "Production readiness",
+      "summary": "Gate a service on ownership, SLOs, failure modes, restore, and rollback before it is allowed to take tier-1 traffic.",
+      "tags": [
+        "delivery",
+        "production-readiness",
+        "operations",
+        "release"
+      ],
+      "when_to_use": "Use when a new service, or a large change to one, is about to take real traffic and you need a review instead of a launch checklist in someone's head.",
+      "related": [
+        "enterprise/delivery/cicd.md",
+        "enterprise/delivery/testing-strategy.md",
+        "enterprise/observability/slos.md",
+        "enterprise/observability/alerting-oncall.md",
+        "enterprise/observability/incidents.md",
+        "enterprise/reliability/disaster-recovery.md",
+        "enterprise/security/threat-modeling.md",
+        "templates/production-readiness-review.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
       "path": "enterprise/delivery/progressive-delivery.md",
       "type": "doc",
       "section": "enterprise",
@@ -682,7 +1045,54 @@
         "enterprise/delivery/database-migrations.md",
         "enterprise/observability/slos.md",
         "patterns/canary.md",
-        "patterns/blue-green.md"
+        "patterns/blue-green.md",
+        "enterprise/reliability/cell-based-architecture.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "enterprise/delivery/testing-strategy.md",
+      "type": "doc",
+      "section": "enterprise",
+      "title": "Testing strategy",
+      "summary": "Keep a portfolio of fast tests, a thin end-to-end slice, and load tests whose pass line is the SLO, including the queueing an open workload exposes.",
+      "tags": [
+        "delivery",
+        "testing",
+        "performance",
+        "quality"
+      ],
+      "when_to_use": "Use when you are deciding which tests to keep, how production is allowed to be a test stage, and what a performance run must show before a launch.",
+      "related": [
+        "enterprise/delivery/cicd.md",
+        "enterprise/delivery/progressive-delivery.md",
+        "enterprise/delivery/production-readiness.md",
+        "enterprise/apis/contract-testing.md",
+        "enterprise/observability/slos.md",
+        "enterprise/reliability/chaos.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "enterprise/identity/authorization-engines.md",
+      "type": "doc",
+      "section": "enterprise",
+      "title": "Authorization engines",
+      "summary": "Keep simple RBAC in the service that owns the row, and add a relationship or policy engine when many services must answer the same graph or the same policy.",
+      "tags": [
+        "identity",
+        "authorization",
+        "rebac",
+        "zanzibar",
+        "policy"
+      ],
+      "when_to_use": "Use when authorization no longer fits in one service's role table and you are choosing an engine, a cache, and a migration.",
+      "related": [
+        "enterprise/identity/authorization-models.md",
+        "enterprise/identity/scim-provisioning.md",
+        "enterprise/identity/oidc-oauth2.md",
+        "enterprise/security/zero-trust.md",
+        "enterprise/compliance/audit-logs.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -707,7 +1117,8 @@
         "enterprise/tenancy/isolation-models.md",
         "enterprise/tenancy/data-and-keys.md",
         "enterprise/security/zero-trust.md",
-        "patterns/api-gateway.md"
+        "enterprise/ai/agents-and-tools.md",
+        "enterprise/identity/authorization-engines.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -732,7 +1143,31 @@
         "enterprise/security/owasp-asvs.md",
         "enterprise/apis/gateways.md",
         "patterns/api-gateway.md",
-        "templates/threat-model.md"
+        "enterprise/identity/passkeys-mfa.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "enterprise/identity/passkeys-mfa.md",
+      "type": "doc",
+      "section": "enterprise",
+      "title": "Passkeys and MFA",
+      "summary": "Prefer phishing-resistant authenticators, treat recovery as part of the factor, and require the IdP to carry the assurance level you claim.",
+      "tags": [
+        "identity",
+        "passkeys",
+        "mfa",
+        "webauthn",
+        "authentication"
+      ],
+      "when_to_use": "Use when you are choosing a second factor, rolling out passkeys, or deciding where MFA runs for workforce and customer SSO.",
+      "related": [
+        "enterprise/identity/oidc-oauth2.md",
+        "enterprise/identity/saml-sso.md",
+        "enterprise/identity/secrets.md",
+        "enterprise/identity/authorization-models.md",
+        "enterprise/security/zero-trust.md",
+        "enterprise/compliance/audit-logs.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -753,7 +1188,34 @@
         "enterprise/identity/oidc-oauth2.md",
         "enterprise/identity/authorization-models.md",
         "enterprise/tenancy/lifecycle.md",
-        "enterprise/security/owasp-asvs.md"
+        "enterprise/security/owasp-asvs.md",
+        "enterprise/identity/passkeys-mfa.md",
+        "enterprise/identity/scim-provisioning.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "enterprise/identity/scim-provisioning.md",
+      "type": "doc",
+      "section": "enterprise",
+      "title": "SCIM provisioning",
+      "summary": "Push user and group lifecycle from the IdP with SCIM 2.0, and treat deprovision as disable-now plus a separate delete decision.",
+      "tags": [
+        "identity",
+        "scim",
+        "provisioning",
+        "directory"
+      ],
+      "when_to_use": "Use when an enterprise tenant expects the IdP to create, update, and remove users and groups in your product.",
+      "related": [
+        "enterprise/identity/oidc-oauth2.md",
+        "enterprise/identity/saml-sso.md",
+        "enterprise/identity/authorization-models.md",
+        "enterprise/identity/secrets.md",
+        "enterprise/tenancy/lifecycle.md",
+        "enterprise/compliance/audit-logs.md",
+        "enterprise/compliance/retention.md",
+        "enterprise/data/idempotency.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -775,7 +1237,8 @@
         "enterprise/security/encryption-keys.md",
         "enterprise/security/supply-chain.md",
         "enterprise/delivery/iac-environments.md",
-        "enterprise/compliance/audit-logs.md"
+        "enterprise/compliance/audit-logs.md",
+        "enterprise/identity/passkeys-mfa.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -905,7 +1368,8 @@
         "enterprise/observability/slos.md",
         "enterprise/reliability/disaster-recovery.md",
         "templates/runbook.md",
-        "templates/postmortem.md"
+        "templates/postmortem.md",
+        "enterprise/compliance/eu-regulations.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -925,7 +1389,8 @@
         "enterprise/observability/telemetry.md",
         "enterprise/observability/slos.md",
         "enterprise/observability/alerting-oncall.md",
-        "enterprise/delivery/cicd.md"
+        "enterprise/delivery/cicd.md",
+        "enterprise/ai/evals-and-observability.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -968,7 +1433,9 @@
         "enterprise/observability/incidents.md",
         "enterprise/reliability/disaster-recovery.md",
         "templates/slo.md",
-        "pack/corpora/INDEX.md"
+        "pack/corpora/INDEX.md",
+        "enterprise/organization/delivery-metrics.md",
+        "enterprise/delivery/testing-strategy.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -991,6 +1458,30 @@
         "enterprise/observability/alerting-oncall.md",
         "enterprise/compliance/audit-logs.md",
         "templates/runbook.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "enterprise/organization/build-vs-buy.md",
+      "type": "doc",
+      "section": "enterprise",
+      "title": "Build versus buy",
+      "summary": "Score differentiation, total cost, time, skill, vendor risk, compliance, and the exit, then revisit the score at renewal.",
+      "tags": [
+        "organization",
+        "build-vs-buy",
+        "vendors",
+        "procurement"
+      ],
+      "when_to_use": "Use when a team is about to build a capability that already exists as a product, or adopt a vendor for something customers will notice.",
+      "related": [
+        "enterprise/organization/decisions.md",
+        "enterprise/organization/ownership.md",
+        "enterprise/security/supply-chain.md",
+        "enterprise/compliance/soc2.md",
+        "enterprise/cost/finops.md",
+        "templates/vendor-evaluation.md",
+        "templates/adr.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -1033,7 +1524,31 @@
         "enterprise/organization/team-topologies.md",
         "templates/adr.md",
         "pack/skills/adr-writer/SKILL.md",
-        "pack/skills/adr-writer/template.md"
+        "pack/skills/adr-writer/template.md",
+        "templates/rfc.md",
+        "enterprise/organization/build-vs-buy.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "enterprise/organization/delivery-metrics.md",
+      "type": "doc",
+      "section": "enterprise",
+      "title": "Software delivery metrics",
+      "summary": "Measure DORA's five software delivery metrics from deploys and incidents, and pair them with SLOs so speed is not the only score.",
+      "tags": [
+        "organization",
+        "dora",
+        "delivery",
+        "metrics"
+      ],
+      "when_to_use": "Use when a team wants a small set of delivery measures and needs the current DORA names, the collection rules, and the ways the numbers get gamed.",
+      "related": [
+        "enterprise/organization/ownership.md",
+        "enterprise/delivery/cicd.md",
+        "enterprise/delivery/testing-strategy.md",
+        "enterprise/observability/slos.md",
+        "enterprise/observability/incidents.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -1054,7 +1569,9 @@
         "enterprise/organization/platform-teams.md",
         "enterprise/organization/decisions.md",
         "enterprise/observability/alerting-oncall.md",
-        "enterprise/data/governance.md"
+        "enterprise/data/governance.md",
+        "enterprise/organization/delivery-metrics.md",
+        "enterprise/delivery/production-readiness.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -1104,7 +1621,7 @@
       "type": "doc",
       "section": "enterprise",
       "title": "Reference architectures",
-      "summary": "Four end-to-end designs with requirements, estimates, a diagram, tradeoffs, and a severity-ranked design review.",
+      "summary": "Five end-to-end designs with requirements, estimates, a diagram, tradeoffs, and a severity-ranked design review.",
       "tags": [
         "reference-architecture",
         "index"
@@ -1115,6 +1632,7 @@
         "enterprise/reference-architectures/event-driven-orders.md",
         "enterprise/reference-architectures/internal-platform.md",
         "enterprise/reference-architectures/data-platform.md",
+        "enterprise/reference-architectures/rag-assistant.md",
         "templates/design-doc.md",
         "pack/skills/design-reviewer/checklist.md",
         "pack/examples/multi-tenant-audit-log/README.md"
@@ -1217,6 +1735,56 @@
       "last_reviewed": "2026-09-25"
     },
     {
+      "path": "enterprise/reference-architectures/rag-assistant.md",
+      "type": "reference-architecture",
+      "section": "enterprise",
+      "title": "Reference architecture: multi-tenant RAG assistant",
+      "summary": "A pooled B2B assistant that answers from each tenant's documents, with filtered hybrid retrieval and a deletion path.",
+      "tags": [
+        "reference-architecture",
+        "ai",
+        "rag",
+        "tenancy"
+      ],
+      "when_to_use": "Use as a concrete baseline when designing a multi-tenant assistant grounded on customer documents.",
+      "related": [
+        "enterprise/reference-architectures/README.md",
+        "enterprise/ai/rag.md",
+        "enterprise/ai/llm-security.md",
+        "enterprise/ai/evals-and-observability.md",
+        "enterprise/tenancy/isolation-models.md",
+        "enterprise/compliance/retention.md",
+        "enterprise/compliance/privacy.md",
+        "pack/skills/design-reviewer/checklist.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "enterprise/reliability/cell-based-architecture.md",
+      "type": "doc",
+      "section": "enterprise",
+      "title": "Cell-based architecture",
+      "summary": "Bound blast radius with full-stack cells, a thin router, and shuffle sharding where a shared pool is still required.",
+      "tags": [
+        "reliability",
+        "cells",
+        "sharding",
+        "blast-radius"
+      ],
+      "when_to_use": "Use when one bad deploy, overload, or tenant must not be able to take the whole product down, and you can run more than one copy of the stack.",
+      "related": [
+        "enterprise/reliability/multi-region.md",
+        "enterprise/tenancy/routing.md",
+        "enterprise/tenancy/isolation-models.md",
+        "enterprise/tenancy/noisy-neighbor.md",
+        "enterprise/delivery/progressive-delivery.md",
+        "patterns/cell-based-architecture.md",
+        "patterns/shuffle-sharding.md",
+        "patterns/sharding.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
       "path": "enterprise/reliability/chaos.md",
       "type": "doc",
       "section": "enterprise",
@@ -1300,7 +1868,9 @@
         "enterprise/apis/rate-limiting.md",
         "enterprise/tenancy/noisy-neighbor.md",
         "enterprise/observability/slos.md",
-        "patterns/rate-limiting.md"
+        "patterns/rate-limiting.md",
+        "enterprise/data/caching-at-scale.md",
+        "enterprise/apis/realtime.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -1324,7 +1894,8 @@
         "enterprise/compliance/residency.md",
         "enterprise/data/idempotency.md",
         "patterns/availability-failover.md",
-        "patterns/replication-multi-leader.md"
+        "patterns/replication-multi-leader.md",
+        "enterprise/reliability/cell-based-architecture.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -1347,7 +1918,9 @@
         "enterprise/data/idempotency.md",
         "enterprise/apis/rate-limiting.md",
         "patterns/retry-with-backoff.md",
-        "patterns/idempotency-keys.md"
+        "enterprise/data/workflow-engines.md",
+        "enterprise/apis/errors-pagination-async.md",
+        "enterprise/apis/realtime.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -1370,7 +1943,8 @@
         "enterprise/identity/secrets.md",
         "enterprise/tenancy/data-and-keys.md",
         "enterprise/compliance/residency.md",
-        "enterprise/compliance/retention.md"
+        "enterprise/compliance/retention.md",
+        "enterprise/security/post-quantum.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -1394,7 +1968,29 @@
         "enterprise/identity/authorization-models.md",
         "enterprise/compliance/audit-logs.md",
         "pack/skills/design-reviewer/checklist.md",
-        "pack/corpora/INDEX.md"
+        "enterprise/ai/llm-security.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "enterprise/security/post-quantum.md",
+      "type": "doc",
+      "section": "enterprise",
+      "title": "Post-quantum migration",
+      "summary": "Inventory where classical public-key crypto protects long-lived data, prefer hybrid key agreement first, and treat NIST's 2030 and 2035 dates as a draft timeline until IR 8547 is final.",
+      "tags": [
+        "security",
+        "cryptography",
+        "post-quantum",
+        "tls",
+        "pki"
+      ],
+      "when_to_use": "Use when you are deciding what to inventory, what to migrate first, and which NIST and IETF documents are final.",
+      "related": [
+        "enterprise/security/encryption-keys.md",
+        "enterprise/security/supply-chain.md",
+        "enterprise/compliance/iso27001-fedramp.md",
+        "enterprise/identity/secrets.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -1417,7 +2013,8 @@
         "enterprise/identity/secrets.md",
         "enterprise/delivery/cicd.md",
         "enterprise/delivery/iac-environments.md",
-        "pack/corpora/INDEX.md"
+        "pack/corpora/INDEX.md",
+        "enterprise/security/post-quantum.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -1439,7 +2036,9 @@
         "enterprise/identity/oidc-oauth2.md",
         "enterprise/identity/authorization-models.md",
         "templates/threat-model.md",
-        "pack/skills/design-reviewer/checklist.md"
+        "pack/skills/design-reviewer/checklist.md",
+        "enterprise/ai/llm-security.md",
+        "pack/skills/threat-modeler/SKILL.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -1461,7 +2060,8 @@
         "enterprise/identity/service-to-service.md",
         "enterprise/identity/authorization-models.md",
         "enterprise/tenancy/isolation-models.md",
-        "patterns/sidecar-service-mesh.md"
+        "patterns/sidecar-service-mesh.md",
+        "enterprise/identity/passkeys-mfa.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -1483,7 +2083,9 @@
         "enterprise/tenancy/lifecycle.md",
         "enterprise/security/encryption-keys.md",
         "enterprise/compliance/retention.md",
-        "enterprise/compliance/residency.md",
+        "enterprise/ai/rag.md",
+        "enterprise/data/search.md",
+        "enterprise/data/caching-at-scale.md",
         "patterns/sharding.md"
       ],
       "last_reviewed": "2026-09-25"
@@ -1507,7 +2109,8 @@
         "enterprise/tenancy/lifecycle.md",
         "enterprise/identity/authorization-models.md",
         "enterprise/compliance/residency.md",
-        "patterns/sharding.md"
+        "enterprise/ai/README.md",
+        "enterprise/reliability/cell-based-architecture.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -1531,7 +2134,8 @@
         "enterprise/identity/saml-sso.md",
         "enterprise/compliance/retention.md",
         "enterprise/compliance/privacy.md",
-        "enterprise/cost/allocation.md"
+        "enterprise/cost/allocation.md",
+        "enterprise/identity/scim-provisioning.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -1555,7 +2159,8 @@
         "enterprise/apis/rate-limiting.md",
         "enterprise/cost/capacity.md",
         "patterns/rate-limiting.md",
-        "patterns/bulkhead.md"
+        "enterprise/reliability/cell-based-architecture.md",
+        "enterprise/data/caching-at-scale.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -1577,7 +2182,8 @@
         "enterprise/tenancy/lifecycle.md",
         "enterprise/identity/oidc-oauth2.md",
         "enterprise/compliance/residency.md",
-        "enterprise/reliability/multi-region.md"
+        "enterprise/reliability/multi-region.md",
+        "enterprise/reliability/cell-based-architecture.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -1599,8 +2205,9 @@
         "patterns/replication-leader-follower.md",
         "patterns/message-queues.md",
         "pack/skills/system-architect/reference/data.md",
-        "pack/skills/system-architect/reference/scalability.md",
-        "pack/skills/system-architect/reference/estimates.md"
+        "patterns/cell-based-architecture.md",
+        "patterns/shuffle-sharding.md",
+        "patterns/durable-workflow.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -1609,7 +2216,7 @@
       "type": "doc",
       "section": "pack",
       "title": "Enterprise system design skills",
-      "summary": "Tool-agnostic architect, design-reviewer, and ADR-writer skills, with the references and worked example they ship with.",
+      "summary": "Tool-agnostic architect, threat-modeler, cost-estimator, design-reviewer, and ADR-writer skills, with the references and worked example they ship with.",
       "tags": [
         "skills",
         "pack",
@@ -1620,6 +2227,8 @@
         "pack/skills/system-architect/SKILL.md",
         "pack/skills/design-reviewer/SKILL.md",
         "pack/skills/adr-writer/SKILL.md",
+        "pack/skills/threat-modeler/SKILL.md",
+        "pack/skills/cost-estimator/SKILL.md",
         "pack/corpora/INDEX.md",
         "pack/examples/multi-tenant-audit-log/README.md",
         "enterprise/README.md",
@@ -1633,17 +2242,19 @@
       "type": "doc",
       "section": "pack",
       "title": "Complementary sources",
-      "summary": "License-checked index of works the Primer does not cover, and whether each one may be copied into a skill.",
+      "summary": "License-checked index of outside sources, grouped by whether this repo may copy them, must share-alike, or may only link.",
       "tags": [
         "sources",
         "licenses"
       ],
-      "when_to_use": "Use before citing SRE, ASVS, twelve-factor, Well-Architected, or microservices.io, so the license is settled before any text is copied.",
+      "when_to_use": "Use before copying or closely paraphrasing an external source into a skill or a doc, so the license class is settled first.",
       "related": [
         "pack/README.md",
         "pack/skills/system-architect/SKILL.md",
         "pack/skills/design-reviewer/SKILL.md",
-        "pack/skills/design-reviewer/checklist.md"
+        "pack/skills/design-reviewer/checklist.md",
+        "pack/skills/threat-modeler/SKILL.md",
+        "pack/skills/cost-estimator/SKILL.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -1765,6 +2376,47 @@
         "pack/skills/adr-writer/reference/when-to-write.md",
         "enterprise/organization/decisions.md",
         "templates/adr.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "pack/skills/cost-estimator/SKILL.md",
+      "type": "skill",
+      "section": "pack",
+      "title": "cost-estimator",
+      "summary": "Use this when turning a system design into a cost estimate: workload drivers, unit costs labeled as assumptions, formulas before totals, sensitivity, and unit economics.",
+      "tags": [
+        "skill"
+      ],
+      "when_to_use": "Use this when turning a system design into a cost estimate: workload drivers, unit costs labeled as assumptions, formulas before totals, sensitivity, and unit economics.",
+      "related": [
+        "pack/skills/cost-estimator/reference/method.md",
+        "pack/skills/system-architect/reference/estimates.md",
+        "templates/capacity-estimate.md",
+        "enterprise/cost/unit-economics.md",
+        "enterprise/cost/capacity.md",
+        "enterprise/cost/finops.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "pack/skills/cost-estimator/reference/method.md",
+      "type": "doc",
+      "section": "pack",
+      "title": "Cost estimate method",
+      "summary": "Formulas for a design cost estimate, then a worked object-storage example with every product shown.",
+      "tags": [
+        "cost",
+        "estimates",
+        "unit-economics"
+      ],
+      "when_to_use": "Use when substituting workload drivers and assumed unit prices into a monthly cost and a per-unit cost.",
+      "related": [
+        "pack/skills/cost-estimator/SKILL.md",
+        "pack/skills/system-architect/reference/estimates.md",
+        "templates/capacity-estimate.md",
+        "enterprise/cost/unit-economics.md",
+        "enterprise/cost/capacity.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -1934,6 +2586,66 @@
       "last_reviewed": "2026-09-25"
     },
     {
+      "path": "pack/skills/threat-modeler/SKILL.md",
+      "type": "skill",
+      "section": "pack",
+      "title": "threat-modeler",
+      "summary": "Use this when turning a data-flow description into a STRIDE threat model: one row per element or trust boundary, with severity and a mitigation or an accepted risk.",
+      "tags": [
+        "skill"
+      ],
+      "when_to_use": "Use this when turning a data-flow description into a STRIDE threat model: one row per element or trust boundary, with severity and a mitigation or an accepted risk.",
+      "related": [
+        "pack/skills/threat-modeler/reference/stride.md",
+        "pack/skills/threat-modeler/reference/ai-threats.md",
+        "templates/threat-model.md",
+        "enterprise/security/threat-modeling.md",
+        "pack/corpora/INDEX.md",
+        "pack/skills/design-reviewer/SKILL.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "pack/skills/threat-modeler/reference/ai-threats.md",
+      "type": "doc",
+      "section": "pack",
+      "title": "AI threat prompts",
+      "summary": "Extra abuses to walk when a design calls a model, retrieves untrusted text, or lets a model invoke tools.",
+      "tags": [
+        "security",
+        "ai",
+        "threat-model"
+      ],
+      "when_to_use": "Use with the STRIDE reference when the data flow includes a model, a retriever, or a tool call.",
+      "related": [
+        "pack/skills/threat-modeler/SKILL.md",
+        "pack/skills/threat-modeler/reference/stride.md",
+        "enterprise/security/threat-modeling.md",
+        "enterprise/ai/llm-security.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "pack/skills/threat-modeler/reference/stride.md",
+      "type": "doc",
+      "section": "pack",
+      "title": "STRIDE reference",
+      "summary": "Six questions to ask of each element and each trust-boundary crossing, plus the severity scale the threat-modeler skill uses.",
+      "tags": [
+        "security",
+        "stride",
+        "threat-model"
+      ],
+      "when_to_use": "Use when walking a data-flow description for spoofing, tampering, repudiation, disclosure, denial of service, and elevation of privilege.",
+      "related": [
+        "pack/skills/threat-modeler/SKILL.md",
+        "pack/skills/threat-modeler/reference/ai-threats.md",
+        "templates/threat-model.md",
+        "enterprise/security/threat-modeling.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
       "path": "patterns/README.md",
       "type": "doc",
       "section": "patterns",
@@ -2078,7 +2790,8 @@
         "patterns/write-through.md",
         "patterns/write-behind.md",
         "patterns/cache-invalidation.md",
-        "patterns/refresh-ahead.md"
+        "patterns/refresh-ahead.md",
+        "enterprise/data/caching-at-scale.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -2098,7 +2811,8 @@
         "patterns/cache-aside.md",
         "patterns/write-through.md",
         "patterns/write-behind.md",
-        "patterns/cdn.md"
+        "patterns/cdn.md",
+        "enterprise/data/caching-at-scale.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -2155,7 +2869,29 @@
       "related": [
         "patterns/cache-invalidation.md",
         "patterns/reverse-proxy.md",
-        "patterns/load-balancing.md"
+        "patterns/load-balancing.md",
+        "enterprise/data/caching-at-scale.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "patterns/cell-based-architecture.md",
+      "type": "pattern",
+      "section": "patterns",
+      "title": "Cell-based architecture",
+      "summary": "Run the workload as several full stacks, each serving a slice of tenants, so one failure does not take the product down.",
+      "tags": [
+        "reliability",
+        "isolation",
+        "cells"
+      ],
+      "when_to_use": "Use when a single shared stack's blast radius is no longer acceptable and you can route each tenant to one cell.",
+      "related": [
+        "patterns/shuffle-sharding.md",
+        "patterns/sharding.md",
+        "patterns/bulkhead.md",
+        "enterprise/reliability/cell-based-architecture.md",
+        "enterprise/tenancy/isolation-models.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -2233,6 +2969,27 @@
         "patterns/cqrs.md",
         "patterns/cache-aside.md",
         "patterns/cache-invalidation.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "patterns/durable-workflow.md",
+      "type": "pattern",
+      "section": "patterns",
+      "title": "Durable workflow",
+      "summary": "Record each step of a long-running process in an event history and continue by replaying that history, instead of holding the work in memory.",
+      "tags": [
+        "data",
+        "workflow",
+        "orchestration"
+      ],
+      "when_to_use": "Use when a business process outlives one process, needs timers and retries, and must not lose its place when the worker dies.",
+      "related": [
+        "patterns/saga.md",
+        "patterns/idempotency-keys.md",
+        "patterns/transactional-outbox.md",
+        "enterprise/data/workflow-engines.md",
+        "enterprise/data/sagas.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -2407,7 +3164,8 @@
       "when_to_use": "Use when a small set of keys is predictably hot and a miss would spike latency.",
       "related": [
         "patterns/cache-aside.md",
-        "patterns/cache-invalidation.md"
+        "patterns/cache-invalidation.md",
+        "enterprise/data/caching-at-scale.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -2504,7 +3262,9 @@
         "patterns/transactional-outbox.md",
         "patterns/idempotency-keys.md",
         "patterns/message-queues.md",
-        "enterprise/data/sagas.md"
+        "enterprise/data/sagas.md",
+        "enterprise/data/workflow-engines.md",
+        "patterns/durable-workflow.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -2523,7 +3283,28 @@
       "related": [
         "patterns/federation.md",
         "patterns/replication-leader-follower.md",
-        "patterns/denormalization.md"
+        "patterns/denormalization.md",
+        "enterprise/reliability/cell-based-architecture.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "patterns/shuffle-sharding.md",
+      "type": "pattern",
+      "section": "patterns",
+      "title": "Shuffle sharding",
+      "summary": "Assign each tenant a small random subset of a shared fleet so two tenants rarely share the exact same fate.",
+      "tags": [
+        "reliability",
+        "isolation",
+        "sharding"
+      ],
+      "when_to_use": "Use when you cannot give every tenant a cell, but one noisy tenant must not be able to sit on every node the others use.",
+      "related": [
+        "patterns/cell-based-architecture.md",
+        "patterns/sharding.md",
+        "patterns/bulkhead.md",
+        "enterprise/reliability/cell-based-architecture.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -2600,7 +3381,8 @@
       "related": [
         "patterns/cache-aside.md",
         "patterns/write-through.md",
-        "patterns/cache-invalidation.md"
+        "patterns/cache-invalidation.md",
+        "enterprise/data/caching-at-scale.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -2618,7 +3400,8 @@
       "related": [
         "patterns/cache-aside.md",
         "patterns/write-behind.md",
-        "patterns/cache-invalidation.md"
+        "patterns/cache-invalidation.md",
+        "enterprise/data/caching-at-scale.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -2627,7 +3410,7 @@
       "type": "doc",
       "section": "templates",
       "title": "Templates",
-      "summary": "Copyable templates for a design doc, an ADR, a threat model, an SLO, a runbook, a postmortem, and a capacity worksheet.",
+      "summary": "Copyable templates for a design doc, an ADR, an RFC, a threat model, an SLO, a runbook, a postmortem, a capacity worksheet, a vendor evaluation, a production-readiness review, and a DPIA.",
       "tags": [
         "templates",
         "index"
@@ -2641,6 +3424,10 @@
         "templates/runbook.md",
         "templates/postmortem.md",
         "templates/capacity-estimate.md",
+        "templates/rfc.md",
+        "templates/vendor-evaluation.md",
+        "templates/production-readiness-review.md",
+        "templates/dpia.md",
         "pack/skills/adr-writer/template.md",
         "pack/skills/system-architect/SKILL.md"
       ],
@@ -2707,6 +3494,29 @@
       "last_reviewed": "2026-09-25"
     },
     {
+      "path": "templates/dpia.md",
+      "type": "template",
+      "section": "templates",
+      "title": "DPIA template",
+      "summary": "A Data Protection Impact Assessment outline aligned to GDPR Article 35: processing description, necessity, risks to people, and measures.",
+      "tags": [
+        "templates",
+        "privacy",
+        "gdpr",
+        "dpia"
+      ],
+      "when_to_use": "Use when a processing activity may be high risk to people and you need a written assessment before you build or change it.",
+      "related": [
+        "enterprise/compliance/privacy.md",
+        "enterprise/compliance/eu-regulations.md",
+        "enterprise/compliance/retention.md",
+        "enterprise/compliance/residency.md",
+        "enterprise/compliance/audit-logs.md",
+        "templates/threat-model.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
       "path": "templates/postmortem.md",
       "type": "template",
       "section": "templates",
@@ -2723,6 +3533,51 @@
         "templates/slo.md",
         "enterprise/observability/postmortems.md",
         "enterprise/observability/incidents.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "templates/production-readiness-review.md",
+      "type": "template",
+      "section": "templates",
+      "title": "Production readiness review template",
+      "summary": "A launch checklist with an evidence column and a gate per service tier, covering ownership, SLOs, failure, security, data, rollout, cost, and audit.",
+      "tags": [
+        "templates",
+        "delivery",
+        "production-readiness"
+      ],
+      "when_to_use": "Use before a service or a major change is called production, when someone must show evidence rather than assert readiness.",
+      "related": [
+        "enterprise/delivery/production-readiness.md",
+        "templates/slo.md",
+        "templates/runbook.md",
+        "templates/threat-model.md",
+        "templates/capacity-estimate.md",
+        "enterprise/observability/slos.md",
+        "enterprise/observability/alerting-oncall.md",
+        "enterprise/security/threat-modeling.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "templates/rfc.md",
+      "type": "template",
+      "section": "templates",
+      "title": "RFC template",
+      "summary": "Outline for a proposal several teams still have to critique: problem, goals, the proposal, alternatives, risks, rollout, and who decides.",
+      "tags": [
+        "templates",
+        "rfc",
+        "decisions"
+      ],
+      "when_to_use": "Use when a choice is still open and more than one team needs to comment before anyone commits.",
+      "related": [
+        "templates/adr.md",
+        "templates/design-doc.md",
+        "enterprise/organization/decisions.md",
+        "pack/skills/adr-writer/SKILL.md",
+        "pack/skills/adr-writer/reference/when-to-write.md"
       ],
       "last_reviewed": "2026-09-25"
     },
@@ -2783,6 +3638,29 @@
         "enterprise/security/threat-modeling.md",
         "enterprise/security/owasp-asvs.md",
         "pack/skills/design-reviewer/checklist.md"
+      ],
+      "last_reviewed": "2026-09-25"
+    },
+    {
+      "path": "templates/vendor-evaluation.md",
+      "type": "template",
+      "section": "templates",
+      "title": "Vendor evaluation template",
+      "summary": "A scored comparison of build, buy, or adopt: requirements, weights, security questions, a three-year cost, and how you leave.",
+      "tags": [
+        "templates",
+        "vendor",
+        "build-vs-buy"
+      ],
+      "when_to_use": "Use when a product decision depends on a vendor or an open-source project with a support contract, and the choice will be expensive to reverse.",
+      "related": [
+        "enterprise/organization/build-vs-buy.md",
+        "enterprise/cost/unit-economics.md",
+        "enterprise/cost/finops.md",
+        "enterprise/security/supply-chain.md",
+        "enterprise/compliance/soc2.md",
+        "enterprise/compliance/privacy.md",
+        "enterprise/compliance/residency.md"
       ],
       "last_reviewed": "2026-09-25"
     }

@@ -10,6 +10,8 @@ related:
   - ../reliability/retries-timeouts.md
   - ../security/encryption-keys.md
   - ../../patterns/idempotency-keys.md
+  - errors-pagination-async.md
+  - realtime.md
 last_reviewed: 2026-09-25
 ---
 

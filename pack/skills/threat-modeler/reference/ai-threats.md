@@ -7,7 +7,7 @@ related:
   - ../SKILL.md
   - stride.md
   - ../../../../enterprise/security/threat-modeling.md
-  - ../../../../pack/corpora/INDEX.md
+  - ../../../../enterprise/ai/llm-security.md
 last_reviewed: 2026-09-25
 ---
 

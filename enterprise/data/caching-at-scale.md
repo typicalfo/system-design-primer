@@ -7,16 +7,11 @@ related:
   - ../tenancy/data-and-keys.md
   - ../tenancy/noisy-neighbor.md
   - ../reliability/load-shedding.md
-  - ../reliability/disaster-recovery.md
   - transactional-outbox.md
-  - cdc.md
   - ../../patterns/cache-aside.md
   - ../../patterns/cache-invalidation.md
-  - ../../patterns/refresh-ahead.md
-  - ../../patterns/write-through.md
-  - ../../patterns/write-behind.md
   - ../../patterns/cdn.md
-  - ../../README.md#cache
+  - ../ai/rag.md
 last_reviewed: 2026-09-25
 ---
 
