@@ -1,11 +1,12 @@
-## Review the Contributing Guidelines
+## Contributing
 
-Before submitting a pull request, verify it meets all requirements in the [Contributing Guidelines](https://github.com/donnemartin/system-design-primer/blob/master/CONTRIBUTING.md).
+Before submitting, read [CONTRIBUTING.md](https://github.com/typicalfo/system-design-primer/blob/master/CONTRIBUTING.md).
 
-### Translations
+### Checklist
 
-See the [Contributing Guidelines](https://github.com/donnemartin/system-design-primer/blob/master/CONTRIBUTING.md).  Verify you've:
-
-* Tagged the [language maintainer](https://github.com/donnemartin/system-design-primer/blob/master/TRANSLATIONS.md)
-* Prefixed the title with a language code
-    * Example: "ja: Fix ..."
+- [ ] One topic per file, roughly under 300 lines
+- [ ] YAML frontmatter: `title`, `summary`, `tags`, `when_to_use`, `related`
+- [ ] `catalog.json` regenerated with `python3 scripts/build_catalog.py`, and `llms.txt` updated (`llms-full.txt` refreshed when the script writes it)
+- [ ] `python3 scripts/check_links.py` passes
+- [ ] External sources cited by link, with accurate, verified licenses; no non-redistributable text copied
+- [ ] Original Primer prose not rewritten (use an `Enterprise update (fork)` callout)

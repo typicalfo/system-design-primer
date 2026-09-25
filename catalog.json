@@ -1,0 +1,1387 @@
+[
+  {
+    "path": "AGENTS.md",
+    "type": "doc",
+    "title": "How to use this repo (coding agents)",
+    "tags": [],
+    "summary": "This is an enterprise-augmented fork of Donne Martin's System Design Primer. The original study guide is unchanged under [Original study guide](README.md#original-study-guide) in [README.md](README.md). Solutions and translations are untouched. New material is for designing and building production systems."
+  },
+  {
+    "path": "CONTRIBUTING.md",
+    "type": "doc",
+    "title": "Contributing",
+    "tags": [],
+    "summary": "Pull requests are welcome. GitHub Issues are intentionally turned off, so open a pull request instead of requesting a change. AI-assisted pull requests are welcome."
+  },
+  {
+    "path": "enterprise/README.md",
+    "type": "doc",
+    "title": "Enterprise guide",
+    "tags": [
+      "enterprise",
+      "index"
+    ],
+    "summary": "Production topics the System Design Primer does not cover, split into short decision-oriented pages."
+  },
+  {
+    "path": "enterprise/apis/contract-testing.md",
+    "type": "doc",
+    "title": "Contract testing",
+    "tags": [
+      "api",
+      "testing",
+      "contracts"
+    ],
+    "summary": "Check producer and consumer agreements in CI so a shared staging environment is not the only integration test."
+  },
+  {
+    "path": "enterprise/apis/gateways.md",
+    "type": "doc",
+    "title": "API gateways",
+    "tags": [
+      "api",
+      "gateway",
+      "edge"
+    ],
+    "summary": "Put edge concerns at the gateway and keep product policy in the service that owns the data."
+  },
+  {
+    "path": "enterprise/apis/rate-limiting.md",
+    "type": "doc",
+    "title": "Rate limiting",
+    "tags": [
+      "api",
+      "rate-limiting",
+      "fairness"
+    ],
+    "summary": "Choose a limiter algorithm from whether bursts are allowed, and key it on the identity that should pay the cost."
+  },
+  {
+    "path": "enterprise/apis/styles.md",
+    "type": "doc",
+    "title": "REST, gRPC, and GraphQL",
+    "tags": [
+      "api",
+      "rest",
+      "grpc",
+      "graphql"
+    ],
+    "summary": "Pick one style per boundary from who the caller is, whether the shape is stable, and who pays for round trips."
+  },
+  {
+    "path": "enterprise/apis/versioning.md",
+    "type": "doc",
+    "title": "API versioning",
+    "tags": [
+      "api",
+      "versioning",
+      "compatibility"
+    ],
+    "summary": "Evolve contracts compatibly, and introduce an explicit version only when a break is unavoidable."
+  },
+  {
+    "path": "enterprise/apis/webhooks.md",
+    "type": "doc",
+    "title": "Webhooks",
+    "tags": [
+      "api",
+      "webhooks",
+      "integration"
+    ],
+    "summary": "Sign each delivery, retry with backoff, and make the receiver dedupe on an event id."
+  },
+  {
+    "path": "enterprise/compliance/audit-logs.md",
+    "type": "doc",
+    "title": "Tamper-evident audit logs",
+    "tags": [
+      "compliance",
+      "audit",
+      "logging"
+    ],
+    "summary": "Record privileged actions in an append-only log that operators cannot quietly edit, and keep it separate from debug logs."
+  },
+  {
+    "path": "enterprise/compliance/hipaa-pci.md",
+    "type": "doc",
+    "title": "HIPAA and PCI DSS basics",
+    "tags": [
+      "compliance",
+      "hipaa",
+      "pci",
+      "security"
+    ],
+    "summary": "Shrink the systems that touch PHI or cardholder data, and put the extra controls only on what remains."
+  },
+  {
+    "path": "enterprise/compliance/privacy.md",
+    "type": "doc",
+    "title": "GDPR and CCPA basics",
+    "tags": [
+      "compliance",
+      "privacy",
+      "gdpr",
+      "ccpa"
+    ],
+    "summary": "Inventory personal data, minimize it, and build export and deletion as product paths rather than as tickets."
+  },
+  {
+    "path": "enterprise/compliance/residency.md",
+    "type": "doc",
+    "title": "Data residency",
+    "tags": [
+      "compliance",
+      "residency",
+      "multi-region"
+    ],
+    "summary": "Pin a tenant's data, backups, and operator access to the regions the contract allows."
+  },
+  {
+    "path": "enterprise/compliance/retention.md",
+    "type": "doc",
+    "title": "Retention and deletion",
+    "tags": [
+      "compliance",
+      "retention",
+      "deletion",
+      "backups"
+    ],
+    "summary": "Give every store a retention period and a deletion path that includes indexes, vendors, and backups."
+  },
+  {
+    "path": "enterprise/compliance/soc2.md",
+    "type": "doc",
+    "title": "SOC 2 basics",
+    "tags": [
+      "compliance",
+      "soc2",
+      "audit"
+    ],
+    "summary": "Treat SOC 2 as an attestation that named controls operated over a period, and build the evidence those controls need."
+  },
+  {
+    "path": "enterprise/cost/allocation.md",
+    "type": "doc",
+    "title": "Cost allocation",
+    "tags": [
+      "cost",
+      "allocation",
+      "tenancy",
+      "finops"
+    ],
+    "summary": "Attribute shared spend to teams and tenants with tags and a written split, so showback is explainable."
+  },
+  {
+    "path": "enterprise/cost/capacity.md",
+    "type": "doc",
+    "title": "Capacity planning",
+    "tags": [
+      "cost",
+      "capacity",
+      "estimates"
+    ],
+    "summary": "Turn the traffic estimate into a resource plan with headroom, a lead time, and a date to revisit."
+  },
+  {
+    "path": "enterprise/cost/finops.md",
+    "type": "doc",
+    "title": "FinOps",
+    "tags": [
+      "cost",
+      "finops"
+    ],
+    "summary": "Make spend visible to the teams who cause it, and review it on a cadence with the same seriousness as an SLO."
+  },
+  {
+    "path": "enterprise/cost/unit-economics.md",
+    "type": "doc",
+    "title": "Unit economics",
+    "tags": [
+      "cost",
+      "unit-economics",
+      "finops"
+    ],
+    "summary": "Express cost per business unit so a design change can be compared to the revenue or the budget it serves."
+  },
+  {
+    "path": "enterprise/data/cdc.md",
+    "type": "doc",
+    "title": "Change data capture",
+    "tags": [
+      "data",
+      "cdc",
+      "replication"
+    ],
+    "summary": "Stream committed database changes from the log when consumers need the row-level history the database already committed."
+  },
+  {
+    "path": "enterprise/data/event-driven.md",
+    "type": "doc",
+    "title": "Event-driven architecture",
+    "tags": [
+      "data",
+      "events",
+      "messaging"
+    ],
+    "summary": "Publish facts that already happened, let consumers build their own state, and treat delivery as at-least-once."
+  },
+  {
+    "path": "enterprise/data/governance.md",
+    "type": "doc",
+    "title": "Data governance",
+    "tags": [
+      "data",
+      "governance",
+      "privacy",
+      "quality"
+    ],
+    "summary": "Assign an owner, a classification, a lineage, and an access rule to data people will rely on."
+  },
+  {
+    "path": "enterprise/data/idempotency.md",
+    "type": "doc",
+    "title": "Idempotency",
+    "tags": [
+      "data",
+      "idempotency",
+      "api"
+    ],
+    "summary": "Make a retried request return the original result, and reject the same key when the body differs."
+  },
+  {
+    "path": "enterprise/data/sagas.md",
+    "type": "doc",
+    "title": "Sagas",
+    "tags": [
+      "data",
+      "saga",
+      "consistency"
+    ],
+    "summary": "Split a multi-service business transaction into local steps plus compensations, and choose a choreography or an orchestrator."
+  },
+  {
+    "path": "enterprise/data/schema-evolution.md",
+    "type": "doc",
+    "title": "Schema evolution",
+    "tags": [
+      "data",
+      "schema",
+      "compatibility"
+    ],
+    "summary": "Change events and tables so old and new producers and consumers overlap for at least one release."
+  },
+  {
+    "path": "enterprise/data/transactional-outbox.md",
+    "type": "doc",
+    "title": "Transactional outbox",
+    "tags": [
+      "data",
+      "outbox",
+      "messaging"
+    ],
+    "summary": "Write the business change and the message you must publish in the same database transaction, then publish asynchronously."
+  },
+  {
+    "path": "enterprise/data/warehouse-lakehouse.md",
+    "type": "doc",
+    "title": "Warehouse and lakehouse",
+    "tags": [
+      "data",
+      "warehouse",
+      "lakehouse",
+      "analytics"
+    ],
+    "summary": "Keep operational stores for transactions, and land analytical copies in a warehouse or a table format on object storage."
+  },
+  {
+    "path": "enterprise/delivery/cicd.md",
+    "type": "doc",
+    "title": "CI and CD",
+    "tags": [
+      "delivery",
+      "cicd",
+      "release"
+    ],
+    "summary": "Build an artifact once, test it, sign it, and promote that same digest through environments."
+  },
+  {
+    "path": "enterprise/delivery/database-migrations.md",
+    "type": "doc",
+    "title": "Database migrations and rollback",
+    "tags": [
+      "delivery",
+      "migrations",
+      "database",
+      "rollback"
+    ],
+    "summary": "Change schemas in expand and contract steps so the previous application version still runs, and so rollback does not require time travel."
+  },
+  {
+    "path": "enterprise/delivery/feature-flags.md",
+    "type": "doc",
+    "title": "Feature flags",
+    "tags": [
+      "delivery",
+      "feature-flags",
+      "release"
+    ],
+    "summary": "Separate release from deploy with short-lived flags, and make the off state safe when the flag service is down."
+  },
+  {
+    "path": "enterprise/delivery/iac-environments.md",
+    "type": "doc",
+    "title": "Infrastructure as code and environments",
+    "tags": [
+      "delivery",
+      "iac",
+      "environments"
+    ],
+    "summary": "Describe infrastructure in reviewed code, and keep environments separated without copying production personal data downhill."
+  },
+  {
+    "path": "enterprise/delivery/progressive-delivery.md",
+    "type": "doc",
+    "title": "Progressive delivery",
+    "tags": [
+      "delivery",
+      "canary",
+      "blue-green",
+      "rollout"
+    ],
+    "summary": "Expose a release to a small slice first, watch the SLO, and expand or roll back on that evidence."
+  },
+  {
+    "path": "enterprise/identity/authorization-models.md",
+    "type": "doc",
+    "title": "Authorization models",
+    "tags": [
+      "identity",
+      "authorization",
+      "rbac",
+      "abac",
+      "rebac"
+    ],
+    "summary": "Choose RBAC, ABAC, or ReBAC for the decision, and enforce it on the server from the authenticated identity."
+  },
+  {
+    "path": "enterprise/identity/oidc-oauth2.md",
+    "type": "doc",
+    "title": "OIDC and OAuth 2.0",
+    "tags": [
+      "identity",
+      "oauth2",
+      "oidc",
+      "authentication"
+    ],
+    "summary": "Pick an OAuth 2.0 flow, bind tokens to the right audience, and treat OpenID Connect as the identity layer on top."
+  },
+  {
+    "path": "enterprise/identity/saml-sso.md",
+    "type": "doc",
+    "title": "SSO and SAML",
+    "tags": [
+      "identity",
+      "saml",
+      "sso",
+      "authentication"
+    ],
+    "summary": "Accept enterprise single sign-on through SAML 2.0 when a customer IdP requires it, and keep the assertion checks strict."
+  },
+  {
+    "path": "enterprise/identity/secrets.md",
+    "type": "doc",
+    "title": "Secrets management",
+    "tags": [
+      "identity",
+      "secrets",
+      "security"
+    ],
+    "summary": "Keep secrets in a manager, inject them at runtime, scope who can read them, and rotate them without a redeploy heroics story."
+  },
+  {
+    "path": "enterprise/identity/service-to-service.md",
+    "type": "doc",
+    "title": "Service-to-service auth",
+    "tags": [
+      "identity",
+      "mtls",
+      "spiffe",
+      "workload-identity",
+      "service-mesh"
+    ],
+    "summary": "Give every workload an identity and a short-lived credential, using workload identity, SPIFFE, or mutually authenticated TLS."
+  },
+  {
+    "path": "enterprise/modernization/anti-corruption-layer.md",
+    "type": "doc",
+    "title": "Anti-corruption layer",
+    "tags": [
+      "modernization",
+      "anti-corruption-layer",
+      "integration"
+    ],
+    "summary": "Translate between a legacy model and a new model in one place, so the new model does not grow the legacy system's concepts."
+  },
+  {
+    "path": "enterprise/modernization/modular-monolith.md",
+    "type": "doc",
+    "title": "Modular monolith",
+    "tags": [
+      "modernization",
+      "monolith",
+      "modularity"
+    ],
+    "summary": "Keep one deployable, split it into modules with hard boundaries, and extract a service only when a team or a scale number requires it."
+  },
+  {
+    "path": "enterprise/modernization/strangler-fig.md",
+    "type": "doc",
+    "title": "Strangler fig",
+    "tags": [
+      "modernization",
+      "strangler",
+      "migration"
+    ],
+    "summary": "Put a seam in front of the legacy system and replace one capability at a time until the old path can be deleted."
+  },
+  {
+    "path": "enterprise/observability/alerting-oncall.md",
+    "type": "doc",
+    "title": "Alerting and on-call",
+    "tags": [
+      "observability",
+      "alerting",
+      "oncall"
+    ],
+    "summary": "Page a named owner on user-visible symptoms that threaten the error budget, and keep a human rotation that can act."
+  },
+  {
+    "path": "enterprise/observability/incidents.md",
+    "type": "doc",
+    "title": "Incident response",
+    "tags": [
+      "observability",
+      "incident",
+      "operations"
+    ],
+    "summary": "Declare early, assign roles, mitigate first, and keep a timeline that the postmortem can trust."
+  },
+  {
+    "path": "enterprise/observability/opentelemetry.md",
+    "type": "doc",
+    "title": "OpenTelemetry",
+    "tags": [
+      "observability",
+      "opentelemetry",
+      "tracing"
+    ],
+    "summary": "Instrument with OpenTelemetry and put sampling, redaction, and vendor export in the collector, not in application code."
+  },
+  {
+    "path": "enterprise/observability/postmortems.md",
+    "type": "doc",
+    "title": "Blameless postmortems",
+    "tags": [
+      "observability",
+      "postmortem",
+      "incident"
+    ],
+    "summary": "Write what happened, why the system allowed it, and which actions will change the system, without blaming a person."
+  },
+  {
+    "path": "enterprise/observability/slos.md",
+    "type": "doc",
+    "title": "SLIs, SLOs, and error budgets",
+    "tags": [
+      "observability",
+      "sli",
+      "slo",
+      "error-budget"
+    ],
+    "summary": "Define a user-visible indicator, set a target over a window, and spend the error budget on purpose."
+  },
+  {
+    "path": "enterprise/observability/telemetry.md",
+    "type": "doc",
+    "title": "Logs, metrics, and traces",
+    "tags": [
+      "observability",
+      "logs",
+      "metrics",
+      "traces"
+    ],
+    "summary": "Use metrics for symptoms and alerts, traces for one request's path, and logs for the detail you cannot aggregate."
+  },
+  {
+    "path": "enterprise/organization/conways-law.md",
+    "type": "doc",
+    "title": "Conway's law",
+    "tags": [
+      "organization",
+      "conway",
+      "architecture"
+    ],
+    "summary": "Expect the system to mirror team communication, and change the team boundary when you want a different system boundary."
+  },
+  {
+    "path": "enterprise/organization/decisions.md",
+    "type": "doc",
+    "title": "ADRs and RFCs",
+    "tags": [
+      "organization",
+      "adr",
+      "rfc",
+      "decisions"
+    ],
+    "summary": "Use an RFC to shape a proposal with the people it affects, and an ADR to record the decision you actually made."
+  },
+  {
+    "path": "enterprise/organization/ownership.md",
+    "type": "doc",
+    "title": "Service ownership",
+    "tags": [
+      "organization",
+      "ownership",
+      "oncall"
+    ],
+    "summary": "Give every service and store one owning team that ships it, runs it, and answers for its data."
+  },
+  {
+    "path": "enterprise/organization/platform-teams.md",
+    "type": "doc",
+    "title": "Platform teams",
+    "tags": [
+      "organization",
+      "platform",
+      "developer-experience"
+    ],
+    "summary": "Run an internal platform as a product with customers, a golden path, and a support model that is not a ticket black hole."
+  },
+  {
+    "path": "enterprise/organization/team-topologies.md",
+    "type": "doc",
+    "title": "Team topologies",
+    "tags": [
+      "organization",
+      "teams",
+      "topology"
+    ],
+    "summary": "Organize teams by the kind of work they do and the way they are allowed to interact, so delivery is not an accident of the org chart."
+  },
+  {
+    "path": "enterprise/reference-architectures/README.md",
+    "type": "doc",
+    "title": "Reference architectures",
+    "tags": [
+      "reference-architecture",
+      "index"
+    ],
+    "summary": "Four end-to-end designs with requirements, estimates, a diagram, tradeoffs, and a severity-ranked design review."
+  },
+  {
+    "path": "enterprise/reference-architectures/data-platform.md",
+    "type": "reference-architecture",
+    "title": "Reference architecture: data platform",
+    "tags": [
+      "reference-architecture",
+      "data",
+      "lakehouse",
+      "cdc"
+    ],
+    "summary": "CDC from operational databases into a lakehouse with owned curated tables, deletion, and a catalog."
+  },
+  {
+    "path": "enterprise/reference-architectures/event-driven-orders.md",
+    "type": "reference-architecture",
+    "title": "Reference architecture: event-driven orders and payments",
+    "tags": [
+      "reference-architecture",
+      "events",
+      "payments"
+    ],
+    "summary": "Checkout as an orchestrated saga with an outbox, idempotent charges, and inventory reservation."
+  },
+  {
+    "path": "enterprise/reference-architectures/internal-platform.md",
+    "type": "reference-architecture",
+    "title": "Reference architecture: internal platform with SSO and audit",
+    "tags": [
+      "reference-architecture",
+      "platform",
+      "audit",
+      "sso"
+    ],
+    "summary": "An internal developer platform with corporate SSO, a service catalog, and a tamper-evident audit log."
+  },
+  {
+    "path": "enterprise/reference-architectures/multi-tenant-b2b-saas.md",
+    "type": "reference-architecture",
+    "title": "Reference architecture: multi-tenant B2B SaaS",
+    "tags": [
+      "reference-architecture",
+      "tenancy",
+      "saas"
+    ],
+    "summary": "A pooled work-management SaaS with a bridge tier for large tenants, SSO, and tenant-scoped webhooks."
+  },
+  {
+    "path": "enterprise/reliability/chaos.md",
+    "type": "doc",
+    "title": "Chaos testing",
+    "tags": [
+      "reliability",
+      "chaos",
+      "game-day"
+    ],
+    "summary": "Run a small, reversible fault with a hypothesis and an abort switch, and write down what broke."
+  },
+  {
+    "path": "enterprise/reliability/circuit-breaker-bulkhead.md",
+    "type": "doc",
+    "title": "Circuit breakers and bulkheads",
+    "tags": [
+      "reliability",
+      "circuit-breaker",
+      "bulkhead"
+    ],
+    "summary": "Stop calling a dependency that is failing, and isolate its concurrency so it cannot sink the whole process."
+  },
+  {
+    "path": "enterprise/reliability/disaster-recovery.md",
+    "type": "doc",
+    "title": "Disaster recovery, RPO, and RTO",
+    "tags": [
+      "reliability",
+      "disaster-recovery",
+      "rpo",
+      "rto",
+      "backups"
+    ],
+    "summary": "Name how much data you can lose and how fast you must be back, then test the restore that those numbers require."
+  },
+  {
+    "path": "enterprise/reliability/load-shedding.md",
+    "type": "doc",
+    "title": "Load shedding",
+    "tags": [
+      "reliability",
+      "load-shedding",
+      "backpressure"
+    ],
+    "summary": "Reject excess work early, with a clear retry signal, before the process collapses under queueing delay."
+  },
+  {
+    "path": "enterprise/reliability/multi-region.md",
+    "type": "doc",
+    "title": "Multi-region architectures",
+    "tags": [
+      "reliability",
+      "multi-region",
+      "active-active",
+      "active-passive"
+    ],
+    "summary": "Choose active-passive or active-active from the RPO, the RTO, and whether two regions may write the same key."
+  },
+  {
+    "path": "enterprise/reliability/retries-timeouts.md",
+    "type": "doc",
+    "title": "Retries, backoff, and timeouts",
+    "tags": [
+      "reliability",
+      "retries",
+      "timeouts",
+      "backoff"
+    ],
+    "summary": "Bound every remote call with a timeout, and retry only idempotent work with jittered backoff."
+  },
+  {
+    "path": "enterprise/security/encryption-keys.md",
+    "type": "doc",
+    "title": "Encryption and key management",
+    "tags": [
+      "security",
+      "encryption",
+      "kms",
+      "cryptography"
+    ],
+    "summary": "Encrypt in transit and at rest with managed keys, separate data keys from key-encryption keys, and do not invent a cipher."
+  },
+  {
+    "path": "enterprise/security/owasp-asvs.md",
+    "type": "doc",
+    "title": "OWASP ASVS chapter map",
+    "tags": [
+      "security",
+      "asvs",
+      "owasp"
+    ],
+    "summary": "Point a design at the ASVS 5.0.0 chapter that covers the control, without copying the standard's requirement text."
+  },
+  {
+    "path": "enterprise/security/supply-chain.md",
+    "type": "doc",
+    "title": "Software supply chain",
+    "tags": [
+      "security",
+      "sbom",
+      "slsa",
+      "signing",
+      "supply-chain"
+    ],
+    "summary": "Know what you build, produce an SBOM, sign the artifact, and deploy only what you verified."
+  },
+  {
+    "path": "enterprise/security/threat-modeling.md",
+    "type": "doc",
+    "title": "Threat modeling with STRIDE",
+    "tags": [
+      "security",
+      "stride",
+      "threat-model"
+    ],
+    "summary": "Walk the data flows once per trust boundary and name spoofing, tampering, repudiation, disclosure, denial of service, and elevation of privilege."
+  },
+  {
+    "path": "enterprise/security/zero-trust.md",
+    "type": "doc",
+    "title": "Zero trust",
+    "tags": [
+      "security",
+      "zero-trust",
+      "identity"
+    ],
+    "summary": "Authenticate and authorize every request, and treat network location as an untrusted hint."
+  },
+  {
+    "path": "enterprise/tenancy/data-and-keys.md",
+    "type": "doc",
+    "title": "Per-tenant data and keys",
+    "tags": [
+      "tenancy",
+      "data",
+      "encryption",
+      "keys"
+    ],
+    "summary": "Put the tenant on every record and decide which tenants get their own encryption key."
+  },
+  {
+    "path": "enterprise/tenancy/isolation-models.md",
+    "type": "doc",
+    "title": "Tenant isolation models",
+    "tags": [
+      "tenancy",
+      "isolation",
+      "saas"
+    ],
+    "summary": "Pick silo, pool, or bridge isolation per tier of tenant, and write down what a bug in one model can leak."
+  },
+  {
+    "path": "enterprise/tenancy/lifecycle.md",
+    "type": "doc",
+    "title": "Tenant onboarding and offboarding",
+    "tags": [
+      "tenancy",
+      "onboarding",
+      "offboarding",
+      "deletion"
+    ],
+    "summary": "Provision a tenant as a record plus policy, and offboard it including access, exports, deletion, and backups."
+  },
+  {
+    "path": "enterprise/tenancy/noisy-neighbor.md",
+    "type": "doc",
+    "title": "Noisy neighbors",
+    "tags": [
+      "tenancy",
+      "quotas",
+      "fairness",
+      "capacity"
+    ],
+    "summary": "Cap one tenant's load so a shared pool stays fair, and move a tenant to a silo when caps are not enough."
+  },
+  {
+    "path": "enterprise/tenancy/routing.md",
+    "type": "doc",
+    "title": "Tenant-aware routing",
+    "tags": [
+      "tenancy",
+      "routing",
+      "residency"
+    ],
+    "summary": "Resolve the tenant from the credential and the host, then send the request to that tenant's home region or cell."
+  },
+  {
+    "path": "enterprise/whats-dated.md",
+    "type": "doc",
+    "title": "What's dated in the Primer",
+    "tags": [
+      "primer",
+      "dated",
+      "modernization"
+    ],
+    "summary": "Where the System Design Primer's advice shows its era, and the current equivalent to use in a design."
+  },
+  {
+    "path": "pack/README.md",
+    "type": "doc",
+    "title": "Enterprise system design skills",
+    "tags": [],
+    "summary": "A tool-agnostic skill pack for designing and reviewing production software systems. It adapts the working method of the [System Design Primer](https://github.com/donnemartin/system-design-primer) \u2014 scope the problem, sketch components, estimate, then stress the design \u2014 and adds the enterprise checks that method does not cover: identity, security requirements, compliance, operability, retention, c"
+  },
+  {
+    "path": "pack/corpora/INDEX.md",
+    "type": "doc",
+    "title": "Complementary sources",
+    "tags": [],
+    "summary": "Works the System Design Primer does not cover, for use with the skills in this pack. This index links to them. It does not include their text."
+  },
+  {
+    "path": "pack/examples/multi-tenant-audit-log/README.md",
+    "type": "example",
+    "title": "Worked example: multi-tenant audit log",
+    "tags": [],
+    "summary": "A hand-run of the skills on one enterprise feature, so readers can see the quality bar. Nothing here is a service in this repository. The Primer solutions are untouched."
+  },
+  {
+    "path": "pack/examples/multi-tenant-audit-log/design.md",
+    "type": "example",
+    "title": "Multi-tenant audit log",
+    "tags": [],
+    "summary": "Output of the system-architect skill for the request in [README.md](README.md)."
+  },
+  {
+    "path": "pack/examples/multi-tenant-audit-log/review.md",
+    "type": "example",
+    "title": "Design review: multi-tenant audit log",
+    "tags": [],
+    "summary": "Reviewed [design.md](design.md) against the [design-reviewer checklist](../../skills/design-reviewer/checklist.md). Checks the design already settles are not listed. In particular: the search index is a rebuildable projection with a sweeper, so a lost queue message does not lose an acknowledged event; idempotency falls through to a conditional create on the object key; exports read the bucket; ten"
+  },
+  {
+    "path": "pack/skills/adr-writer/SKILL.md",
+    "type": "skill",
+    "title": "adr-writer",
+    "tags": [
+      "skill"
+    ],
+    "summary": "Use this when recording an architecture decision: context, the decision, alternatives rejected and why, consequences, and status, as an Architecture Decision Record."
+  },
+  {
+    "path": "pack/skills/adr-writer/template.md",
+    "type": "doc",
+    "title": "ADR-NNNN: Title in the imperative",
+    "tags": [],
+    "summary": "- Status: Proposed - Date: YYYY-MM-DD - Owners: team that lives with the decision"
+  },
+  {
+    "path": "pack/skills/design-reviewer/SKILL.md",
+    "type": "skill",
+    "title": "design-reviewer",
+    "tags": [
+      "skill"
+    ],
+    "summary": "Use this when reviewing a proposed software architecture or system design for production gaps: single points of failure, cache invalidation, consistency, 10x load, failure modes, authentication and authorization, OWASP ASVS, compliance, observability, retention, cost, migration, and team boundaries."
+  },
+  {
+    "path": "pack/skills/design-reviewer/checklist.md",
+    "type": "doc",
+    "title": "Design review checklist",
+    "tags": [],
+    "summary": "Walk in order. Each item is a question about the design in front of you. The severity scale and the output shape live in [SKILL.md](SKILL.md). Primer patterns for caches, replication, and failover live in [the architect references](../system-architect/reference/scalability.md) and as cards under [patterns/](../../../patterns/README.md). ASVS chapter titles below are identifiers from the OWASP ASVS"
+  },
+  {
+    "path": "pack/skills/system-architect/SKILL.md",
+    "type": "skill",
+    "title": "system-architect",
+    "tags": [
+      "skill"
+    ],
+    "summary": "Use this when turning a feature or product request into an enterprise system design: functional and non-functional requirements, back-of-the-envelope traffic, storage, and bandwidth estimates, a mermaid component sketch, a data model, an API outline, and explicit tradeoffs."
+  },
+  {
+    "path": "pack/skills/system-architect/reference/approach.md",
+    "type": "doc",
+    "title": "Design method",
+    "tags": [],
+    "summary": "Adapted from the System Design Primer. Attribution: [pack README](../../../README.md#attribution)."
+  },
+  {
+    "path": "pack/skills/system-architect/reference/data.md",
+    "type": "doc",
+    "title": "Data, consistency, and availability",
+    "tags": [],
+    "summary": "Adapted from the System Design Primer. Attribution: [pack README](../../../README.md#attribution)."
+  },
+  {
+    "path": "pack/skills/system-architect/reference/estimates.md",
+    "type": "doc",
+    "title": "Estimates",
+    "tags": [],
+    "summary": "Adapted from the System Design Primer. Attribution: [pack README](../../../README.md#attribution)."
+  },
+  {
+    "path": "pack/skills/system-architect/reference/scalability.md",
+    "type": "doc",
+    "title": "Scaling patterns",
+    "tags": [],
+    "summary": "Adapted from the System Design Primer. Attribution: [pack README](../../../README.md#attribution)."
+  },
+  {
+    "path": "patterns/README.md",
+    "type": "doc",
+    "title": "Pattern cards",
+    "tags": [
+      "patterns",
+      "index"
+    ],
+    "summary": "One card per pattern with the problem, when to use it, when not to, tradeoffs, and failure modes."
+  },
+  {
+    "path": "patterns/anti-corruption-layer.md",
+    "type": "pattern",
+    "title": "Anti-corruption layer",
+    "tags": [
+      "modernization",
+      "integration"
+    ],
+    "summary": "Translate between a new model and a legacy or external model so foreign concepts stay at the edge."
+  },
+  {
+    "path": "patterns/api-gateway.md",
+    "type": "pattern",
+    "title": "API gateway",
+    "tags": [
+      "api",
+      "edge"
+    ],
+    "summary": "A single edge that authenticates, limits, and routes requests, without owning product decisions."
+  },
+  {
+    "path": "patterns/availability-failover.md",
+    "type": "pattern",
+    "title": "Availability and failover",
+    "tags": [
+      "availability",
+      "primer",
+      "failover"
+    ],
+    "summary": "Stand up a second copy and a tested promotion path so one failure does not end the service."
+  },
+  {
+    "path": "patterns/backend-for-frontend.md",
+    "type": "pattern",
+    "title": "Backend for frontend",
+    "tags": [
+      "api",
+      "clients"
+    ],
+    "summary": "A server-side API shaped for one client, aggregating downstream services so the client does not."
+  },
+  {
+    "path": "patterns/blue-green.md",
+    "type": "pattern",
+    "title": "Blue/green",
+    "tags": [
+      "delivery",
+      "release"
+    ],
+    "summary": "Run two complete environments and switch traffic from the live color to the idle one."
+  },
+  {
+    "path": "patterns/bulkhead.md",
+    "type": "pattern",
+    "title": "Bulkhead",
+    "tags": [
+      "reliability",
+      "isolation"
+    ],
+    "summary": "Give each dependency or tenant a separate concurrency limit so one failure cannot take every thread."
+  },
+  {
+    "path": "patterns/cache-aside.md",
+    "type": "pattern",
+    "title": "Cache-aside",
+    "tags": [
+      "caching",
+      "primer"
+    ],
+    "summary": "The application reads the cache, and on a miss loads the store and fills the cache."
+  },
+  {
+    "path": "patterns/cache-invalidation.md",
+    "type": "pattern",
+    "title": "Cache invalidation",
+    "tags": [
+      "caching",
+      "primer",
+      "consistency"
+    ],
+    "summary": "Define who may overwrite or delete a cached entry and the maximum staleness a caller can observe."
+  },
+  {
+    "path": "patterns/canary.md",
+    "type": "pattern",
+    "title": "Canary",
+    "tags": [
+      "delivery",
+      "release"
+    ],
+    "summary": "Send a small fraction of traffic to the new version and expand only if the user-visible metrics hold."
+  },
+  {
+    "path": "patterns/cdc.md",
+    "type": "pattern",
+    "title": "Change data capture",
+    "tags": [
+      "data",
+      "replication"
+    ],
+    "summary": "Read committed row changes from the database log and stream them to other systems."
+  },
+  {
+    "path": "patterns/cdn.md",
+    "type": "pattern",
+    "title": "Content delivery network",
+    "tags": [
+      "edge",
+      "primer",
+      "caching"
+    ],
+    "summary": "Serve cacheable bytes from a location near the user so the origin does not see that request."
+  },
+  {
+    "path": "patterns/circuit-breaker.md",
+    "type": "pattern",
+    "title": "Circuit breaker",
+    "tags": [
+      "reliability",
+      "resilience"
+    ],
+    "summary": "Stop calling a dependency that is failing, fail fast for a cool-down, then try a few probes."
+  },
+  {
+    "path": "patterns/consistency-patterns.md",
+    "type": "pattern",
+    "title": "Consistency patterns",
+    "tags": [
+      "data",
+      "primer",
+      "consistency"
+    ],
+    "summary": "Choose weak, eventual, or strong consistency per path, and write the partition behavior separately from the healthy-path latency."
+  },
+  {
+    "path": "patterns/cqrs.md",
+    "type": "pattern",
+    "title": "CQRS",
+    "tags": [
+      "data",
+      "architecture"
+    ],
+    "summary": "Use a write model shaped for commands and a read model shaped for queries, updated asynchronously."
+  },
+  {
+    "path": "patterns/denormalization.md",
+    "type": "pattern",
+    "title": "Denormalization",
+    "tags": [
+      "data",
+      "primer"
+    ],
+    "summary": "Store a copy of a field next to the data that reads it, so a hot path does not join."
+  },
+  {
+    "path": "patterns/event-sourcing.md",
+    "type": "pattern",
+    "title": "Event sourcing",
+    "tags": [
+      "data",
+      "events"
+    ],
+    "summary": "Store the state of an aggregate as an append-only sequence of domain events and derive current state by fold."
+  },
+  {
+    "path": "patterns/feature-flags.md",
+    "type": "pattern",
+    "title": "Feature flags",
+    "tags": [
+      "delivery",
+      "release"
+    ],
+    "summary": "Branch behavior at runtime so you can ship code dark, open it gradually, or turn it off without a redeploy."
+  },
+  {
+    "path": "patterns/federation.md",
+    "type": "pattern",
+    "title": "Federation",
+    "tags": [
+      "data",
+      "primer",
+      "federation"
+    ],
+    "summary": "Split databases by function so each domain has its own store and its own write path."
+  },
+  {
+    "path": "patterns/idempotency-keys.md",
+    "type": "pattern",
+    "title": "Idempotency keys",
+    "tags": [
+      "api",
+      "data",
+      "reliability"
+    ],
+    "summary": "Store the result of a write under a client-supplied key so a retry returns the same result and does not repeat the effect."
+  },
+  {
+    "path": "patterns/load-balancing.md",
+    "type": "pattern",
+    "title": "Load balancing",
+    "tags": [
+      "edge",
+      "primer",
+      "availability"
+    ],
+    "summary": "Spread requests across healthy targets so one instance is not the user-facing capacity or the single failure."
+  },
+  {
+    "path": "patterns/load-shedding.md",
+    "type": "pattern",
+    "title": "Load shedding",
+    "tags": [
+      "reliability",
+      "backpressure"
+    ],
+    "summary": "Reject new work when the service is past a defined saturation point so accepted work can finish."
+  },
+  {
+    "path": "patterns/message-queues.md",
+    "type": "pattern",
+    "title": "Message queues and async processing",
+    "tags": [
+      "messaging",
+      "primer",
+      "async"
+    ],
+    "summary": "Accept work onto a durable queue and let a worker finish it after the user request returns."
+  },
+  {
+    "path": "patterns/rate-limiting.md",
+    "type": "pattern",
+    "title": "Rate limiting",
+    "tags": [
+      "api",
+      "fairness",
+      "reliability"
+    ],
+    "summary": "Count or meter requests per identity and reject the excess before the service is overloaded."
+  },
+  {
+    "path": "patterns/refresh-ahead.md",
+    "type": "pattern",
+    "title": "Refresh-ahead",
+    "tags": [
+      "caching",
+      "primer"
+    ],
+    "summary": "The cache reloads a hot entry before its TTL expires so the next reader does not pay for a miss."
+  },
+  {
+    "path": "patterns/replication-leader-follower.md",
+    "type": "pattern",
+    "title": "Leader-follower replication",
+    "tags": [
+      "data",
+      "primer",
+      "replication"
+    ],
+    "summary": "One leader accepts writes and replicates them to followers that serve reads."
+  },
+  {
+    "path": "patterns/replication-multi-leader.md",
+    "type": "pattern",
+    "title": "Multi-leader replication",
+    "tags": [
+      "data",
+      "primer",
+      "replication"
+    ],
+    "summary": "More than one node accepts writes, and the nodes converge, with conflicts when they write the same key."
+  },
+  {
+    "path": "patterns/retry-with-backoff.md",
+    "type": "pattern",
+    "title": "Retry with backoff",
+    "tags": [
+      "reliability",
+      "retries"
+    ],
+    "summary": "Repeat a failed idempotent call with exponential delay and jitter, and stop at a budget."
+  },
+  {
+    "path": "patterns/reverse-proxy.md",
+    "type": "pattern",
+    "title": "Reverse proxy",
+    "tags": [
+      "edge",
+      "primer"
+    ],
+    "summary": "A proxy in front of the origin terminates client connections and can cache, compress, and hide the origin."
+  },
+  {
+    "path": "patterns/saga.md",
+    "type": "pattern",
+    "title": "Saga",
+    "tags": [
+      "data",
+      "consistency",
+      "workflow"
+    ],
+    "summary": "Complete a business transaction as a series of local commits with explicit compensations."
+  },
+  {
+    "path": "patterns/sharding.md",
+    "type": "pattern",
+    "title": "Sharding",
+    "tags": [
+      "data",
+      "primer",
+      "sharding"
+    ],
+    "summary": "Split one dataset so each node holds a subset of the keys, usually by hash or by range."
+  },
+  {
+    "path": "patterns/sidecar-service-mesh.md",
+    "type": "pattern",
+    "title": "Sidecar and service mesh",
+    "tags": [
+      "platform",
+      "security",
+      "reliability"
+    ],
+    "summary": "Run a helper process beside each instance to do mTLS, retries, and telemetry, or adopt a mesh when many services need those uniformly."
+  },
+  {
+    "path": "patterns/strangler-fig.md",
+    "type": "pattern",
+    "title": "Strangler fig",
+    "tags": [
+      "modernization",
+      "migration"
+    ],
+    "summary": "Route capabilities one at a time from a legacy system to a new one behind a stable facade, then delete the old path."
+  },
+  {
+    "path": "patterns/transactional-outbox.md",
+    "type": "pattern",
+    "title": "Transactional outbox",
+    "tags": [
+      "data",
+      "messaging"
+    ],
+    "summary": "Commit the business write and the outbound message in one database transaction, then publish asynchronously."
+  },
+  {
+    "path": "patterns/write-behind.md",
+    "type": "pattern",
+    "title": "Write-behind",
+    "tags": [
+      "caching",
+      "primer"
+    ],
+    "summary": "The application writes the cache and the store is updated asynchronously after the caller has been told success."
+  },
+  {
+    "path": "patterns/write-through.md",
+    "type": "pattern",
+    "title": "Write-through",
+    "tags": [
+      "caching",
+      "primer"
+    ],
+    "summary": "The application writes the cache and the cache writes the store before the write returns."
+  },
+  {
+    "path": "templates/README.md",
+    "type": "doc",
+    "title": "Templates",
+    "tags": [
+      "templates",
+      "index"
+    ],
+    "summary": "Copyable templates for a design doc, an ADR, a threat model, an SLO, a runbook, a postmortem, and a capacity worksheet."
+  },
+  {
+    "path": "templates/adr.md",
+    "type": "template",
+    "title": "ADR template pointer",
+    "tags": [
+      "templates",
+      "adr"
+    ],
+    "summary": "The canonical Architecture Decision Record template lives with the adr-writer skill. Copy that file, not a second variant."
+  },
+  {
+    "path": "templates/capacity-estimate.md",
+    "type": "template",
+    "title": "Capacity estimate worksheet",
+    "tags": [
+      "templates",
+      "capacity",
+      "estimates"
+    ],
+    "summary": "A worksheet for request rate, bandwidth, storage, the first bottleneck, and the cost driver."
+  },
+  {
+    "path": "templates/design-doc.md",
+    "type": "template",
+    "title": "Design doc template",
+    "tags": [
+      "templates",
+      "design"
+    ],
+    "summary": "Outline for a system design with requirements, estimates, a component sketch, data, API, and tradeoffs."
+  },
+  {
+    "path": "templates/postmortem.md",
+    "type": "template",
+    "title": "Postmortem template",
+    "tags": [
+      "templates",
+      "postmortem",
+      "incident"
+    ],
+    "summary": "A blameless incident write-up with a timeline, impact, contributing factors, and owned actions."
+  },
+  {
+    "path": "templates/runbook.md",
+    "type": "template",
+    "title": "Runbook template",
+    "tags": [
+      "templates",
+      "oncall",
+      "runbook"
+    ],
+    "summary": "The steps on-call follows for one page, including how to tell that the mitigation worked."
+  },
+  {
+    "path": "templates/slo.md",
+    "type": "template",
+    "title": "SLO template",
+    "tags": [
+      "templates",
+      "slo",
+      "observability"
+    ],
+    "summary": "A one-page definition of an SLI, its target and window, and what happens when the error budget burns."
+  },
+  {
+    "path": "templates/threat-model.md",
+    "type": "template",
+    "title": "Threat model template",
+    "tags": [
+      "templates",
+      "security",
+      "stride"
+    ],
+    "summary": "A STRIDE worksheet tied to the trust boundaries of one design."
+  }
+]

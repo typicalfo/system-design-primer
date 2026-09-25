@@ -1,0 +1,67 @@
+# System Design Primer (enterprise fork)
+
+> Enterprise-augmented fork of Donne Martin's System Design Primer (CC BY 4.0). Original study guide preserved. New guides, pattern cards, templates, and agent skills for designing production systems.
+
+This file is a short map. The generated concatenation of the new docs is [llms-full.txt](llms-full.txt) when that file is present (it is omitted if it would exceed about 1 MB).
+
+## Start here
+
+- [AGENTS.md](AGENTS.md): How a coding agent should use the repo, including which files to load.
+- [README.md](README.md): Fork banner, design quick start, then the original Primer.
+- [CONTRIBUTING.md](CONTRIBUTING.md): Pull requests only. GitHub Issues are off. Conventions for new pages.
+- [Enterprise guide](enterprise/README.md): Index of production topics the Primer does not cover.
+- [What's dated](enterprise/whats-dated.md): Primer advice that has aged, and the current equivalent.
+- [Pattern cards](patterns/README.md): One card per pattern with tradeoffs and failure modes.
+- [Templates](templates/README.md): Design doc, ADR pointer, threat model, SLO, runbook, postmortem, capacity worksheet.
+- [Reference architectures](enterprise/reference-architectures/README.md): Four end-to-end designs with a review pass.
+- [Skills pack](pack/README.md): Architect, design reviewer, and ADR writer.
+- [catalog.json](catalog.json): Machine-readable index. Regenerate with `python3 scripts/build_catalog.py`.
+
+## Skills
+
+- [System architect](pack/skills/system-architect/SKILL.md): Requirements, estimates, sketch, data model, API, tradeoffs.
+- [Design reviewer](pack/skills/design-reviewer/SKILL.md): Severity-ranked review against the checklist.
+- [Review checklist](pack/skills/design-reviewer/checklist.md): SPOF, consistency, security, SLO, retention, cost, migration, ownership.
+- [ADR writer](pack/skills/adr-writer/SKILL.md): One decision per record.
+- [ADR template](pack/skills/adr-writer/template.md): Canonical ADR outline. Templates link here rather than copying it.
+- [Sources and licenses](pack/corpora/INDEX.md): What may be linked and what may not be copied.
+
+## Identity and security
+
+- [OIDC and OAuth 2.0](enterprise/identity/oidc-oauth2.md): Flows, PKCE, and token types.
+- [SSO and SAML](enterprise/identity/saml-sso.md): Enterprise identity-provider assertions.
+- [Authorization models](enterprise/identity/authorization-models.md): RBAC, ABAC, and ReBAC.
+- [Service-to-service auth](enterprise/identity/service-to-service.md): Workload identity, SPIFFE, and mTLS.
+- [Secrets](enterprise/identity/secrets.md): Runtime injection and rotation.
+- [Threat modeling](enterprise/security/threat-modeling.md): STRIDE on the diagram in front of you.
+- [OWASP ASVS](enterprise/security/owasp-asvs.md): Chapter map for version 5.0.0, without copied requirement text.
+- [Zero trust](enterprise/security/zero-trust.md): Identity over network location.
+- [Supply chain](enterprise/security/supply-chain.md): SBOM, signing, and provenance.
+- [Encryption and keys](enterprise/security/encryption-keys.md): TLS, envelope encryption, tenant keys.
+
+## Tenancy, compliance, and operations
+
+- [Isolation models](enterprise/tenancy/isolation-models.md): Silo, pool, and bridge.
+- [Noisy neighbors](enterprise/tenancy/noisy-neighbor.md): Caps before one tenant sets everyone's latency.
+- [Retention and deletion](enterprise/compliance/retention.md): Includes backups.
+- [Audit logs](enterprise/compliance/audit-logs.md): Tamper-evident privileged actions.
+- [SLOs and error budgets](enterprise/observability/slos.md): User-visible targets.
+- [OpenTelemetry](enterprise/observability/opentelemetry.md): Instrument once, export from the collector.
+- [Disaster recovery](enterprise/reliability/disaster-recovery.md): RPO, RTO, and a tested restore.
+- [Multi-region](enterprise/reliability/multi-region.md): Active-passive versus active-active.
+
+## Data, APIs, and delivery
+
+- [Transactional outbox](enterprise/data/transactional-outbox.md): One commit for the row and the message.
+- [Sagas](enterprise/data/sagas.md): Local commits and compensations.
+- [CDC](enterprise/data/cdc.md): Stream committed changes.
+- [API styles](enterprise/apis/styles.md): REST, gRPC, and GraphQL.
+- [Database migrations](enterprise/delivery/database-migrations.md): Expand then contract.
+- [Modular monolith](enterprise/modernization/modular-monolith.md): When not to split into services.
+
+## Reference architectures
+
+- [Multi-tenant B2B SaaS](enterprise/reference-architectures/multi-tenant-b2b-saas.md): Pool plus bridge, SSO, webhooks.
+- [Event-driven orders](enterprise/reference-architectures/event-driven-orders.md): Payments and inventory saga.
+- [Internal platform](enterprise/reference-architectures/internal-platform.md): SSO, catalog, and audit.
+- [Data platform](enterprise/reference-architectures/data-platform.md): CDC into a lakehouse.
