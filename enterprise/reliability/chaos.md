@@ -9,6 +9,7 @@ related:
   - circuit-breaker-bulkhead.md
   - ../observability/incidents.md
   - ../../templates/runbook.md
+last_reviewed: 2026-09-25
 ---
 
 # Chaos testing

@@ -8,6 +8,7 @@ related:
   - feature-flags.md
   - load-balancing.md
   - ../enterprise/delivery/progressive-delivery.md
+last_reviewed: 2026-09-25
 ---
 
 # Canary

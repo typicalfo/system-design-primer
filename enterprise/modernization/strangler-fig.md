@@ -9,11 +9,12 @@ related:
   - ../delivery/progressive-delivery.md
   - ../../patterns/strangler-fig.md
   - ../../patterns/anti-corruption-layer.md
+last_reviewed: 2026-09-25
 ---
 
 # Strangler fig
 
-A strangler fig grows around a tree and eventually replaces it. In software, a facade routes each capability either to the legacy system or to the new one. You move one capability when the new path matches the old, then you delete the old path. The name comes from Martin Fowler's description of this migration. This page is an operational checklist, not a copy of that article.
+A strangler fig grows around a tree and eventually replaces it. In software, a facade routes each capability either to the legacy system or to the new one. You move one capability when the new path matches the old, then you delete the old path. The name comes from Martin Fowler's [Strangler Fig Application](https://martinfowler.com/bliki/StranglerFigApplication.html). This page is an operational checklist, not a copy of that article.
 
 Pattern card: [strangler fig](../../patterns/strangler-fig.md).
 
@@ -45,3 +46,7 @@ flowchart LR
 - A facade that contains business logic the new system also contains.
 - Leaving the legacy path "just in case" with no traffic and a full on-call burden.
 - Migrating the database tables first and the callers never, so both systems write the same rows.
+
+## Further reading
+
+- [Strangler Fig Application](https://martinfowler.com/bliki/StranglerFigApplication.html), Martin Fowler

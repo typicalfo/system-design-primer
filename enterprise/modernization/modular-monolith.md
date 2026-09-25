@@ -9,6 +9,7 @@ related:
   - ../organization/conways-law.md
   - ../organization/team-topologies.md
   - ../../patterns/strangler-fig.md
+last_reviewed: 2026-09-25
 ---
 
 # Modular monolith

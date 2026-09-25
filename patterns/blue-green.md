@@ -7,6 +7,7 @@ related:
   - canary.md
   - feature-flags.md
   - ../enterprise/delivery/progressive-delivery.md
+last_reviewed: 2026-09-25
 ---
 
 # Blue/green

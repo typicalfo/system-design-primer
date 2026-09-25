@@ -7,6 +7,7 @@ related:
   - ../pack/skills/adr-writer/template.md
   - ../pack/skills/adr-writer/SKILL.md
   - ../enterprise/organization/decisions.md
+last_reviewed: 2026-09-25
 ---
 
 # ADR template

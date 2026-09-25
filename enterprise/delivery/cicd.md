@@ -8,8 +8,10 @@ related:
   - progressive-delivery.md
   - ../security/supply-chain.md
   - ../observability/incidents.md
-  - ../../patterns/blue-green.md
-  - ../../patterns/canary.md
+  - production-readiness.md
+  - testing-strategy.md
+  - ../organization/delivery-metrics.md
+last_reviewed: 2026-09-25
 ---
 
 # CI and CD

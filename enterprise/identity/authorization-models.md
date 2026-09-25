@@ -10,7 +10,9 @@ related:
   - ../tenancy/isolation-models.md
   - ../tenancy/data-and-keys.md
   - ../security/zero-trust.md
-  - ../../patterns/api-gateway.md
+  - ../ai/agents-and-tools.md
+  - authorization-engines.md
+last_reviewed: 2026-09-25
 ---
 
 # Authorization models

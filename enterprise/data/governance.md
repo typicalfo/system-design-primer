@@ -10,6 +10,7 @@ related:
   - ../compliance/privacy.md
   - ../compliance/retention.md
   - ../organization/ownership.md
+last_reviewed: 2026-09-25
 ---
 
 # Data governance

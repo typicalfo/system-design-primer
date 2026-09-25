@@ -10,7 +10,9 @@ related:
   - ../apis/rate-limiting.md
   - ../cost/capacity.md
   - ../../patterns/rate-limiting.md
-  - ../../patterns/bulkhead.md
+  - ../reliability/cell-based-architecture.md
+  - ../data/caching-at-scale.md
+last_reviewed: 2026-09-25
 ---
 
 # Noisy neighbors

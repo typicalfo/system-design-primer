@@ -10,6 +10,8 @@ related:
   - ../tenancy/data-and-keys.md
   - ../reliability/multi-region.md
   - ../data/governance.md
+  - iso27001-fedramp.md
+last_reviewed: 2026-09-25
 ---
 
 # Data residency

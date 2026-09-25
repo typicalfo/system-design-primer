@@ -1,3 +1,16 @@
+---
+title: "Multi-tenant audit log review"
+summary: "Design-reviewer findings on the multi-tenant audit log, led by the missing erasure path and the single-writer hash chain."
+tags: [example, audit-log, review]
+when_to_use: "Use when you want to see severity-ranked findings against a design that already looks complete."
+related:
+  - design.md
+  - README.md
+  - ../../skills/design-reviewer/SKILL.md
+  - ../../skills/design-reviewer/checklist.md
+last_reviewed: 2026-09-25
+---
+
 # Design review: multi-tenant audit log
 
 Reviewed [design.md](design.md) against the [design-reviewer checklist](../../skills/design-reviewer/checklist.md). Checks the design already settles are not listed. In particular: the search index is a rebuildable projection with a sweeper, so a lost queue message does not lose an acknowledged event; idempotency falls through to a conditional create on the object key; exports read the bucket; tenant id is taken from the credential; TLS and encryption at rest are specified.

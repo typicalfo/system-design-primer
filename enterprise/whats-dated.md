@@ -9,8 +9,10 @@ related:
   - ../patterns/replication-leader-follower.md
   - ../patterns/message-queues.md
   - ../pack/skills/system-architect/reference/data.md
-  - ../pack/skills/system-architect/reference/scalability.md
-  - ../pack/skills/system-architect/reference/estimates.md
+  - ../patterns/cell-based-architecture.md
+  - ../patterns/shuffle-sharding.md
+  - ../patterns/durable-workflow.md
+last_reviewed: 2026-09-25
 ---
 
 # What's dated in the Primer
@@ -37,17 +39,21 @@ The Primer points at Amazon's 2007 Dynamo paper in places that readers now map o
 
 The published table (SSD at about 1 GB/s, 1 Gbps Ethernet, HDD seeks) is the wrong absolute for NVMe and 10/25/100 Gbps networks. Keep it as a ratio tool: memory is far faster than disk, disk is far faster than a cross-region round trip, and a cross-continent trip dominates a local cache hit. Do not replace the table with invented "current" numbers. Measure the hop you are betting on. Source note: [estimates reference](../pack/skills/system-architect/reference/estimates.md).
 
+## Availability patterns
+
+A second replica is not a cell. Failover between two copies of one stack still shares fate when the shared dependency fails. A cell is a full stack with its own copy of those dependencies, and shuffle sharding is how tenants share a pool without all sharing the same failure. See [cell-based architecture](../patterns/cell-based-architecture.md) and [shuffle sharding](../patterns/shuffle-sharding.md). The Primer's failover sketch is still the right picture for one database.
+
 ## Proxies and load balancers
 
 The job is the same: health checks, TLS termination, spread load, more than one balancer. The usual implementation is a cloud load balancer or an Envoy or nginx-class proxy. Squid is not the default cache in front of an origin anymore. A CDN often terminates TLS and can cache selected dynamic responses. Only cache responses you are willing to serve late. Cards: [load balancing](../patterns/load-balancing.md), [reverse proxy](../patterns/reverse-proxy.md), [CDN](../patterns/cdn.md).
 
 ## Queues
 
-Redis as a broker can lose jobs. RabbitMQ means you run the nodes. SQS is at-least-once. Those warnings hold. For a durable replayable stream, use a log (Kafka or the cloud equivalent). For multi-step work with timers and compensation, consider a workflow engine instead of a pile of ad-hoc task queues. Celery is one Python task library, not the pattern. The pattern is a worker on a durable queue. See [message queues](../patterns/message-queues.md) and the [outbox](../patterns/transactional-outbox.md).
+Redis as a broker can lose jobs. RabbitMQ means you run the nodes. SQS is at-least-once. Those warnings hold. For a durable replayable stream, use a log (Kafka or the cloud equivalent). A queue does not by itself resume a multi-step process after a worker dies. That needs a durable workflow: persisted steps, timers, and compensation. See [durable workflow](../patterns/durable-workflow.md). Celery is one Python task library, not the pattern. The pattern is a worker on a durable queue. See [message queues](../patterns/message-queues.md) and the [outbox](../patterns/transactional-outbox.md).
 
 ## Service discovery
 
-Consul, etcd, and ZooKeeper are still real systems. On Kubernetes, Service DNS plus readiness probes cover the common case. A separate discovery cluster is extra machinery until you have a reason. Health checks remain mandatory either way. See [what's in the application-layer note](../pack/skills/system-architect/reference/scalability.md).
+Consul, etcd, and ZooKeeper are still real systems. On Kubernetes, Service DNS plus readiness probes cover the common case. A separate discovery cluster is extra machinery until you have a reason. Health checks remain mandatory either way. See the [scalability reference](../pack/skills/system-architect/reference/scalability.md).
 
 ## RPC, REST, and clients
 

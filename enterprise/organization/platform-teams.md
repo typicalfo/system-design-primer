@@ -9,6 +9,7 @@ related:
   - ../delivery/cicd.md
   - ../delivery/iac-environments.md
   - ../cost/allocation.md
+last_reviewed: 2026-09-25
 ---
 
 # Platform teams

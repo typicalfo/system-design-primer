@@ -7,6 +7,7 @@ related:
   - reverse-proxy.md
   - availability-failover.md
   - bulkhead.md
+last_reviewed: 2026-09-25
 ---
 
 # Load balancing

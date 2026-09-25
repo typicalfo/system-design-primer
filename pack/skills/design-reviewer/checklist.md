@@ -1,24 +1,37 @@
+---
+title: "Design review checklist"
+summary: "Ordered review questions from single points of failure through ownership, plus the ASVS 5.0.0 chapter names used as citations."
+tags: [review, checklist, security]
+when_to_use: "Use when walking a proposed design for production gaps, one checklist section at a time."
+related:
+  - SKILL.md
+  - ../../corpora/INDEX.md
+  - ../../../enterprise/README.md
+  - ../../../enterprise/security/owasp-asvs.md
+last_reviewed: 2026-09-25
+---
+
 # Design review checklist
 
-Walk in order. Each item is a question about the design in front of you. The severity scale and the output shape live in [SKILL.md](SKILL.md). Primer patterns for caches, replication, and failover live in [the architect references](../system-architect/reference/scalability.md) and as cards under [patterns/](../../../patterns/README.md). ASVS chapter titles below are identifiers from the OWASP ASVS 5.0.0 English sources (CC BY-SA 4.0). Requirement text is not copied; the license and the link are in [corpora/INDEX.md](../../corpora/INDEX.md). The same chapter names are in [enterprise/security/owasp-asvs.md](../../../enterprise/security/owasp-asvs.md).
+Walk in order. Each item is a question about the design in front of you. The severity scale and the output shape live in [SKILL.md](SKILL.md). Primer patterns for caches, replication, and failover live in [the architect references](https://github.com/typicalfo/system-design-primer/blob/master/pack/skills/system-architect/reference/scalability.md) and as cards under [patterns/](https://github.com/typicalfo/system-design-primer/blob/master/patterns/README.md). ASVS chapter titles below are identifiers from the OWASP ASVS 5.0.0 English sources (CC BY-SA 4.0). Requirement text is not copied; the license and the link are in [corpora/INDEX.md](https://github.com/typicalfo/system-design-primer/blob/master/pack/corpora/INDEX.md). The same chapter names are in [enterprise/security/owasp-asvs.md](https://github.com/typicalfo/system-design-primer/blob/master/enterprise/security/owasp-asvs.md).
 
 Guides to open when a section is in play:
 
 | Section | Guide |
 |---|---|
-| Single points of failure | [Disaster recovery](../../../enterprise/reliability/disaster-recovery.md), [availability and failover](../../../patterns/availability-failover.md) |
-| Cache invalidation | [Cache invalidation](../../../patterns/cache-invalidation.md) |
-| Consistency and replication | [Consistency patterns](../../../patterns/consistency-patterns.md), [data reference](../system-architect/reference/data.md) |
-| Behavior at 10× load | [Capacity](../../../enterprise/cost/capacity.md), [load shedding](../../../enterprise/reliability/load-shedding.md) |
-| Failure modes | [Retries and timeouts](../../../enterprise/reliability/retries-timeouts.md), [circuit breaker](../../../patterns/circuit-breaker.md) |
-| Authentication and authorization | [OIDC and OAuth 2.0](../../../enterprise/identity/oidc-oauth2.md), [authorization models](../../../enterprise/identity/authorization-models.md) |
-| ASVS | [Chapter map](../../../enterprise/security/owasp-asvs.md) |
-| Compliance and audit | [Audit logs](../../../enterprise/compliance/audit-logs.md) |
-| Observability and on-call | [SLOs](../../../enterprise/observability/slos.md), [alerting](../../../enterprise/observability/alerting-oncall.md) |
-| Retention and deletion | [Retention](../../../enterprise/compliance/retention.md) |
-| Cost | [FinOps](../../../enterprise/cost/finops.md) |
-| Migration and rollback | [Database migrations](../../../enterprise/delivery/database-migrations.md), [strangler fig](../../../patterns/strangler-fig.md) |
-| Ownership | [Service ownership](../../../enterprise/organization/ownership.md) |
+| Single points of failure | [Disaster recovery](https://github.com/typicalfo/system-design-primer/blob/master/enterprise/reliability/disaster-recovery.md), [availability and failover](https://github.com/typicalfo/system-design-primer/blob/master/patterns/availability-failover.md) |
+| Cache invalidation | [Cache invalidation](https://github.com/typicalfo/system-design-primer/blob/master/patterns/cache-invalidation.md) |
+| Consistency and replication | [Consistency patterns](https://github.com/typicalfo/system-design-primer/blob/master/patterns/consistency-patterns.md), [data reference](https://github.com/typicalfo/system-design-primer/blob/master/pack/skills/system-architect/reference/data.md) |
+| Behavior at 10× load | [Capacity](https://github.com/typicalfo/system-design-primer/blob/master/enterprise/cost/capacity.md), [load shedding](https://github.com/typicalfo/system-design-primer/blob/master/enterprise/reliability/load-shedding.md) |
+| Failure modes | [Retries and timeouts](https://github.com/typicalfo/system-design-primer/blob/master/enterprise/reliability/retries-timeouts.md), [circuit breaker](https://github.com/typicalfo/system-design-primer/blob/master/patterns/circuit-breaker.md) |
+| Authentication and authorization | [OIDC and OAuth 2.0](https://github.com/typicalfo/system-design-primer/blob/master/enterprise/identity/oidc-oauth2.md), [authorization models](https://github.com/typicalfo/system-design-primer/blob/master/enterprise/identity/authorization-models.md) |
+| ASVS | [Chapter map](https://github.com/typicalfo/system-design-primer/blob/master/enterprise/security/owasp-asvs.md) |
+| Compliance and audit | [Audit logs](https://github.com/typicalfo/system-design-primer/blob/master/enterprise/compliance/audit-logs.md) |
+| Observability and on-call | [SLOs](https://github.com/typicalfo/system-design-primer/blob/master/enterprise/observability/slos.md), [alerting](https://github.com/typicalfo/system-design-primer/blob/master/enterprise/observability/alerting-oncall.md) |
+| Retention and deletion | [Retention](https://github.com/typicalfo/system-design-primer/blob/master/enterprise/compliance/retention.md) |
+| Cost | [FinOps](https://github.com/typicalfo/system-design-primer/blob/master/enterprise/cost/finops.md) |
+| Migration and rollback | [Database migrations](https://github.com/typicalfo/system-design-primer/blob/master/enterprise/delivery/database-migrations.md), [strangler fig](https://github.com/typicalfo/system-design-primer/blob/master/patterns/strangler-fig.md) |
+| Ownership | [Service ownership](https://github.com/typicalfo/system-design-primer/blob/master/enterprise/organization/ownership.md) |
 
 ## Single points of failure
 
@@ -35,13 +48,13 @@ Guides to open when a section is in play:
 ## Consistency and replication
 
 - For each store, is the choice weak, eventual, or strong, and does that match the requirement on that path?
-- During a partition, does the design fail the call (CP) or answer with a local copy (AP)? While healthy, does it pay synchronous latency for consistency (PACELC)? See [data.md](../system-architect/reference/data.md).
+- During a partition, does the design fail the call (CP) or answer with a local copy (AP)? While healthy, does it pay synchronous latency for consistency (PACELC)? See [data.md](https://github.com/typicalfo/system-design-primer/blob/master/pack/skills/system-architect/reference/data.md).
 - What is the replication lag a read can see, and which writes are lost if the primary dies before a replica acknowledges?
 - Are conflicts possible because two writers accept the same key? If yes, what is the resolution rule?
 
 ## Behavior at 10× load
 
-Multiply the design's rate, bandwidth, and hot working set by 10 using [estimates.md](../system-architect/reference/estimates.md).
+Multiply the design's rate, bandwidth, and hot working set by 10 using [estimates.md](https://github.com/typicalfo/system-design-primer/blob/master/pack/skills/system-architect/reference/estimates.md).
 
 - What hits a limit first: partition throughput, connection count, disk, lock, or quota?
 - Is there a hot key (one tenant, one row, one queue partition) that does not split when the average looks fine?

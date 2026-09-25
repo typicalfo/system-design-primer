@@ -1,3 +1,22 @@
+---
+title: "Enterprise system design skills"
+summary: "Tool-agnostic architect, threat-modeler, cost-estimator, design-reviewer, and ADR-writer skills, with the references and worked example they ship with."
+tags: [skills, pack, index]
+when_to_use: "Use when installing these skills into Cursor or Claude Code, or when choosing which skill runs next."
+related:
+  - skills/system-architect/SKILL.md
+  - skills/design-reviewer/SKILL.md
+  - skills/adr-writer/SKILL.md
+  - skills/threat-modeler/SKILL.md
+  - skills/cost-estimator/SKILL.md
+  - corpora/INDEX.md
+  - examples/multi-tenant-audit-log/README.md
+  - ../enterprise/README.md
+  - ../patterns/README.md
+  - ../templates/README.md
+last_reviewed: 2026-09-25
+---
+
 # Enterprise system design skills
 
 A tool-agnostic skill pack for designing and reviewing production software systems. It adapts the working method of the [System Design Primer](https://github.com/donnemartin/system-design-primer) — scope the problem, sketch components, estimate, then stress the design — and adds the enterprise checks that method does not cover: identity, security requirements, compliance, operability, retention, cost, migration, and team boundaries.
@@ -9,10 +28,12 @@ The original Primer study prose is preserved in the root [README.md](../README.m
 | Skill | Use |
 |---|---|
 | [system-architect](skills/system-architect/SKILL.md) | Turn a feature or product request into requirements, estimates, a component sketch, a data model, an API outline, and explicit tradeoffs. |
+| [threat-modeler](skills/threat-modeler/SKILL.md) | Walk that sketch with STRIDE. One row per element or trust boundary, with severity and a mitigation. |
+| [cost-estimator](skills/cost-estimator/SKILL.md) | Turn the design's drivers into a cost estimate: formulas, labeled unit-cost assumptions, sensitivity, and a unit cost. |
 | [design-reviewer](skills/design-reviewer/SKILL.md) | Review that design. Findings are ranked by severity. The checks live in [checklist.md](skills/design-reviewer/checklist.md). |
 | [adr-writer](skills/adr-writer/SKILL.md) | Record one architecture decision using [template.md](skills/adr-writer/template.md). |
 
-Run them in that order when you are taking a request from a blank page to a decision: architect, then reviewer, then an ADR for any tradeoff the review says must be an explicit decision. Each skill tells the agent which sibling files to read, and which [enterprise](../enterprise/README.md) pages and [pattern cards](../patterns/README.md) to open for the decision in front of it. Copyable outlines are in [templates/](../templates/README.md). The ADR outline in [template.md](skills/adr-writer/template.md) is the only copy. [templates/adr.md](../templates/adr.md) points at it.
+Suggested order when you are taking a request from a blank page to a decision: architect, then threat-modeler, then cost-estimator, then reviewer, then an ADR for any tradeoff the review says must be an explicit decision. Threat-modeler and cost-estimator can swap. Both need the sketch and the drivers from the architect, and both should finish before the review so the reviewer can see the threats and the cost. Skip a skill the request does not need. An ADR is still last, and only for a decision you are actually keeping. Each skill tells the agent which sibling files to read, and which [enterprise](../enterprise/README.md) pages and [pattern cards](../patterns/README.md) to open for the decision in front of it. Copyable outlines are in [templates/](../templates/README.md). The ADR outline in [template.md](skills/adr-writer/template.md) is the only copy. [templates/adr.md](../templates/adr.md) points at it.
 
 Worked quality bar: [a multi-tenant audit log](examples/multi-tenant-audit-log/README.md), with both the architect output and the reviewer output.
 
@@ -20,15 +41,40 @@ Numbers, patterns, and the four-step method are distilled under [skills/system-a
 
 ## Use the skills in any agent
 
-The skill is the `SKILL.md` file plus the files it links to. Point the agent at that file and tell it to follow the links. Do not paste the Primer README in as a substitute.
+The skill is the `SKILL.md` file plus the files in its folder. Point the agent at that file and tell it to follow the links. Do not paste the Primer README in as a substitute.
 
-**Generic.** Add the skill directory to the agent's skill path, or attach `SKILL.md` and say: "Follow this skill, including the files it links." The agent needs the linked reference, checklist, or template in context, not only the frontmatter.
+Descriptions in the frontmatter start with "Use this when" so an agent that selects skills by description can trigger them without a slash command. The folder name and the `name` field match (`system-architect`, `threat-modeler`, `cost-estimator`, `design-reviewer`, `adr-writer`).
 
-**Cursor.** Copy or symlink each skill directory to `.cursor/skills/<skill-name>/` in the project (the folder that contains `SKILL.md`). Alternatively, add a project rule whose only instruction is to follow `pack/skills/<skill-name>/SKILL.md` when the task matches that skill's description.
+Two install methods:
 
-**Claude Code.** Copy or symlink each skill directory to `.claude/skills/<skill-name>/`. The folder name and the `name` field in the frontmatter match (`system-architect`, `design-reviewer`, `adr-writer`).
+1. **Symlink** the skill directory. It stays in sync with a clone of this repo. Relative links inside the folder and absolute GitHub links both work, because the clone is on disk.
+2. **Copy** the skill directory. The copy is self-contained. Links inside the folder stay relative. Links that leave the folder are absolute `https://github.com/typicalfo/system-design-primer/blob/master/...` URLs (directories use `/tree/master/`).
 
-Descriptions in the frontmatter start with "Use this when" so an agent that selects skills by description can trigger them without a slash command.
+Cursor loads project skills from `.cursor/skills/<name>/` and user skills from `~/.cursor/skills/<name>/` ([Cursor skills](https://cursor.com/docs/skills)). Claude Code loads project skills from `.claude/skills/<name>/` and personal skills from `~/.claude/skills/<name>/` ([Claude Code skills](https://code.claude.com/docs/en/skills)).
+
+```bash
+git clone https://github.com/typicalfo/system-design-primer.git
+cd /path/to/your-project
+mkdir -p .cursor/skills .claude/skills
+
+# Symlink. Relative links and GitHub links both work.
+ln -s /absolute/path/to/system-design-primer/pack/skills/system-architect .cursor/skills/system-architect
+ln -s /absolute/path/to/system-design-primer/pack/skills/system-architect .claude/skills/system-architect
+
+# Or copy.
+cp -R /absolute/path/to/system-design-primer/pack/skills/system-architect .cursor/skills/system-architect
+cp -R /absolute/path/to/system-design-primer/pack/skills/system-architect .claude/skills/system-architect
+```
+
+Personal skills use the same symlink or copy with a home-directory destination:
+
+```bash
+mkdir -p ~/.claude/skills ~/.cursor/skills
+ln -s /absolute/path/to/system-design-primer/pack/skills/system-architect ~/.claude/skills/system-architect
+ln -s /absolute/path/to/system-design-primer/pack/skills/system-architect ~/.cursor/skills/system-architect
+```
+
+Repeat for `threat-modeler`, `cost-estimator`, `design-reviewer`, and `adr-writer`. Ask the agent to follow that skill. The five folder names are `system-architect`, `threat-modeler`, `cost-estimator`, `design-reviewer`, and `adr-writer`.
 
 ## Attribution
 

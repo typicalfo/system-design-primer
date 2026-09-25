@@ -8,8 +8,11 @@ related:
   - transactional-outbox.md
   - event-driven.md
   - ../reliability/retries-timeouts.md
-  - ../apis/webhooks.md
   - ../../patterns/idempotency-keys.md
+  - ../ai/agents-and-tools.md
+  - workflow-engines.md
+  - ../apis/errors-pagination-async.md
+last_reviewed: 2026-09-25
 ---
 
 # Idempotency

@@ -9,11 +9,14 @@ related:
   - transactional-outbox.md
   - ../../patterns/saga.md
   - ../../patterns/transactional-outbox.md
+  - workflow-engines.md
+  - ../../patterns/durable-workflow.md
+last_reviewed: 2026-09-25
 ---
 
 # Sagas
 
-A saga is a sequence of local transactions. Each step commits in its own service. If a later step fails, earlier steps run compensations (a refund, a release of reserved stock), not a roll-back of someone else's commit. Two-phase commit across services is the thing the saga is replacing. Do not add 2PC lightly. It couples availability of every participant to one lock.
+A saga is a sequence of local transactions. Each step commits in its own service. If a later step fails, earlier steps run compensations (void an authorization, release reserved stock), not a roll-back of someone else's commit. A refund is the compensation only after a capture has already succeeded, which is why the capture runs last. Two-phase commit across services is the thing the saga is replacing. Do not add 2PC lightly. It couples availability of every participant to one lock.
 
 Pattern card: [saga](../../patterns/saga.md).
 
@@ -39,16 +42,22 @@ sequenceDiagram
   participant O as Orchestrator
   participant P as Payments
   participant I as Inventory
-  O->>P: Charge
-  P-->>O: Charged
+  O->>P: Authorize
+  P-->>O: Authorized
   O->>I: Reserve
-  I-->>O: Out of stock
-  O->>P: Refund compensation
+  alt reserved
+    I-->>O: Reserved
+    O->>P: Capture
+    P-->>O: Captured
+  else out of stock
+    I-->>O: Out of stock
+    O->>P: Void authorization
+  end
 ```
 
 ## Anti-patterns
 
-- A compensation that can fail permanently with no human queue. You now have a charged order and no stock and no alert.
+- A compensation that can fail permanently with no human queue. You now have a hold you never voided, or a captured payment and no stock, and no alert.
 - Distributed locks held for the whole saga. You rebuilt a long transaction.
 - Choreography cycles (A waits for B waits for A).
 - Using a saga between tables in the same database that could have been one commit.

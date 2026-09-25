@@ -10,6 +10,9 @@ related:
   - ../reliability/retries-timeouts.md
   - ../security/encryption-keys.md
   - ../../patterns/idempotency-keys.md
+  - errors-pagination-async.md
+  - realtime.md
+last_reviewed: 2026-09-25
 ---
 
 # Webhooks
@@ -18,8 +21,7 @@ A webhook is an HTTP callback to a URL the receiver controls. You are the client
 
 ## Defaults
 
-- The receiver registers an HTTPS URL and a secret per endpoint. You sign the raw body. Include a timestamp in the signature input so a captured request cannot be replayed forever.
-- A common construction is `HMAC-SHA256` over `timestamp + "." + body` with the endpoint secret. Send the timestamp and the signature in headers. Receivers reject timestamps outside a small window (about five minutes) and compare signatures in constant time.
+- The receiver registers an HTTPS URL and a secret per endpoint. Sign the webhook id, the unix timestamp, and the raw body, in that order, separated by periods, with HMAC-SHA256. Send `webhook-id`, `webhook-timestamp`, and `webhook-signature`. Receivers reject timestamps outside a small window (about five minutes), compare signatures in constant time, and treat the id as the dedupe key. That is the [Standard Webhooks](https://www.standardwebhooks.com/) symmetric scheme. The specification is in the [standard-webhooks repository](https://github.com/standard-webhooks/standard-webhooks). This page does not copy it.
 - Rotate secrets by accepting two secrets during overlap.
 - Each event has a stable id. Receivers store it and ignore duplicates. Your delivery is at-least-once.
 - Respond `2xx` quickly means "I durably accepted it," not "I finished the business process." Receivers enqueue and return. You treat non-`2xx` and timeouts as failures.
@@ -52,3 +54,8 @@ sequenceDiagram
 - Treating `200` after a 30-second handler as success while your worker pool dies.
 - One shared secret for every customer.
 - Following redirects from the receiver to an internal address.
+
+## Further reading
+
+- [Standard Webhooks](https://www.standardwebhooks.com/)
+- [standard-webhooks repository](https://github.com/standard-webhooks/standard-webhooks)

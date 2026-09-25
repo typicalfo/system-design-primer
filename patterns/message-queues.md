@@ -9,6 +9,7 @@ related:
   - idempotency-keys.md
   - saga.md
   - load-shedding.md
+last_reviewed: 2026-09-25
 ---
 
 # Message queues and async processing

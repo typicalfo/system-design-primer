@@ -8,6 +8,7 @@ related:
   - blue-green.md
   - strangler-fig.md
   - ../enterprise/delivery/feature-flags.md
+last_reviewed: 2026-09-25
 ---
 
 # Feature flags

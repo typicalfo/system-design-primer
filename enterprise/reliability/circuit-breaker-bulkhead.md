@@ -9,6 +9,7 @@ related:
   - ../tenancy/noisy-neighbor.md
   - ../../patterns/circuit-breaker.md
   - ../../patterns/bulkhead.md
+last_reviewed: 2026-09-25
 ---
 
 # Circuit breakers and bulkheads

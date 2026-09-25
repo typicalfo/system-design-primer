@@ -11,6 +11,7 @@ related:
   - ../compliance/retention.md
   - ../../patterns/cdc.md
   - ../../pack/skills/design-reviewer/checklist.md
+last_reviewed: 2026-09-25
 ---
 
 # Data platform
@@ -43,9 +44,9 @@ Out of scope: real-time product features served from the warehouse, a data mesh 
 
 Given: three operational databases, together 40 GB/day of logical change (updates are a large share). Assumed 2× storage amplification in the raw table format (copies, files, metadata). Assumed curated zone is 20% of raw after projection. Assumed 90 days of raw snapshots kept for rebuild, unless a shorter deletion rule applies to personal-data tables.
 
-- Raw growth ≈ 40 GB/day × 2 = 80 GB/day. 90 days ≈ 7.2 TB before compaction. A year of curated ≈ 0.2 × 40 GB × 365 ≈ 2.9 TB. These are small for object storage and large enough to punish a full scan every five minutes.
+- Raw growth ≈ 40 GB/day × 2 = 80 GB/day. 90 days ≈ 80 × 90 = 7,200 GB = 7.2 TB before compaction. Curated is 20% of that raw rate: 0.2 × 80 GB/day × 365 = 5,840 GB = 5.84 TB in a year. These are small for object storage and large enough to punish a full scan every five minutes.
 - Connector lag budget is 10 minutes so the hourly curated SLO has room for the transform.
-- Analyst concurrency assumed at 30 simultaneous queries. A warehouse engine sized for that is a fixed cost. The variable cost is scanned bytes. A dashboard that scans 7 TB every refresh will dominate the bill. Certified tables are partitioned by day so a daily dashboard scans one partition.
+- Analyst concurrency assumed at 30 simultaneous queries. A warehouse engine sized for that is a fixed cost. The variable cost is scanned bytes. A dashboard that scans the 7.2 TB raw window every refresh will dominate the bill. Certified tables are partitioned by day so a daily dashboard scans one partition.
 - 10× change volume (400 GB/day) is still an object-storage problem, not an OLTP problem, only if CDC stays on the log. If someone "simplifies" by querying the primary, the product SLO dies first.
 - Decimal GB (10^9).
 
@@ -137,7 +138,7 @@ Reviewed against [checklist.md](../../pack/skills/design-reviewer/checklist.md).
 ### 5. Scan cost is described and not alarmed
 - Severity: Low
 - Area: Cost
-- Evidence: The estimate says a 7 TB scan will dominate and then relies on partition discipline.
+- Evidence: The estimate says a 7.2 TB raw-window scan will dominate and then relies on partition discipline.
 - Why it matters: One dashboard can spend the month's budget over a weekend.
 - Change: A per-team scanned-byte budget with an alert, using the warehouse engine's query history.
 

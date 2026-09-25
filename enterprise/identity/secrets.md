@@ -10,6 +10,8 @@ related:
   - ../security/supply-chain.md
   - ../delivery/iac-environments.md
   - ../compliance/audit-logs.md
+  - passkeys-mfa.md
+last_reviewed: 2026-09-25
 ---
 
 # Secrets management

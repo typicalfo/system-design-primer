@@ -1,8 +1,21 @@
+---
+title: "Scaling patterns"
+summary: "When cache, shard, CDN, queue, and load-balancing patterns apply, including Primer notes that no longer match current practice."
+tags: [scalability, patterns, cache]
+when_to_use: "Use when an estimate shows a bottleneck and the design must name the pattern and its cost."
+related:
+  - estimates.md
+  - data.md
+  - ../SKILL.md
+  - ../../../../patterns/README.md
+last_reviewed: 2026-09-25
+---
+
 # Scaling patterns
 
-Adapted from the System Design Primer. Attribution: [pack README](../../../README.md#attribution).
+Adapted from the System Design Primer by Donne Martin, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Attribution: [pack README](https://github.com/typicalfo/system-design-primer/blob/master/pack/README.md#attribution).
 
-Use a pattern when [estimates](estimates.md) show a bottleneck. Record the disadvantage in the design's tradeoffs. Definitions below follow the Primer; sentences marked dated name the current equivalent. Cards with the same names live in [patterns/](../../../../patterns/README.md): [cache-aside](../../../../patterns/cache-aside.md), [write-through](../../../../patterns/write-through.md), [write-behind](../../../../patterns/write-behind.md), [sharding](../../../../patterns/sharding.md), [CDN](../../../../patterns/cdn.md), [load balancing](../../../../patterns/load-balancing.md), [reverse proxy](../../../../patterns/reverse-proxy.md), [message queues](../../../../patterns/message-queues.md). The enterprise resilience cards ([retry](../../../../patterns/retry-with-backoff.md), [circuit breaker](../../../../patterns/circuit-breaker.md), [bulkhead](../../../../patterns/bulkhead.md), [load shedding](../../../../patterns/load-shedding.md)) extend the Primer's back-pressure note.
+Use a pattern when [estimates](estimates.md) show a bottleneck. Record the disadvantage in the design's tradeoffs. Definitions below follow the Primer; sentences marked dated name the current equivalent. Cards with the same names live in [patterns/](https://github.com/typicalfo/system-design-primer/blob/master/patterns/README.md): [cache-aside](https://github.com/typicalfo/system-design-primer/blob/master/patterns/cache-aside.md), [write-through](https://github.com/typicalfo/system-design-primer/blob/master/patterns/write-through.md), [write-behind](https://github.com/typicalfo/system-design-primer/blob/master/patterns/write-behind.md), [sharding](https://github.com/typicalfo/system-design-primer/blob/master/patterns/sharding.md), [CDN](https://github.com/typicalfo/system-design-primer/blob/master/patterns/cdn.md), [load balancing](https://github.com/typicalfo/system-design-primer/blob/master/patterns/load-balancing.md), [reverse proxy](https://github.com/typicalfo/system-design-primer/blob/master/patterns/reverse-proxy.md), [message queues](https://github.com/typicalfo/system-design-primer/blob/master/patterns/message-queues.md). The enterprise resilience cards ([retry](https://github.com/typicalfo/system-design-primer/blob/master/patterns/retry-with-backoff.md), [circuit breaker](https://github.com/typicalfo/system-design-primer/blob/master/patterns/circuit-breaker.md), [bulkhead](https://github.com/typicalfo/system-design-primer/blob/master/patterns/bulkhead.md), [load shedding](https://github.com/typicalfo/system-design-primer/blob/master/patterns/load-shedding.md)) extend the Primer's back-pressure note.
 
 ## Performance and scalability
 

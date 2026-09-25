@@ -10,6 +10,7 @@ related:
   - ../security/encryption-keys.md
   - ../security/zero-trust.md
   - ../tenancy/isolation-models.md
+last_reviewed: 2026-09-25
 ---
 
 # HIPAA and PCI DSS basics

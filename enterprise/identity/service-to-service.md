@@ -10,6 +10,7 @@ related:
   - ../security/zero-trust.md
   - ../security/supply-chain.md
   - ../../patterns/sidecar-service-mesh.md
+last_reviewed: 2026-09-25
 ---
 
 # Service-to-service auth
@@ -21,7 +22,7 @@ A workload is a caller. It needs a name the callee can check, and a credential t
 | Choose | Use when | Avoid when |
 |---|---|---|
 | Cloud workload identity | The workload runs on a cloud that can mint short-lived tokens from an instance or service account | The caller and callee sit in unrelated trust domains with no federation |
-| SPIFFE / SPIRE | You want a stable workload id (`spiffe://trust-domain/ns/sa`) across clusters or clouds, issued as an X.509-SVID or JWT-SVID | You have one cluster and the platform identity already answers the question |
+| [SPIFFE](https://spiffe.io/) / SPIRE | You want a stable workload id (`spiffe://trust-domain/ns/sa`) across clusters or clouds, issued as an X.509-SVID or JWT-SVID | You have one cluster and the platform identity already answers the question |
 | Mutual TLS | You need encryption and authentication at the connection, often terminated by a mesh sidecar | You only needed application-level authorization and TLS is already terminated elsewhere. mTLS without a name check is just encryption |
 | OAuth client credentials | A partner or a non-mesh job must call an HTTP API you already protect with an authorization server | Both sides are your workloads and a platform identity exists. A second static client secret is a step backward |
 | Static API key or long-lived cert on disk | Almost never | You can issue a short-lived credential. Static keys leak into images, tickets, and logs |
@@ -50,3 +51,7 @@ A workload is a caller. It needs a name the callee can check, and a credential t
 - mTLS to the sidecar and then plain HTTP to the app with the peer identity dropped on the floor.
 - One Kubernetes `cluster-admin` binding used by CI "temporarily."
 - Trusting the `X-Forwarded-Client-Cert` header from any caller, not only from the proxy you control.
+
+## Further reading
+
+- [SPIFFE](https://spiffe.io/)

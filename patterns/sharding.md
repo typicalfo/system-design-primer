@@ -7,6 +7,8 @@ related:
   - federation.md
   - replication-leader-follower.md
   - denormalization.md
+  - ../enterprise/reliability/cell-based-architecture.md
+last_reviewed: 2026-09-25
 ---
 
 # Sharding

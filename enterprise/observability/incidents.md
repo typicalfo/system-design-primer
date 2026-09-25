@@ -10,6 +10,8 @@ related:
   - ../reliability/disaster-recovery.md
   - ../../templates/runbook.md
   - ../../templates/postmortem.md
+  - ../compliance/eu-regulations.md
+last_reviewed: 2026-09-25
 ---
 
 # Incident response

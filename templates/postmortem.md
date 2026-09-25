@@ -8,6 +8,7 @@ related:
   - slo.md
   - ../enterprise/observability/postmortems.md
   - ../enterprise/observability/incidents.md
+last_reviewed: 2026-09-25
 ---
 
 # Postmortem: <incident title>

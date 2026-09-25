@@ -10,13 +10,15 @@ related:
   - ../identity/authorization-models.md
   - ../tenancy/isolation-models.md
   - ../../patterns/sidecar-service-mesh.md
+  - ../identity/passkeys-mfa.md
+last_reviewed: 2026-09-25
 ---
 
 # Zero trust
 
 Zero trust means a request is allowed because of the caller's identity, the device or workload posture you checked, and a policy on that resource. It is not allowed because the packet arrived from a "trusted" subnet.
 
-The idea is widely documented, including NIST SP 800-207. This page does not copy that publication. It states the engineering defaults.
+The idea is widely documented, including [NIST SP 800-207](https://csrc.nist.gov/pubs/sp/800/207/final). This page does not copy that publication. It states the engineering defaults.
 
 ## Decide
 
@@ -50,3 +52,7 @@ The idea is widely documented, including NIST SP 800-207. This page does not cop
 - Mutual TLS in permissive mode.
 - Trusting an internal header (`X-User-Id`) that any pod can set.
 - One shared admin role for all on-call across all products.
+
+## Further reading
+
+- [NIST SP 800-207, Zero Trust Architecture](https://csrc.nist.gov/pubs/sp/800/207/final)

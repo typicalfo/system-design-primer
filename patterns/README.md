@@ -8,6 +8,7 @@ related:
   - ../templates/README.md
   - ../pack/skills/system-architect/reference/scalability.md
   - ../README.md
+last_reviewed: 2026-09-25
 ---
 
 # Pattern cards
@@ -60,3 +61,6 @@ Guides with the surrounding enterprise context live under [enterprise/](../enter
 | [Feature flags](feature-flags.md) | [Feature flags guide](../enterprise/delivery/feature-flags.md) |
 | [Blue/green](blue-green.md) | [Progressive delivery](../enterprise/delivery/progressive-delivery.md) |
 | [Canary](canary.md) | [Progressive delivery](../enterprise/delivery/progressive-delivery.md) |
+| [Cell-based architecture](cell-based-architecture.md) | [Cell-based architecture](../enterprise/reliability/cell-based-architecture.md) |
+| [Shuffle sharding](shuffle-sharding.md) | [Cell-based architecture](../enterprise/reliability/cell-based-architecture.md) |
+| [Durable workflow](durable-workflow.md) | [Workflow engines](../enterprise/data/workflow-engines.md) |

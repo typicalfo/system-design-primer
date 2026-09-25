@@ -9,6 +9,7 @@ related:
   - circuit-breaker.md
   - message-queues.md
   - ../enterprise/reliability/load-shedding.md
+last_reviewed: 2026-09-25
 ---
 
 # Load shedding

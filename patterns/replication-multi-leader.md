@@ -8,6 +8,7 @@ related:
   - consistency-patterns.md
   - availability-failover.md
   - idempotency-keys.md
+last_reviewed: 2026-09-25
 ---
 
 # Multi-leader replication

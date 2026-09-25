@@ -1,3 +1,16 @@
+---
+title: "ADR template"
+summary: "The canonical Architecture Decision Record outline: status, context, the decision, rejected alternatives, and consequences."
+tags: [adr, template]
+when_to_use: "Use when copying the outline for one architecture decision into the place your team keeps ADRs."
+related:
+  - SKILL.md
+  - reference/when-to-write.md
+  - ../../../enterprise/organization/decisions.md
+  - ../../../templates/adr.md
+last_reviewed: 2026-09-25
+---
+
 # ADR-NNNN: Title in the imperative
 
 - Status: Proposed

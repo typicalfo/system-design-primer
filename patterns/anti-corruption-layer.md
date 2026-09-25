@@ -7,6 +7,7 @@ related:
   - strangler-fig.md
   - api-gateway.md
   - ../enterprise/modernization/anti-corruption-layer.md
+last_reviewed: 2026-09-25
 ---
 
 # Anti-corruption layer

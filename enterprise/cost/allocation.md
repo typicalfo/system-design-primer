@@ -9,6 +9,7 @@ related:
   - ../tenancy/isolation-models.md
   - ../organization/ownership.md
   - ../organization/platform-teams.md
+last_reviewed: 2026-09-25
 ---
 
 # Cost allocation

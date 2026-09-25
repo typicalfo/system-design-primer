@@ -10,6 +10,9 @@ related:
   - ../tenancy/noisy-neighbor.md
   - ../observability/slos.md
   - ../../patterns/rate-limiting.md
+  - ../data/caching-at-scale.md
+  - ../apis/realtime.md
+last_reviewed: 2026-09-25
 ---
 
 # Load shedding

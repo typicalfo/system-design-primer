@@ -8,6 +8,7 @@ related:
   - event-sourcing.md
   - cqrs.md
   - ../enterprise/data/cdc.md
+last_reviewed: 2026-09-25
 ---
 
 # Change data capture

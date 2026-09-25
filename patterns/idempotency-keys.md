@@ -9,6 +9,7 @@ related:
   - message-queues.md
   - saga.md
   - ../enterprise/data/idempotency.md
+last_reviewed: 2026-09-25
 ---
 
 # Idempotency keys

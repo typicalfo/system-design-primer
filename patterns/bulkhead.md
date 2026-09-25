@@ -8,6 +8,7 @@ related:
   - rate-limiting.md
   - load-shedding.md
   - ../enterprise/reliability/circuit-breaker-bulkhead.md
+last_reviewed: 2026-09-25
 ---
 
 # Bulkhead

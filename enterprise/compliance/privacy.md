@@ -7,9 +7,12 @@ related:
   - retention.md
   - residency.md
   - audit-logs.md
-  - soc2.md
   - ../tenancy/lifecycle.md
   - ../data/governance.md
+  - ../ai/rag.md
+  - eu-regulations.md
+  - ../../templates/dpia.md
+last_reviewed: 2026-09-25
 ---
 
 # GDPR and CCPA basics

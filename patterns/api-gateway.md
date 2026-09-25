@@ -8,6 +8,7 @@ related:
   - rate-limiting.md
   - reverse-proxy.md
   - ../enterprise/apis/gateways.md
+last_reviewed: 2026-09-25
 ---
 
 # API gateway

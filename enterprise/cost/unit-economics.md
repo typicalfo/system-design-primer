@@ -8,6 +8,9 @@ related:
   - allocation.md
   - capacity.md
   - ../tenancy/noisy-neighbor.md
+  - ../ai/llm-app-architecture.md
+  - ../../pack/skills/cost-estimator/SKILL.md
+last_reviewed: 2026-09-25
 ---
 
 # Unit economics

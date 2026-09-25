@@ -8,8 +8,11 @@ related:
   - lifecycle.md
   - ../security/encryption-keys.md
   - ../compliance/retention.md
-  - ../compliance/residency.md
+  - ../ai/rag.md
+  - ../data/search.md
+  - ../data/caching-at-scale.md
   - ../../patterns/sharding.md
+last_reviewed: 2026-09-25
 ---
 
 # Per-tenant data and keys

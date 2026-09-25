@@ -9,6 +9,7 @@ related:
   - ../apis/styles.md
   - ../../patterns/anti-corruption-layer.md
   - ../../patterns/strangler-fig.md
+last_reviewed: 2026-09-25
 ---
 
 # Anti-corruption layer

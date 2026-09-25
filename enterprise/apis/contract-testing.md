@@ -8,6 +8,8 @@ related:
   - styles.md
   - ../data/schema-evolution.md
   - ../delivery/cicd.md
+  - ../delivery/testing-strategy.md
+last_reviewed: 2026-09-25
 ---
 
 # Contract testing
@@ -28,7 +30,7 @@ A contract is the slice of behavior a consumer relies on: method, path or messag
 - The contract lives in version control or a registry, reviewed when it changes.
 - CI on the producer runs the consumer expectations, or runs a compatibility gate against the last released schema. A failure blocks the merge.
 - CI on the consumer runs against a stub generated from the contract, so the consumer does not need the real producer to unit-test its parser.
-- Include the error you actually return (`409` on idempotency conflict, `429` on limit), not only the happy JSON.
+- Include the error you actually return (`409` on idempotency conflict, `429` on limit), not only the happy JSON. For HTTP APIs that body is a problem-details document. See [API styles](styles.md) and [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457).
 - Version the contract with the API. See [versioning](versioning.md).
 - Pact-style broker workflows are one implementation. The requirement is the check, not the product. Use what the team will keep green.
 - Semantic versioning of events and a fixture for the oldest reader you still support beat a thousand end-to-end UI tests for this particular risk.
@@ -46,3 +48,7 @@ A contract is the slice of behavior a consumer relies on: method, path or messag
 - Consumer tests that duplicate the producer's implementation instead of the agreed responses.
 - Ignoring contract failures to meet a release date, then debugging them in production with a partner.
 - Schema checks only, while the money field silently changes units.
+
+## Further reading
+
+- [RFC 9457, Problem Details for HTTP APIs](https://www.rfc-editor.org/rfc/rfc9457)

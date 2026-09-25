@@ -7,6 +7,7 @@ related:
   - replication-leader-follower.md
   - load-balancing.md
   - circuit-breaker.md
+last_reviewed: 2026-09-25
 ---
 
 # Availability and failover

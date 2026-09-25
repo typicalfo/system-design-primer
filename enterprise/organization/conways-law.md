@@ -9,6 +9,7 @@ related:
   - platform-teams.md
   - ../modernization/modular-monolith.md
   - ../modernization/strangler-fig.md
+last_reviewed: 2026-09-25
 ---
 
 # Conway's law

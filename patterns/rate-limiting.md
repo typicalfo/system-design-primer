@@ -8,6 +8,7 @@ related:
   - bulkhead.md
   - retry-with-backoff.md
   - ../enterprise/apis/rate-limiting.md
+last_reviewed: 2026-09-25
 ---
 
 # Rate limiting

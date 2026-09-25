@@ -10,6 +10,9 @@ related:
   - ../identity/authorization-models.md
   - ../../templates/threat-model.md
   - ../../pack/skills/design-reviewer/checklist.md
+  - ../ai/llm-security.md
+  - ../../pack/skills/threat-modeler/SKILL.md
+last_reviewed: 2026-09-25
 ---
 
 # Threat modeling with STRIDE

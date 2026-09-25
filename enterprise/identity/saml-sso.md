@@ -8,6 +8,9 @@ related:
   - authorization-models.md
   - ../tenancy/lifecycle.md
   - ../security/owasp-asvs.md
+  - passkeys-mfa.md
+  - scim-provisioning.md
+last_reviewed: 2026-09-25
 ---
 
 # SSO and SAML

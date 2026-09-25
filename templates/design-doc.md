@@ -11,6 +11,7 @@ related:
   - ../pack/skills/system-architect/SKILL.md
   - ../pack/skills/system-architect/reference/approach.md
   - ../pack/skills/design-reviewer/checklist.md
+last_reviewed: 2026-09-25
 ---
 
 # Design doc: <name>

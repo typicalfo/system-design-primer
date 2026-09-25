@@ -9,6 +9,7 @@ related:
   - ../apis/versioning.md
   - ../delivery/database-migrations.md
   - ../../patterns/cdc.md
+last_reviewed: 2026-09-25
 ---
 
 # Schema evolution

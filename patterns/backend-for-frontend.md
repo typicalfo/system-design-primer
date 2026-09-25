@@ -7,6 +7,7 @@ related:
   - api-gateway.md
   - cqrs.md
   - ../enterprise/apis/styles.md
+last_reviewed: 2026-09-25
 ---
 
 # Backend for frontend
