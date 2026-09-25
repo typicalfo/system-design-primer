@@ -8,6 +8,7 @@ related:
   - cdc.md
   - transactional-outbox.md
   - ../enterprise/compliance/audit-logs.md
+last_reviewed: 2026-09-25
 ---
 
 # Event sourcing

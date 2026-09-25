@@ -10,6 +10,7 @@ related:
   - ../apis/rate-limiting.md
   - ../../patterns/retry-with-backoff.md
   - ../../patterns/idempotency-keys.md
+last_reviewed: 2026-09-25
 ---
 
 # Retries, backoff, and timeouts

@@ -11,6 +11,7 @@ related:
   - ../security/supply-chain.md
   - ../../patterns/api-gateway.md
   - ../../pack/skills/design-reviewer/checklist.md
+last_reviewed: 2026-09-25
 ---
 
 # Internal platform with SSO and audit
@@ -46,7 +47,8 @@ Given: 800 engineers, 250 services, 40 production deploys per business day. Assu
 
 - Catalog reads ≈ 800 × 30 / 86,400 ≈ 0.3/s average. Peak during the workday at 10× is still a few reads per second. This is not a scale problem. It is a control problem.
 - Audit volume ≈ 40 × 15 events/day plus break-glass ≈ 600 + (50 × 200 / 30) ≈ 600 + 333 ≈ 1,000 events/day. At 1 KB, two years is under 1 GB. Integrity and access matter. Throughput does not.
-- Build minutes are the cost driver, not the catalog. Assumed 250 services × 5 builds/day × 10 minutes. That is about 87,000 build minutes a month. Showback uses build minutes and deployed replica-hours.
+- Build minutes are the cost driver, not the catalog. 250 services × 5 builds/day × 10 minutes = 12,500 build-minutes/day. A month of business days (22) is 12,500 × 22 = 275,000 build-minutes. If that daily rate holds all 30 calendar days, the month is 12,500 × 30 = 375,000 build-minutes. Showback uses build minutes and deployed replica-hours. The quantity to price is those minutes: 275,000 / 60 = 4,583 runner-hours on the 22-day month, or 375,000 / 60 = 6,250 runner-hours on the 30-day month. This design has no dollar rate card, so it does not convert hours to currency.
+- Runner concurrency assumes the day's 12,500 minutes fall in an 8-hour window (480 minutes), which is a planning assumption, not a measurement. Average in flight = 12,500 / 480 ≈ 26 builds. A 2× daytime clump, also a planning factor, needs about 52 concurrent runners. If all 250 services start one 10-minute build together, 52 runners drain the queue in 250 / 52 × 10 ≈ 48 minutes. Size the pool for about 52 concurrent builds. The catalog QPS above is not the limit.
 - 10× engineers (8,000) still does not stress Postgres. The bottleneck to design for is the IdP and the signing key, not QPS.
 
 ## Component sketch
@@ -136,7 +138,7 @@ Reviewed against [checklist.md](../../pack/skills/design-reviewer/checklist.md).
 ### 4. Showback has no owner for untagged build minutes
 - Severity: Low
 - Area: Cost
-- Evidence: Cost is build minutes and replica-hours. Untagged minutes are not given an owner.
+- Evidence: Cost is build minutes and replica-hours. The business-day month is 275,000 build-minutes (12,500 × 22). Untagged minutes are not given an owner.
 - Why it matters: Shared runners will become an unallocated bucket and the showback will not be trusted.
 - Change: Default-deny untagged jobs, and assign the platform residual to the platform team explicitly.
 

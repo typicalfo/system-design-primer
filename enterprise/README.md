@@ -10,6 +10,7 @@ related:
   - ../templates/README.md
   - ../pack/README.md
   - ../AGENTS.md
+last_reviewed: 2026-09-25
 ---
 
 # Enterprise guide
@@ -25,7 +26,7 @@ If a Primer section is old, start at [what's dated](whats-dated.md).
 | [OIDC and OAuth 2.0](identity/oidc-oauth2.md) | Which flow and which token |
 | [SSO and SAML](identity/saml-sso.md) | When a customer IdP speaks SAML |
 | [Authorization models](identity/authorization-models.md) | RBAC, ABAC, or ReBAC |
-| [Service-to-service auth](identity/service-to-service.md) | Workload identity, SPIFFE, mTLS |
+| [Service-to-service auth](identity/service-to-service.md) | Workload identity, [SPIFFE](https://spiffe.io/), mTLS |
 | [Secrets](identity/secrets.md) | Where credentials live and how they rotate |
 
 ## Security

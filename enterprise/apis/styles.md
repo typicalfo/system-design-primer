@@ -10,6 +10,7 @@ related:
   - ../data/schema-evolution.md
   - ../../patterns/api-gateway.md
   - ../../patterns/backend-for-frontend.md
+last_reviewed: 2026-09-25
 ---
 
 # REST, gRPC, and GraphQL
@@ -30,7 +31,7 @@ Pattern context: [API gateway](../../patterns/api-gateway.md), [backend for fron
 ## Defaults
 
 - One style per boundary. A service can speak REST outside and gRPC inside. It should not speak three styles to the same caller without a reason.
-- Errors are stable and documented. HTTP status codes for HTTP. Richer error bodies with a code, a message safe to show, and a request id. Do not leak stack traces.
+- Errors are stable and documented. HTTP status codes for HTTP. Use a problem-details body (`application/problem+json`): a type, a title, the HTTP status, a detail safe to show, and a request id. [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457) defines that document and obsoletes RFC 7807. Do not leak stack traces.
 - Pagination is cursor-based when the list can change while someone pages. Offset pagination drifts and gets slow.
 - Idempotency on creates that clients retry. See [idempotency](../data/idempotency.md).
 - Timeouts and payload limits are part of the contract. A 50 MB JSON body is a decision, not an accident.
@@ -43,3 +44,7 @@ Pattern context: [API gateway](../../patterns/api-gateway.md), [backend for fron
 - GraphQL as a gateway to every internal database table, with the client's query becoming your capacity plan.
 - Exposing gRPC reflection and an admin service on the public port.
 - Choosing a style because it is fashionable, then fighting it for the actual access pattern.
+
+## Further reading
+
+- [RFC 9457, Problem Details for HTTP APIs](https://www.rfc-editor.org/rfc/rfc9457)

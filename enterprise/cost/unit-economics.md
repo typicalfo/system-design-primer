@@ -8,6 +8,7 @@ related:
   - allocation.md
   - capacity.md
   - ../tenancy/noisy-neighbor.md
+last_reviewed: 2026-09-25
 ---
 
 # Unit economics

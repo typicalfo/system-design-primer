@@ -9,6 +9,7 @@ related:
   - decisions.md
   - ../observability/alerting-oncall.md
   - ../data/governance.md
+last_reviewed: 2026-09-25
 ---
 
 # Service ownership

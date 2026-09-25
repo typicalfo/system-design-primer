@@ -9,6 +9,7 @@ related:
   - idempotency.md
   - ../../patterns/transactional-outbox.md
   - ../../patterns/cdc.md
+last_reviewed: 2026-09-25
 ---
 
 # Transactional outbox

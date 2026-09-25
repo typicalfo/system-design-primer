@@ -1,6 +1,17 @@
+---
+title: "Estimates"
+summary: "Back-of-the-envelope formulas plus the Primer's powers-of-two, latency, and availability figures used for capacity math."
+tags: [estimates, capacity]
+when_to_use: "Use when a design needs a shown rate, storage, bandwidth, latency budget, or availability product."
+related:
+  - approach.md
+  - ../SKILL.md
+last_reviewed: 2026-09-25
+---
+
 # Estimates
 
-Adapted from the System Design Primer. Attribution: [pack README](../../../README.md#attribution).
+Adapted from the System Design Primer by Donne Martin, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Attribution: [pack README](https://github.com/typicalfo/system-design-primer/blob/master/pack/README.md#attribution).
 
 Show every multiplication. Round at the end, and say which unit (decimal GB is 10^9 bytes; GiB is 2^30). A peak multiplier is an assumption you state, not a constant the Primer defines.
 
@@ -20,12 +31,12 @@ Show every multiplication. Round at the end, and say which unit (decimal GB is 1
 
 ### Downtime the Primer publishes
 
-These are the Primer's published figures. They sit within about a second of 0.1% and 0.01% of a 365.25-day year.
+These are the Primer's published figures, except the four-9s week. A 365.25-day year is 31,557,600 seconds. Three 9s is 0.1% of that (31,557.6 s = 8h 45min 57.6s, printed below as 57s). Four 9s is 0.01% (3,155.76 s = 52min 35.8s, printed as 35.7s). A month is that year divided by 12. A week in this table is 7 days, not a year divided by 52. The Primer prints 1m 5s for four 9s per week. 0.01% of 7 days is 7 × 86,400 × 0.0001 = 60.48 s, which is 1m 0.5s. This table uses 1m 0.5s. The other cells match the Primer and sit within about a second of the same formula.
 
 | Target | Per year | Per month | Per week | Per day |
 |---|---|---|---|---|
 | 99.9% (three 9s) | 8h 45min 57s | 43m 49.7s | 10m 4.8s | 1m 26.4s |
-| 99.99% (four 9s) | 52min 35.7s | 4m 23s | 1m 5s | 8.6s |
+| 99.99% (four 9s) | 52min 35.7s | 4m 23s | 1m 0.5s | 8.6s |
 
 Quote a target only after naming the window and the user-visible failure. "The API returns 5xx" and "a queued export is an hour late" are different availabilities.
 

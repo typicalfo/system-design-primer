@@ -8,6 +8,7 @@ related:
   - ../enterprise/observability/slos.md
   - ../enterprise/observability/alerting-oncall.md
   - ../pack/skills/system-architect/reference/estimates.md
+last_reviewed: 2026-09-25
 ---
 
 # SLO: <service / journey>

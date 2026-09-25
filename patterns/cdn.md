@@ -7,6 +7,7 @@ related:
   - cache-invalidation.md
   - reverse-proxy.md
   - load-balancing.md
+last_reviewed: 2026-09-25
 ---
 
 # Content delivery network

@@ -1,3 +1,5 @@
+> **Enterprise update (fork):** Translations cover only the original study guide. Translation work belongs upstream at https://github.com/donnemartin/system-design-primer.
+
 # Translations
 
 **Thank you to our awesome translation maintainers!**

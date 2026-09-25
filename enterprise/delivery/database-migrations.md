@@ -8,6 +8,7 @@ related:
   - progressive-delivery.md
   - ../data/schema-evolution.md
   - ../reliability/disaster-recovery.md
+last_reviewed: 2026-09-25
 ---
 
 # Database migrations and rollback

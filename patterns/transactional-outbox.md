@@ -9,6 +9,7 @@ related:
   - idempotency-keys.md
   - saga.md
   - ../enterprise/data/transactional-outbox.md
+last_reviewed: 2026-09-25
 ---
 
 # Transactional outbox

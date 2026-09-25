@@ -11,6 +11,7 @@ related:
   - ../cost/capacity.md
   - ../../patterns/rate-limiting.md
   - ../../patterns/bulkhead.md
+last_reviewed: 2026-09-25
 ---
 
 # Noisy neighbors

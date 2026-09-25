@@ -10,6 +10,7 @@ related:
   - ../observability/incidents.md
   - ../../patterns/blue-green.md
   - ../../patterns/canary.md
+last_reviewed: 2026-09-25
 ---
 
 # CI and CD

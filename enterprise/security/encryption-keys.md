@@ -10,6 +10,7 @@ related:
   - ../tenancy/data-and-keys.md
   - ../compliance/residency.md
   - ../compliance/retention.md
+last_reviewed: 2026-09-25
 ---
 
 # Encryption and key management

@@ -8,6 +8,7 @@ related:
   - ../enterprise/security/threat-modeling.md
   - ../enterprise/security/owasp-asvs.md
   - ../pack/skills/design-reviewer/checklist.md
+last_reviewed: 2026-09-25
 ---
 
 # Threat model: <name>

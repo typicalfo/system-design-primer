@@ -11,6 +11,7 @@ related:
   - ../pack/skills/system-architect/reference/data.md
   - ../pack/skills/system-architect/reference/scalability.md
   - ../pack/skills/system-architect/reference/estimates.md
+last_reviewed: 2026-09-25
 ---
 
 # What's dated in the Primer

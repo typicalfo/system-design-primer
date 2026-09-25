@@ -8,6 +8,7 @@ related:
   - write-behind.md
   - cache-invalidation.md
   - refresh-ahead.md
+last_reviewed: 2026-09-25
 ---
 
 # Cache-aside

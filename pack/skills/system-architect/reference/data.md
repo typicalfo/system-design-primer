@@ -1,8 +1,22 @@
+---
+title: "Data, consistency, and availability"
+summary: "How to pick a store, a consistency model, and a replication scheme, with the Primer's older terms mapped to current names."
+tags: [data, consistency, replication]
+when_to_use: "Use when the design has to name a database, a consistency choice, or what a failover does to writes."
+related:
+  - estimates.md
+  - scalability.md
+  - ../SKILL.md
+  - ../../../../patterns/README.md
+  - ../../../../enterprise/reliability/multi-region.md
+last_reviewed: 2026-09-25
+---
+
 # Data, consistency, and availability
 
-Adapted from the System Design Primer. Attribution: [pack README](../../../README.md#attribution).
+Adapted from the System Design Primer by Donne Martin, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Attribution: [pack README](https://github.com/typicalfo/system-design-primer/blob/master/pack/README.md#attribution).
 
-Pick the store from the access pattern, then pick the consistency you can actually operate. Vocabulary follows the Primer. "Master/slave" in the Primer means primary/replica (one writer) and "master/master" means multi-primary. Use the current terms in the design. Cards: [leader-follower](../../../../patterns/replication-leader-follower.md), [multi-leader](../../../../patterns/replication-multi-leader.md), [federation](../../../../patterns/federation.md), [sharding](../../../../patterns/sharding.md), [denormalization](../../../../patterns/denormalization.md), [consistency patterns](../../../../patterns/consistency-patterns.md), [availability and failover](../../../../patterns/availability-failover.md). Region placement and RPO/RTO are in [multi-region](../../../../enterprise/reliability/multi-region.md) and [disaster recovery](../../../../enterprise/reliability/disaster-recovery.md).
+Pick the store from the access pattern, then pick the consistency you can actually operate. Vocabulary follows the Primer. "Master/slave" in the Primer means primary/replica (one writer) and "master/master" means multi-primary. Use the current terms in the design. Cards: [leader-follower](https://github.com/typicalfo/system-design-primer/blob/master/patterns/replication-leader-follower.md), [multi-leader](https://github.com/typicalfo/system-design-primer/blob/master/patterns/replication-multi-leader.md), [federation](https://github.com/typicalfo/system-design-primer/blob/master/patterns/federation.md), [sharding](https://github.com/typicalfo/system-design-primer/blob/master/patterns/sharding.md), [denormalization](https://github.com/typicalfo/system-design-primer/blob/master/patterns/denormalization.md), [consistency patterns](https://github.com/typicalfo/system-design-primer/blob/master/patterns/consistency-patterns.md), [availability and failover](https://github.com/typicalfo/system-design-primer/blob/master/patterns/availability-failover.md). Region placement and RPO/RTO are in [multi-region](https://github.com/typicalfo/system-design-primer/blob/master/enterprise/reliability/multi-region.md) and [disaster recovery](https://github.com/typicalfo/system-design-primer/blob/master/enterprise/reliability/disaster-recovery.md).
 
 ## SQL and NoSQL
 

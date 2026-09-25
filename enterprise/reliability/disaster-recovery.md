@@ -10,6 +10,7 @@ related:
   - ../compliance/residency.md
   - ../observability/incidents.md
   - ../../patterns/availability-failover.md
+last_reviewed: 2026-09-25
 ---
 
 # Disaster recovery, RPO, and RTO

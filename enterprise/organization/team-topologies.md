@@ -8,11 +8,12 @@ related:
   - platform-teams.md
   - conways-law.md
   - decisions.md
+last_reviewed: 2026-09-25
 ---
 
 # Team topologies
 
-Team Topologies (Skelton and Pais) names four team types and three interaction modes. This page is a short operational reading, not a summary of the book and not a copy of it.
+[Team Topologies](https://teamtopologies.com/) (Skelton and Pais) names four team types and three interaction modes. This page is a short operational reading, not a summary of the book and not a copy of it.
 
 ## Team types
 
@@ -46,3 +47,7 @@ Most product work should sit in stream-aligned teams. The others exist to reduce
 - An architecture board that must approve every service call. That is a bottleneck with a calendar.
 - Enabling teams with production approval power and no on-call.
 - Splitting by technology layer so a one-line user fix needs three teams.
+
+## Further reading
+
+- [Team Topologies](https://teamtopologies.com/)

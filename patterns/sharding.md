@@ -7,6 +7,7 @@ related:
   - federation.md
   - replication-leader-follower.md
   - denormalization.md
+last_reviewed: 2026-09-25
 ---
 
 # Sharding

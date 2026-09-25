@@ -1,6 +1,20 @@
+---
+title: "Design method"
+summary: "The four-step design method adapted from the Primer, and the section headings a written design has to emit."
+tags: [architecture, method]
+when_to_use: "Use when turning a request into a design and you need the step order and the output sections."
+related:
+  - estimates.md
+  - scalability.md
+  - data.md
+  - enterprise-checks.md
+  - ../SKILL.md
+last_reviewed: 2026-09-25
+---
+
 # Design method
 
-Adapted from the System Design Primer. Attribution: [pack README](../../../README.md#attribution).
+Adapted from the System Design Primer by Donne Martin, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Attribution: [pack README](https://github.com/typicalfo/system-design-primer/blob/master/pack/README.md#attribution).
 
 The Primer teaches an interview conversation in four steps. Use the same order for a written enterprise design. The output of each step is a section, not a speech.
 
@@ -52,4 +66,4 @@ Use these headings, in order:
 
 Estimates use [estimates.md](estimates.md). Do not add a section the request does not need, and do not drop Estimates or Tradeoffs.
 
-The same headings are the [design doc template](../../../../templates/design-doc.md). Enterprise constraints (identity, tenancy, retention, residency) are requirements when the request has them. The index is [enterprise/README.md](../../../../enterprise/README.md). Pattern names in component notes should match a card in [patterns/](../../../../patterns/README.md). If a Primer note is marked dated in [scalability.md](scalability.md) or [data.md](data.md), the short list is [what's dated](../../../../enterprise/whats-dated.md).
+The same headings are the [design doc template](https://github.com/typicalfo/system-design-primer/blob/master/templates/design-doc.md). Enterprise constraints (identity, tenancy, retention, residency) are requirements when the request has them. The decisions to write down are in [enterprise-checks.md](enterprise-checks.md). The full index is [enterprise/README.md](https://github.com/typicalfo/system-design-primer/blob/master/enterprise/README.md). Pattern names in component notes should match a card in [patterns/](https://github.com/typicalfo/system-design-primer/blob/master/patterns/README.md). If a Primer note is marked dated in [scalability.md](scalability.md) or [data.md](data.md), the short list is [what's dated](https://github.com/typicalfo/system-design-primer/blob/master/enterprise/whats-dated.md).

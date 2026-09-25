@@ -1,3 +1,17 @@
+---
+title: "Worked example: multi-tenant audit log"
+summary: "A hand-run of the architect and design-reviewer skills on one multi-tenant audit log, including where the review disagrees with the design."
+tags: [example, audit-log, tenancy]
+when_to_use: "Use when you want a finished example of the skill output instead of the procedure alone."
+related:
+  - design.md
+  - review.md
+  - ../../skills/system-architect/SKILL.md
+  - ../../skills/design-reviewer/SKILL.md
+  - ../../skills/adr-writer/SKILL.md
+last_reviewed: 2026-09-25
+---
+
 # Worked example: multi-tenant audit log
 
 A hand-run of the skills on one enterprise feature, so readers can see the quality bar. Nothing here is a service in this repository. The Primer solutions are untouched.

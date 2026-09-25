@@ -1,3 +1,16 @@
+---
+title: "Multi-tenant audit log design"
+summary: "Architect-skill design for a multi-tenant audit log, covering ingest, tenant-scoped search, export, retention, and the capacity arithmetic."
+tags: [example, audit-log, design]
+when_to_use: "Use when you want to see the system-architect sections filled in for a production feature."
+related:
+  - README.md
+  - review.md
+  - ../../skills/system-architect/SKILL.md
+  - ../../skills/system-architect/reference/approach.md
+last_reviewed: 2026-09-25
+---
+
 # Multi-tenant audit log
 
 Output of the system-architect skill for the request in [README.md](README.md).
@@ -43,7 +56,7 @@ Arithmetic:
 - Ingress average = 1.0×10^11 / 86,400 ≈ 1.16 MB/s. Peak ingress ≈ 5.8 MB/s.
 - Query egress peak = 100 × 200 KB = 20 MB/s. Small next to ingest storage.
 - Hot raw = 100 GB × 90 = 9 TB. With 0.5× overhead = 13.5 TB primary. With one replica = 27 TB.
-- Cold steady state, after year 7: 0.9 × 100 GB × 365 = 32,850 GB (32.85 TB) on the one-year tier, plus 0.1 × 100 GB × 365 × 7 = 25,550 GB (25.55 TB) on the seven-year tier. Together 58.4 TB logical. Decimal TB, 1 TB = 1,000 GB.
+- Cold steady state, after year 7: 0.9 × 100 GB × 365 = 32,850 GB (32.85 TB) on the one-year tier, plus 0.1 × 100 GB × 365 × 7 = 25,550 GB (25.55 TB) on the seven-year tier. Together 58.4 TB logical in the home region. Decimal TB, 1 TB = 1,000 GB. The other region stores an asynchronous copy of the seven-year prefix only, another 25.55 TB. Object bytes this design stores are 58.4 + 25.55 = 83.95 TB. The one-year tier is not in that copy.
 
 The bottleneck at this size is not bandwidth. It is per-tenant ordering and the operational promise that an acknowledgement means the bytes are in object storage. 2,900 events/s of 2 KB is a modest stream for a log or an object store. The design still partitions, because a single writer process would be the availability risk, not because the bytes require it.
 

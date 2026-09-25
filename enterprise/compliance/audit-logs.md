@@ -10,6 +10,7 @@ related:
   - ../observability/telemetry.md
   - ../security/threat-modeling.md
   - ../../patterns/event-sourcing.md
+last_reviewed: 2026-09-25
 ---
 
 # Tamper-evident audit logs

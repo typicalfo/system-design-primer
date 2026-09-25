@@ -9,6 +9,7 @@ related:
   - ../tenancy/noisy-neighbor.md
   - ../cost/capacity.md
   - ../../patterns/rate-limiting.md
+last_reviewed: 2026-09-25
 ---
 
 # Rate limiting
@@ -28,7 +29,7 @@ A rate limit is a fairness and cost control. Load shedding is what you do when t
 
 - Key by credential or tenant, plus the route class. Anonymous traffic can additionally key by IP. IP alone is wrong for authenticated APIs.
 - Different limits for cheap reads, writes, and exports. One global number will be either too tight for reads or too loose for exports.
-- Return `429` with `Retry-After` and a machine-readable code. Tell the client which limit, in words a customer integrator can act on.
+- Return `429` with `Retry-After` and a problem-details body ([RFC 9457](https://www.rfc-editor.org/rfc/rfc9457)) that names the limit in words a customer integrator can act on. Do not put a stack trace in `detail`.
 - Enforce in one place per key or accept that two limiters can each allow the full budget. If you run many gateway replicas, the counter has to be shared or proportionally split. A local counter per replica multiplies the allowed rate by the replica count.
 - Log limit breaches with the key and the route. They are an abuse signal and a capacity signal.
 - Internal callers get their own key and limit. "Internal" with no limit is how a job takes the API down.
@@ -47,3 +48,7 @@ A rate limit is a fairness and cost control. Load shedding is what you do when t
 - A limit so high it never trips before the database falls over.
 - Returning `500` on limit so clients retry harder.
 - Per-user limits with no per-tenant limit, so a tenant with many users is unlimited.
+
+## Further reading
+
+- [RFC 9457, Problem Details for HTTP APIs](https://www.rfc-editor.org/rfc/rfc9457)

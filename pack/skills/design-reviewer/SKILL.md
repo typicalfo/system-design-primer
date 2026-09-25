@@ -5,9 +5,9 @@ description: "Use this when reviewing a proposed software architecture or system
 
 # Design reviewer
 
-Review the design you were given. Do not redesign it from scratch. Read [checklist.md](checklist.md) and walk every section. Supporting sources and their licenses are in [corpora/INDEX.md](../../corpora/INDEX.md); follow those links when a finding depends on them, and do not paste their text.
+Review the design you were given. Do not redesign it from scratch. Read [checklist.md](checklist.md) and walk every section. The checklist is the whole review procedure. Links from this folder to the rest of the repo use GitHub URLs so a copied skill still opens them. Supporting sources and their licenses are in [corpora/INDEX.md](https://github.com/typicalfo/system-design-primer/blob/master/pack/corpora/INDEX.md); follow those links when a finding depends on them, and do not paste their text.
 
-The Primer's own security note is only: encrypt in transit and at rest, sanitize input, parameterize queries, least privilege. That is not this review. Identity, ASVS, audit, retention, on-call, cost, migration, and ownership come from the checklist. The checklist links to the [enterprise guide](../../../enterprise/README.md) and the [pattern cards](../../../patterns/README.md). Chapter names for ASVS 5.0.0 are also listed in [enterprise/security/owasp-asvs.md](../../../enterprise/security/owasp-asvs.md). Do not copy requirement text.
+The Primer's own security note is only: encrypt in transit and at rest, sanitize input, parameterize queries, least privilege. That is not this review. Identity, ASVS, audit, retention, on-call, cost, migration, and ownership come from the checklist. The checklist links to the [enterprise guide](https://github.com/typicalfo/system-design-primer/blob/master/enterprise/README.md) and the [pattern cards](https://github.com/typicalfo/system-design-primer/blob/master/patterns/README.md). Chapter names for ASVS 5.0.0 are also listed in [enterprise/security/owasp-asvs.md](https://github.com/typicalfo/system-design-primer/blob/master/enterprise/security/owasp-asvs.md). Do not copy requirement text.
 
 ## What a finding is
 

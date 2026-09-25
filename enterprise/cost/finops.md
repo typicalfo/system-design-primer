@@ -9,13 +9,14 @@ related:
   - allocation.md
   - ../observability/slos.md
   - ../organization/ownership.md
+last_reviewed: 2026-09-25
 ---
 
 # FinOps
 
 FinOps is the practice of managing cloud spend as an engineering concern: see it, attribute it, and change the design when the unit cost is wrong. It is not a finance team renaming the invoice.
 
-The FinOps Foundation publishes the framework. This page does not copy it. The engineering defaults below are enough to start.
+The [FinOps Foundation](https://www.finops.org/framework/) publishes the FinOps Framework. This page does not copy it. The engineering defaults below are enough to start.
 
 ## Defaults
 
@@ -43,3 +44,7 @@ The FinOps Foundation publishes the framework. This page does not copy it. The e
 - Dashboards in a currency nobody on the on-call understands, with no link to a service.
 - Turning off redundancy to make a quarter's number, without changing the SLO you still advertise.
 - Optimizing a 1% line item while an unbounded log pipeline is the bill.
+
+## Further reading
+
+- [FinOps Framework](https://www.finops.org/framework/)

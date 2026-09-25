@@ -56,13 +56,13 @@ Load the row that matches the question. Do not load the whole Primer.
 | Is the Primer section outdated? | [What's dated](enterprise/whats-dated.md) |
 | Show me a full design | [Reference architectures](enterprise/reference-architectures/README.md) |
 
-Machine-readable index of every catalogued doc: [catalog.json](catalog.json). Regenerate with `python3 scripts/build_catalog.py`. Short index for models: [llms.txt](llms.txt).
+Machine-readable index: [catalog.json](catalog.json), schema version 2. It has `schema_version`, a `source_hash` over the catalogued file bytes (no commit id and no timestamp), `counts` (total, by type, and by top-level section), and `entries` sorted by path. Each entry has `path`, `type`, `section`, `title`, `summary`, `tags`, `when_to_use`, `related` (repo-relative), and `last_reviewed`. `SKILL.md` does not carry `last_reviewed`; the catalog uses the latest `last_reviewed` among the other Markdown files in that skill folder. Install [PyYAML](scripts/requirements.txt) with `pip install -r scripts/requirements.txt`, then regenerate with `python3 scripts/build_catalog.py`. That command also rewrites [llms.txt](llms.txt), [llms-full.txt](llms-full.txt), `llms-full/`, and the counts table in [README.md](README.md). `python3 scripts/build_catalog.py --check` exits non-zero if any of those drift, and it does not write. Short index for models: [llms.txt](llms.txt). Full text is indexed from [llms-full.txt](llms-full.txt). One file per section, capped at 1,000,000 bytes. The enterprise bundle is split into `llms-full/enterprise-<subfolder>.txt` when the current text plus 40 further docs, each the size of the largest current enterprise doc, would pass that cap.
 
 ## Conventions
 
-- New docs under `enterprise/`, `patterns/`, and `templates/` start with YAML frontmatter: `title`, `summary`, `tags`, `when_to_use`, `related`.
+- New docs under `enterprise/`, `patterns/`, `templates/`, and `pack/` (except `SKILL.md`) start with YAML frontmatter: `title`, `summary`, `tags`, `when_to_use`, `related`, and `last_reviewed` as `YYYY-MM-DD`. Update `last_reviewed` when you change the page. `SKILL.md` keeps only `name` and `description`, and the description starts with "Use this when".
 - Pattern cards keep the sections Problem, When to use, When not to use, Tradeoffs, Failure modes, Implementation notes, Related patterns.
-- `catalog.json` is generated. Do not hand-edit it.
+- `catalog.json`, `llms.txt`, `llms-full.txt`, and `llms-full/` are generated. Do not hand-edit them.
 - Cite external sources by link. State a license only when it is already verified in [pack/corpora/INDEX.md](pack/corpora/INDEX.md). Do not copy non-redistributable text (Google SRE book and workbook are CC BY-NC-ND; microservices.io is all rights reserved).
 - Original Primer prose, translations, and `solutions/` are not rewritten. Additions to the English README are the fork banner, the "how to use" section, and callouts that start with `Enterprise update (fork)`.
 - How to contribute: [CONTRIBUTING.md](CONTRIBUTING.md). Pull requests only; GitHub Issues are off.

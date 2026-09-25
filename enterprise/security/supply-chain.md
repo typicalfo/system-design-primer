@@ -9,6 +9,7 @@ related:
   - ../delivery/cicd.md
   - ../delivery/iac-environments.md
   - ../../pack/corpora/INDEX.md
+last_reviewed: 2026-09-25
 ---
 
 # Software supply chain
@@ -25,7 +26,7 @@ The supply chain is everything that can change what production runs: source, dep
 | Dependency pinning and review | Libraries and base images move under you | A floating `latest` tag is how you "stay patched." Patch by rebuilding a pin |
 | SLSA-style provenance | A customer or an internal policy asks how the artifact was built | You paste a level number into a slide without a generator that emits the attestation |
 
-SLSA describes levels of build integrity and provenance. Use the project documentation when you need the level definitions. This page does not copy that spec. Prefer the properties: source is identified, the build runs in isolation, the provenance is signed, and deploy checks it.
+[SLSA](https://slsa.dev/) describes levels of build integrity and provenance. Use the project documentation when you need the level definitions. This page does not copy that spec. Prefer the properties: source is identified, the build runs in isolation, the provenance is signed, and deploy checks it.
 
 ## Defaults
 
@@ -51,3 +52,7 @@ SLSA describes levels of build integrity and provenance. Use the project documen
 - Disabling verification the first time it blocks a Friday deploy, with no expiry on the exception.
 - Storing the SBOM in a wiki and the image in a registry, with no digest linking them.
 - Assuming a language lockfile covers the base image, the OS packages, and the CI plugins. It does not.
+
+## Further reading
+
+- [SLSA](https://slsa.dev/)

@@ -8,6 +8,7 @@ related:
   - slos.md
   - alerting-oncall.md
   - ../delivery/cicd.md
+last_reviewed: 2026-09-25
 ---
 
 # OpenTelemetry

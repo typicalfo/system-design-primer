@@ -8,6 +8,7 @@ related:
   - write-through.md
   - write-behind.md
   - cdn.md
+last_reviewed: 2026-09-25
 ---
 
 # Cache invalidation

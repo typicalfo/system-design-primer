@@ -9,6 +9,7 @@ related:
   - incidents.md
   - ../reliability/load-shedding.md
   - ../../templates/runbook.md
+last_reviewed: 2026-09-25
 ---
 
 # Alerting and on-call

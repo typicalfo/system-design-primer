@@ -8,6 +8,7 @@ related:
   - ../templates/README.md
   - ../pack/skills/system-architect/reference/scalability.md
   - ../README.md
+last_reviewed: 2026-09-25
 ---
 
 # Pattern cards

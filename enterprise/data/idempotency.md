@@ -10,6 +10,7 @@ related:
   - ../reliability/retries-timeouts.md
   - ../apis/webhooks.md
   - ../../patterns/idempotency-keys.md
+last_reviewed: 2026-09-25
 ---
 
 # Idempotency

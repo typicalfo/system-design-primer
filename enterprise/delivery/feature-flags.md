@@ -9,6 +9,7 @@ related:
   - ../observability/incidents.md
   - ../../patterns/feature-flags.md
   - ../../patterns/canary.md
+last_reviewed: 2026-09-25
 ---
 
 # Feature flags

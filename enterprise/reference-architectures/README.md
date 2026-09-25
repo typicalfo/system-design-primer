@@ -11,6 +11,7 @@ related:
   - ../../templates/design-doc.md
   - ../../pack/skills/design-reviewer/checklist.md
   - ../../pack/examples/multi-tenant-audit-log/README.md
+last_reviewed: 2026-09-25
 ---
 
 # Reference architectures

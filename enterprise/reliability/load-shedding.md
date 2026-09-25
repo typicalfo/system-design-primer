@@ -10,6 +10,7 @@ related:
   - ../tenancy/noisy-neighbor.md
   - ../observability/slos.md
   - ../../patterns/rate-limiting.md
+last_reviewed: 2026-09-25
 ---
 
 # Load shedding

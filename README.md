@@ -1,32 +1,58 @@
-# Enterprise working fork of the System Design Primer
+# System Design Primer
 
-> This repository is an enterprise-augmented fork of [donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer) by Donne Martin. The original work is copyright 2017 Donne Martin and is licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/). The same grant is stated in [LICENSE.txt](LICENSE.txt), including the note that the license is from the author and not from the author's employer (named there as Facebook). Changes were made, as CC BY 4.0 requires: an enterprise guide, pattern cards, copyable templates, reference architectures, grounding for the AI skills pack under `pack/`, and agent entry points (`AGENTS.md`, `llms.txt`, `catalog.json`). The original Primer prose is preserved below.
+A working kit for designing production systems, built on the System Design Primer.
 
-## How to use this repo to design and build a system (for humans and AI agents)
+- [Enterprise guide](enterprise/README.md)
+- [AI systems](enterprise/ai/README.md)
+- [Agent skills pack](pack/README.md)
 
-Use this repository as a working kit for designing and building production systems. The original study and interview material is unchanged under [Original study guide](#original-study-guide).
+## Use it in Cursor or Claude Code in 60 seconds
 
-### Quick start
+Clone this fork, then install a skill by symlink or by copy. Repeat for `design-reviewer` and `adr-writer`. Symlink stays in sync with the clone. Copy is self-contained: links inside the skill folder stay relative, and links that leave the folder point at GitHub.
 
-1. Write requirements, estimates, and a component sketch with the [system-architect](pack/skills/system-architect/SKILL.md) skill. Start from the [design doc template](templates/design-doc.md).
-2. Review the design with the [design-reviewer](pack/skills/design-reviewer/SKILL.md) skill and its [checklist](pack/skills/design-reviewer/checklist.md).
-3. Record each durable tradeoff with the [adr-writer](pack/skills/adr-writer/SKILL.md) skill. The canonical outline is [template.md](pack/skills/adr-writer/template.md).
-4. Pull a [pattern card](patterns/README.md) or an [enterprise page](enterprise/README.md) for each decision the design actually makes, and copy a [template](templates/README.md) instead of starting from a blank page.
+```bash
+git clone https://github.com/typicalfo/system-design-primer.git
+cd /path/to/your-project
+mkdir -p .cursor/skills .claude/skills
 
-### Map
+# Symlink. Relative links and GitHub links both work.
+ln -s /absolute/path/to/system-design-primer/pack/skills/system-architect .cursor/skills/system-architect
+ln -s /absolute/path/to/system-design-primer/pack/skills/system-architect .claude/skills/system-architect
 
-| Start here | What it is |
-|---|---|
-| [AGENTS.md](AGENTS.md) | How any coding agent should use the repo: workflow, which files to load, conventions. |
-| [llms.txt](llms.txt) | Short index of the key docs for language models. |
-| [catalog.json](catalog.json) | Machine-readable index of every new doc, pattern, skill, template, and reference architecture. Regenerate with `python3 scripts/build_catalog.py`. |
-| [enterprise/](enterprise/README.md) | Identity, security, tenancy, compliance, operations, data, APIs, delivery, cost, and organization. |
-| [patterns/](patterns/README.md) | One card per pattern: problem, when to use, when not to, tradeoffs, failure modes. |
-| [templates/](templates/README.md) | Design doc, ADR pointer, threat model, SLO, runbook, postmortem, capacity worksheet. |
-| [Reference architectures](enterprise/reference-architectures/README.md) | Four end-to-end designs with estimates and a design-review pass. |
-| [pack/](pack/README.md) | Tool-agnostic skills: architect, reviewer, ADR writer. |
-| [What's dated](enterprise/whats-dated.md) | Where the Primer's advice has aged, and the current equivalent. |
-| [CONTRIBUTING.md](CONTRIBUTING.md) | Pull requests only. GitHub Issues are off. |
+# Or copy.
+cp -R /absolute/path/to/system-design-primer/pack/skills/system-architect .cursor/skills/system-architect
+cp -R /absolute/path/to/system-design-primer/pack/skills/system-architect .claude/skills/system-architect
+```
+
+Personal skills use the same symlink or copy with a home-directory destination:
+
+```bash
+mkdir -p ~/.claude/skills ~/.cursor/skills
+ln -s /absolute/path/to/system-design-primer/pack/skills/system-architect ~/.claude/skills/system-architect
+ln -s /absolute/path/to/system-design-primer/pack/skills/system-architect ~/.cursor/skills/system-architect
+```
+
+Ask the agent to follow that skill. Cursor reads [`.cursor/skills/`](https://cursor.com/docs/skills) and `~/.cursor/skills/`. Claude Code reads [`.claude/skills/`](https://code.claude.com/docs/en/skills) and `~/.claude/skills/`.
+
+## What's inside
+
+<!-- counts:start -->
+| Kind | Count |
+|---|---:|
+| Enterprise docs | 72 |
+| AI docs | 1 |
+| Reference architectures | 4 |
+| Pattern cards | 35 |
+| Templates | 7 |
+| Skills | 3 |
+| Total catalogued docs | 132 |
+
+Enterprise docs count every catalogued file under `enterprise/`, including the AI docs and reference architectures listed on their own rows. Pattern cards omit `patterns/README.md`. Templates omit `templates/README.md`. Skills are the `SKILL.md` files.
+<!-- counts:end -->
+
+[AGENTS.md](AGENTS.md) · [llms.txt](llms.txt) · [catalog.json](catalog.json) · [CONTRIBUTING.md](CONTRIBUTING.md) · [CHANGELOG.md](CHANGELOG.md)
+
+This fork builds on the System Design Primer by Donne Martin. The original work is [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); the grant is in [LICENSE.txt](LICENSE.txt). Changes were made: added `enterprise/`, `patterns/`, `templates/`, `pack/`, and agent entry points, and marked callouts. The original study guide text is preserved under [Original study guide](#original-study-guide).
 
 ## Original study guide
 
@@ -35,6 +61,8 @@ The original System Design Primer (study and interview material) by Donne Martin
 *[English](README.md) ∙ [日本語](README-ja.md) ∙ [简体中文](README-zh-Hans.md) ∙ [繁體中文](README-zh-TW.md) | [العَرَبِيَّة‎](https://github.com/donnemartin/system-design-primer/issues/170) ∙ [বাংলা](https://github.com/donnemartin/system-design-primer/issues/220) ∙ [Português do Brasil](https://github.com/donnemartin/system-design-primer/issues/40) ∙ [Deutsch](https://github.com/donnemartin/system-design-primer/issues/186) ∙ [ελληνικά](https://github.com/donnemartin/system-design-primer/issues/130) ∙ [עברית](https://github.com/donnemartin/system-design-primer/issues/272) ∙ [Italiano](https://github.com/donnemartin/system-design-primer/issues/104) ∙ [한국어](https://github.com/donnemartin/system-design-primer/issues/102) ∙ [فارسی](https://github.com/donnemartin/system-design-primer/issues/110) ∙ [Polski](https://github.com/donnemartin/system-design-primer/issues/68) ∙ [русский язык](https://github.com/donnemartin/system-design-primer/issues/87) ∙ [Español](https://github.com/donnemartin/system-design-primer/issues/136) ∙ [ภาษาไทย](https://github.com/donnemartin/system-design-primer/issues/187) ∙ [Türkçe](https://github.com/donnemartin/system-design-primer/issues/39) ∙ [tiếng Việt](https://github.com/donnemartin/system-design-primer/issues/127) ∙ [Français](https://github.com/donnemartin/system-design-primer/issues/250) | [Add Translation](https://github.com/donnemartin/system-design-primer/issues/28)*
 
 **Help [translate](TRANSLATIONS.md) this guide!**
+
+> **Enterprise update (fork):** Translations cover only the original study guide and are maintained upstream at [donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer). Fork additions are English only.
 
 # The System Design Primer
 
@@ -115,6 +143,8 @@ Feel free to submit pull requests to help:
 * Improve sections
 * Add new sections
 * [Translate](https://github.com/donnemartin/system-design-primer/issues/28)
+
+> **Enterprise update (fork):** That translate link is for the original study guide, upstream at [donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer). Fork additions are English only.
 
 Content that needs some polishing is placed [under development](#under-development).
 
@@ -1891,6 +1921,8 @@ Special thanks to:
 Feel free to contact me to discuss any issues, questions, or comments.
 
 My contact info can be found on my [GitHub page](https://github.com/donnemartin).
+
+> **Enterprise update (fork):** Contact for this fork is a pull request on [typicalfo/system-design-primer](https://github.com/typicalfo/system-design-primer). The contact details above are Donne Martin's, for the original project.
 
 ## License
 

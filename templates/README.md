@@ -13,6 +13,7 @@ related:
   - capacity-estimate.md
   - ../pack/skills/adr-writer/template.md
   - ../pack/skills/system-architect/SKILL.md
+last_reviewed: 2026-09-25
 ---
 
 # Templates

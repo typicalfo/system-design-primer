@@ -7,6 +7,7 @@ related:
   - load-balancing.md
   - cdn.md
   - api-gateway.md
+last_reviewed: 2026-09-25
 ---
 
 # Reverse proxy

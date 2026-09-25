@@ -12,6 +12,7 @@ related:
   - ../../patterns/cache-aside.md
   - ../../patterns/transactional-outbox.md
   - ../../pack/skills/design-reviewer/checklist.md
+last_reviewed: 2026-09-25
 ---
 
 # Multi-tenant B2B SaaS
@@ -37,12 +38,13 @@ Out of scope: a custom per-tenant code branch, mobile offline sync, and analytic
 | Interactive read latency | p99 under 300 ms | Home region, item by id, cache hit or primary |
 | Create latency | p99 under 400 ms | Ack after the primary commit, not after webhook delivery |
 | Availability | 99.9% monthly | Successful item reads and writes, excluding planned maintenance announced 7 days ahead |
-| Durability | RPO of 0 for acknowledged writes inside one region | Multi-AZ primary. A region loss may pause the product |
+| Durability | RPO 0 for acknowledged writes inside the region | Primary plus a synchronous replica in another zone. A write is acknowledged only after that replica has the commit. If the replica is unhealthy, the write is not acknowledged |
 | RTO | 60 minutes for a zone loss | With a tested failover |
 | Isolation | A bug that forgets an application `WHERE` still must not return another tenant's row | Database row-level security on the pool |
 | Webhook lag | p99 under 60 s | After commit, while the tenant endpoint is healthy |
 | Retention | 1 year default, 7 years if the contract says so | Then delete, including backups by expiry or by key destruction |
 | Residency | Home region is EU or US, chosen at onboarding | No silent cross-region replica |
+| Region loss | The product pauses. No cross-region RPO is claimed | Acknowledged bytes stay in the home region. Backup restore is not a stated recovery point |
 
 ## Estimates
 
@@ -51,7 +53,7 @@ Given: 5,000 tenants. Assumed: 25 daily active users each, so 125,000 DAU. Assum
 - Average item reads = 125,000 × 40 / 86,400 = 57.9 reads/s. Peak reads ≈ 289/s.
 - Average item writes = 125,000 × 4 / 86,400 = 5.8 writes/s. Peak writes ≈ 29/s.
 - Read egress at peak ≈ 289 × 2 KB ≈ 0.6 MB/s. Not a bandwidth problem.
-- Item storage after 3 years ≈ 5,000 tenants × 4 writes/DAU × 25 users × 365 × 3 × 2 KB ≈ 5,000 × 219,000 × 2 KB ≈ 2.2 TB of rows before indexes. With index overhead 0.5× and one intra-region replica, order of 7 TB. A single primary can hold this. Sharding is not the first move.
+- Item storage after 3 years. Writes per tenant = 4 × 25 × 365 × 3 = 109,500. All tenants = 5,000 × 109,500 = 547,500,000 writes. At 2 KB (decimal, 2,000 bytes) that is 1.095 × 10^12 bytes = 1.095 TB of rows, about 1.1 TB, before indexes. Index overhead 0.5× makes the primary 1.095 × 1.5 = 1.6425 TB. One intra-region synchronous replica doubles that: 1.6425 × 2 = 3.285 TB, about 3.3 TB. A single primary can hold this. Sharding is not the first move.
 - Attachments ≈ 5,000 × 20 × 1 MB = 100 GB/day. Three-year retention ≈ 110 TB in object storage. That is the storage bill.
 - Webhook deliveries ≈ write peak 29/s, one HTTP call each, short body. Worker concurrency stays under a few dozen if endpoints respond in under a second. A slow endpoint must not occupy the whole pool.
 - 10× peak reads ≈ 2,900/s. Still modest for the app tier. The first bottleneck is a hot tenant's queries on the shared primary, not the mean.
@@ -100,7 +102,7 @@ flowchart LR
 | Isolation | Pool plus row-level security. Bridge: dedicated database for tenants that pay for it | Silo account per tenant | 5,000 accounts would dominate operations. Fifty dedicated databases are operable |
 | Identity | OIDC authorization code with PKCE. SAML SP when the customer requires it | Passwords for enterprise tenants | Customers already have an IdP. Owning their passwords is a worse risk |
 | Authorization | RBAC inside the tenant, permission checks in the items service | ReBAC | The product has roles, not a sharing graph |
-| Item store | Postgres, primary plus one sync replica in another zone | A wide-column store from day one | The access pattern is relational and the volume fits |
+| Item store | Postgres, primary plus one sync replica in another zone, for both the pool and each dedicated database | A wide-column store from day one | The access pattern is relational and about 3.3 TB with indexes and the replica still fits one primary |
 | Cache | Redis cache-aside, key `tenant:item`, TTL 60 s, delete on write | Write-through | Writes are rare next to reads. A missed delete is covered by the TTL |
 | Files | Object storage, SSE with a platform KMS key. Per-tenant data key for bridge tenants | Bytes in Postgres | 110 TB does not belong in the primary |
 | Webhooks | Transactional outbox in the item transaction | Publish on the request thread | A crash after commit and before POST would drop events, or a slow endpoint would stall the write |
@@ -109,7 +111,7 @@ flowchart LR
 ## Tradeoffs
 
 - Webhook success is not part of the create latency. A dead customer endpoint lags. The user still has the item. Cost: customers who expect synchronous delivery will be wrong. The admin UI shows the last delivery error.
-- Region loss pauses the product. Cost: no multi-region active-passive yet. The availability target is zonal, and the estimate does not include a second region's bill.
+- Region loss pauses the product. In-region RPO for an acknowledged write is 0, via the synchronous replica. There is no cross-region replica and no cross-region RPO. Cost: no multi-region active-passive yet. The availability target is zonal, and the estimate does not include a second region's bill.
 - RLS is the second control behind application predicates. Cost: every new table must enable it. A table that forgets is a review finding, not a silent hope.
 - Cache staleness up to 60 s, shorter if the delete lands. A read-your-writes path reads the primary for the writer's own request id for 2 s. Cost: extra primary reads on that path.
 - Bridge tenants cost a database each. The unit cost is the reason it is a priced tier, not the default.
@@ -120,8 +122,8 @@ flowchart LR
 |---|---|---|---|
 | One app instance | Nothing user-visible if the balancer drains it | The rest of the tier | None |
 | Redis down | Cache-aside misses | Reads and writes on Postgres | None, latency rises |
-| Pooled primary down | Pooled tenant writes until promotion | Bridge tenants on other databases | Writes not synced to the replica, inside a sub-second RPO if sync replication is healthy |
-| One dedicated database down | That tenant | Everyone else | That tenant's RPO |
+| Pooled primary down | Pooled tenant writes until promotion | Bridge tenants on other databases | Acknowledged writes are on the synchronous replica (RPO 0). Unacknowledged writes are not durable. If that replica is unhealthy, the primary does not acknowledge new writes |
+| One dedicated database down | That tenant | Everyone else | Same rule on that database: RPO 0 for writes it has acknowledged |
 | Outbox publisher down | Webhook lag grows | Item API | Events remain in the outbox |
 | IdP down | New logins | Existing access tokens until they expire (15 min) | None |
 | Bad items deploy | All tenants on that build | Rollback to the previous digest | Schema is expand-only, so rollback of the binary is safe |

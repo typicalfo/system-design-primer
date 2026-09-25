@@ -8,6 +8,7 @@ related:
   - ../enterprise/cost/capacity.md
   - ../enterprise/cost/unit-economics.md
   - ../pack/skills/system-architect/reference/estimates.md
+last_reviewed: 2026-09-25
 ---
 
 # Capacity estimate: <system>

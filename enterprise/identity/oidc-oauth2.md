@@ -12,11 +12,14 @@ related:
   - ../apis/gateways.md
   - ../../patterns/api-gateway.md
   - ../../templates/threat-model.md
+last_reviewed: 2026-09-25
 ---
 
 # OIDC and OAuth 2.0
 
 OAuth 2.0 delegates access. OpenID Connect (OIDC) adds an identity layer: an ID token that says who signed in. An access token is not proof of identity for your client, and an ID token is not a credential for your API.
+
+The defaults below follow the [OAuth 2.0 Security Best Current Practice](https://www.rfc-editor.org/rfc/rfc9700) (RFC 9700). Where this page is stricter than that BCP, the sentence says so. [DPoP](https://www.rfc-editor.org/rfc/rfc9449) (RFC 9449) is one way to bind a token to the client's key. This page does not copy those RFCs.
 
 ## Decide
 
@@ -30,9 +33,11 @@ OAuth 2.0 delegates access. OpenID Connect (OIDC) adds an identity layer: an ID 
 
 ## Defaults
 
-- Public and confidential interactive clients both use authorization code with PKCE (`S256`). A client secret does not replace PKCE on a channel that can leak the code.
+- Public and confidential interactive clients both use authorization code with PKCE (`S256`). A client secret does not replace PKCE. RFC 9700 requires PKCE for public clients and recommends it for confidential clients, including web applications. `S256` is the challenge method that does not put the verifier in the authorization request.
+- Do not issue or accept the implicit grant. RFC 9700 says clients should not use it, because the access token is exposed in the authorization response. Do not accept the resource-owner password credentials grant. RFC 9700 says that grant must not be used.
+- Sender-constrain access tokens with DPoP or mutual TLS where the client can hold a key. RFC 9700 recommends that for access tokens. A bearer token that any holder can replay is the case the constraint is for.
 - Access tokens live 5–15 minutes. Audience is the resource server, not "any API we run."
-- Refresh tokens are rotating, one-time, and sender-constrained (DPoP or mutual TLS) when the client can do it. Reuse of a rotated refresh token revokes the family.
+- Refresh tokens are rotating and one-time. Reuse of a rotated refresh token revokes the family. RFC 9700 requires a public client's refresh token to be sender-constrained or rotating. This page does both when the client can hold a key, and rotates in every case.
 - ID tokens are for the client. Validate issuer, audience (the client id), expiry, nonce, and signature. Do not accept an ID token at the API.
 - Prefer opaque reference tokens at the edge if you must revoke instantly and can afford an introspection hop. Use JWTs when verifiers are many and revocation can wait for expiry, and keep the token small.
 - Browser apps: keep tokens out of `localStorage`. A backend-for-frontend holds the refresh token in an `HttpOnly` `Secure` `SameSite` cookie and calls APIs on the user's behalf.
@@ -73,3 +78,8 @@ sequenceDiagram
 ## Where this sits
 
 ASVS 5.0.0 chapters that cover this area are V6 Authentication, V9 Self-contained Tokens, and V10 OAuth and OIDC. Requirement text stays in the OWASP standard (CC BY-SA 4.0); the chapter map is in [OWASP ASVS](../security/owasp-asvs.md). The license note is in [pack/corpora/INDEX.md](../../pack/corpora/INDEX.md).
+
+## Further reading
+
+- [RFC 9700, OAuth 2.0 Security Best Current Practice](https://www.rfc-editor.org/rfc/rfc9700)
+- [RFC 9449, OAuth 2.0 Demonstrating Proof of Possession (DPoP)](https://www.rfc-editor.org/rfc/rfc9449)

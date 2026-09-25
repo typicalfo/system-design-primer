@@ -7,6 +7,7 @@ related:
   - sharding.md
   - denormalization.md
   - cqrs.md
+last_reviewed: 2026-09-25
 ---
 
 # Federation

@@ -10,6 +10,7 @@ related:
   - ../compliance/retention.md
   - ../compliance/privacy.md
   - ../cost/unit-economics.md
+last_reviewed: 2026-09-25
 ---
 
 # Warehouse and lakehouse

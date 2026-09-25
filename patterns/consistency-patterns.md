@@ -8,6 +8,7 @@ related:
   - replication-multi-leader.md
   - availability-failover.md
   - cqrs.md
+last_reviewed: 2026-09-25
 ---
 
 # Consistency patterns

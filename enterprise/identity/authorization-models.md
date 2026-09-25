@@ -11,6 +11,7 @@ related:
   - ../tenancy/data-and-keys.md
   - ../security/zero-trust.md
   - ../../patterns/api-gateway.md
+last_reviewed: 2026-09-25
 ---
 
 # Authorization models

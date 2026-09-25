@@ -8,6 +8,7 @@ related:
   - availability-failover.md
   - consistency-patterns.md
   - sharding.md
+last_reviewed: 2026-09-25
 ---
 
 # Leader-follower replication

@@ -11,6 +11,7 @@ related:
   - ../identity/authorization-models.md
   - ../compliance/residency.md
   - ../../patterns/sharding.md
+last_reviewed: 2026-09-25
 ---
 
 # Tenant isolation models

@@ -11,6 +11,7 @@ related:
   - schema-evolution.md
   - ../../patterns/message-queues.md
   - ../../patterns/cqrs.md
+last_reviewed: 2026-09-25
 ---
 
 # Event-driven architecture

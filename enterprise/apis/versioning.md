@@ -8,6 +8,7 @@ related:
   - contract-testing.md
   - ../data/schema-evolution.md
   - ../delivery/database-migrations.md
+last_reviewed: 2026-09-25
 ---
 
 # API versioning
@@ -21,7 +22,7 @@ A version is a promise that some callers still need the old behavior. If you dep
 - Breaking changes (remove a field, change a type, change an error code's meaning, tighten validation) ship as a new version or behind a negotiated media type.
 - Prefer one or two live versions, not ten. A version has a published sunset date and a usage metric. Turning it off is a decision with a number, not a hope.
 - URL prefixes (`/v1`) are easy to route and easy to leave forever. Use them when the break is large. Header or media-type versioning fits callers who already pin headers. Pick one scheme per API.
-- Deprecation is a signal in the response (for example a `Sunset` header or a documented field) plus a notice to the owners of the credentials still calling the old version.
+- Deprecation is a signal in the response plus a notice to the owners of the credentials still calling the old version. Send [`Deprecation`](https://www.rfc-editor.org/rfc/rfc9745) (RFC 9745) with the HTTP-date the version is deprecated, and [`Sunset`](https://www.rfc-editor.org/rfc/rfc8594) (RFC 8594) with the HTTP-date after which you may stop serving it.
 - Internal gRPC packages version on breaking protobuf changes. Do not overload field numbers.
 - Events version the same way. See [schema evolution](../data/schema-evolution.md).
 
@@ -48,3 +49,8 @@ A version is a promise that some callers still need the old behavior. If you dep
 - Versioning the entire platform because one endpoint changed.
 - "Versionless" APIs that break mobile clients who cannot refresh today.
 - Encoding the version only in documentation, not in the route, the package, or the schema id, so nobody can see what is live.
+
+## Further reading
+
+- [RFC 9745, The Deprecation HTTP Header Field](https://www.rfc-editor.org/rfc/rfc9745)
+- [RFC 8594, The Sunset HTTP Header Field](https://www.rfc-editor.org/rfc/rfc8594)

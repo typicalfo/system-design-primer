@@ -12,13 +12,14 @@ related:
   - ../compliance/audit-logs.md
   - ../../pack/skills/design-reviewer/checklist.md
   - ../../pack/corpora/INDEX.md
+last_reviewed: 2026-09-25
 ---
 
 # OWASP ASVS chapter map
 
 The Application Security Verification Standard is a catalog of security requirements for web apps and web services. This repo uses version 5.0.0 (May 2025) as the chapter map. The project content is CC BY-SA 4.0, as stated in the ASVS repository README. This page names chapters. It does not copy requirement sentences. The license check and the links live in [pack/corpora/INDEX.md](../../pack/corpora/INDEX.md).
 
-Standard: <https://owasp.org/www-project-application-security-verification-standard/>
+Standard: <https://owasp.org/projects/asvs>
 English PDF for 5.0.0: <https://github.com/OWASP/ASVS/raw/v5.0.0/5.0/OWASP_Application_Security_Verification_Standard_5.0.0_en.pdf>
 
 When a finding needs the exact requirement sentence, say it was not verified here and follow that link.

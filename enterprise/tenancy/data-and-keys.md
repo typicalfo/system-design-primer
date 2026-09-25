@@ -10,6 +10,7 @@ related:
   - ../compliance/retention.md
   - ../compliance/residency.md
   - ../../patterns/sharding.md
+last_reviewed: 2026-09-25
 ---
 
 # Per-tenant data and keys

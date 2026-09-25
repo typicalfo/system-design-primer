@@ -10,6 +10,7 @@ related:
   - ../delivery/cicd.md
   - ../identity/authorization-models.md
   - ../../templates/runbook.md
+last_reviewed: 2026-09-25
 ---
 
 # SOC 2 basics

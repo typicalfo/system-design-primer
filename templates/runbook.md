@@ -8,6 +8,7 @@ related:
   - postmortem.md
   - ../enterprise/observability/alerting-oncall.md
   - ../enterprise/observability/incidents.md
+last_reviewed: 2026-09-25
 ---
 
 # Runbook: <alert name>

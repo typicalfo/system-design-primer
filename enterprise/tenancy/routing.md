@@ -10,6 +10,7 @@ related:
   - ../identity/oidc-oauth2.md
   - ../compliance/residency.md
   - ../reliability/multi-region.md
+last_reviewed: 2026-09-25
 ---
 
 # Tenant-aware routing

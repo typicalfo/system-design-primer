@@ -9,6 +9,7 @@ related:
   - ../identity/secrets.md
   - ../security/supply-chain.md
   - ../compliance/privacy.md
+last_reviewed: 2026-09-25
 ---
 
 # Infrastructure as code and environments

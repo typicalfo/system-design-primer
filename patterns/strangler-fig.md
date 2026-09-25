@@ -8,13 +8,14 @@ related:
   - feature-flags.md
   - api-gateway.md
   - ../enterprise/modernization/strangler-fig.md
+last_reviewed: 2026-09-25
 ---
 
 # Strangler fig
 
 ## Problem
 
-A rewrite that big-bangs on launch day has no rollback except 'turn the old system back on' after the data has already moved. A strangler replaces the system in slices.
+A rewrite that big-bangs on launch day has no rollback except 'turn the old system back on' after the data has already moved. A strangler replaces the system in slices. The name is Martin Fowler's: [Strangler Fig Application](https://martinfowler.com/bliki/StranglerFigApplication.html). This card does not copy that article.
 
 ## When to use
 
@@ -55,3 +56,7 @@ A rewrite that big-bangs on launch day has no rollback except 'turn the old syst
 - [Anti-corruption layer](anti-corruption-layer.md)
 - [Feature flags](feature-flags.md)
 - [Modular monolith guide](../enterprise/modernization/modular-monolith.md)
+
+## Further reading
+
+- [Strangler Fig Application](https://martinfowler.com/bliki/StranglerFigApplication.html), Martin Fowler

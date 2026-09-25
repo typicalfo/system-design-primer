@@ -2,9 +2,14 @@
 """Check relative Markdown links and frontmatter `related` paths.
 
 Covers enterprise/, patterns/, templates/, pack/, AGENTS.md, CLAUDE.md,
-CONTRIBUTING.md, llms.txt, and the fork additions in README.md (the preamble
+CONTRIBUTING.md, CHANGELOG.md, llms.txt, llms-full.txt, the fork note at the
+top of TRANSLATIONS.md, and the fork additions in README.md (the preamble
 plus callouts).
-External URLs are not fetched. Standard library only.
+
+Absolute links to this repo
+(https://github.com/typicalfo/system-design-primer/blob/master/<path> and
+/tree/master/<path>) are checked as local files or directories, including
+anchors on Markdown and text files. Other external URLs are not fetched.
 
     python3 scripts/check_links.py
 """
@@ -21,7 +26,9 @@ ROOT = Path(__file__).resolve().parents[1]
 LINK_RE = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
 FENCE_RE = re.compile(r"```.*?```", re.DOTALL)
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*$", re.MULTILINE)
-RELATED_RE = re.compile(r"^related:\s*(?:\[(.*?)\]\s*)?$", re.MULTILINE)
+REPO_URL_RE = re.compile(
+    r"^https://github\.com/typicalfo/system-design-primer/(blob|tree)/master/(.+)$"
+)
 
 
 def strip_fences(text: str) -> str:
@@ -54,6 +61,17 @@ def parse_target(raw: str) -> str:
         if end != -1:
             return unquote(raw[1:end].strip())
     return unquote(raw.split()[0])
+
+
+def parse_repo_url(target: str) -> tuple[str, str, str] | None:
+    base, _, frag = target.partition("#")
+    base = base.split("?", 1)[0]
+    match = REPO_URL_RE.match(base)
+    if not match:
+        return None
+    kind = match.group(1)
+    repo_path = unquote(match.group(2)).strip("/")
+    return kind, repo_path, unquote(frag)
 
 
 def frontmatter_related(text: str) -> list[str]:
@@ -91,10 +109,19 @@ def iter_files() -> list[Path]:
         base = ROOT / name
         if base.exists():
             files.extend(p for p in base.rglob("*.md") if p.is_file())
-    for name in ("AGENTS.md", "CLAUDE.md", "CONTRIBUTING.md", "llms.txt", "README.md"):
-        p = ROOT / name
-        if p.exists():
-            files.append(p)
+    for name in (
+        "AGENTS.md",
+        "CLAUDE.md",
+        "CONTRIBUTING.md",
+        "CHANGELOG.md",
+        "llms.txt",
+        "llms-full.txt",
+        "README.md",
+        "TRANSLATIONS.md",
+    ):
+        path = ROOT / name
+        if path.exists():
+            files.append(path)
     return files
 
 
@@ -119,22 +146,67 @@ def readme_addition_text(text: str) -> str:
     return "\n".join(chunks)
 
 
+def translations_fork_text(text: str) -> str:
+    lines: list[str] = []
+    for line in text.splitlines():
+        if line.startswith(">"):
+            lines.append(line)
+            continue
+        if lines:
+            break
+    return "\n".join(lines)
+
+
+def scanned_text(path: Path, text: str) -> str:
+    if path.name == "README.md" and path.parent == ROOT:
+        return readme_addition_text(text)
+    if path.name == "TRANSLATIONS.md" and path.parent == ROOT:
+        return translations_fork_text(text)
+    return text
+
+
 def check_file(path: Path, text: str, errors: list[str]) -> None:
     rel = path.relative_to(ROOT).as_posix()
-    scanned = readme_addition_text(text) if path.name == "README.md" and path.parent == ROOT else text
+    scanned = scanned_text(path, text)
     slugs_cache: dict[Path, set[str]] = {path: github_slugs(text)}
 
     def slugs_for(target: Path) -> set[str]:
         if target not in slugs_cache:
-            if target.suffix.lower() in {".md", ".txt"} and target.exists():
+            if target.suffix.lower() in {".md", ".txt"} and target.is_file():
                 slugs_cache[target] = github_slugs(target.read_text(encoding="utf-8"))
             else:
                 slugs_cache[target] = set()
         return slugs_cache[target]
 
+    def anchor_ok(target: Path, frag: str, label: str) -> None:
+        if not frag or target.suffix.lower() not in {".md", ".txt"}:
+            return
+        if frag not in slugs_for(target):
+            errors.append(f"{rel}: {label}")
+
     for raw in LINK_RE.findall(strip_fences(scanned)):
         target = parse_target(raw)
-        if not target or target.startswith(("http://", "https://", "mailto:", "irc:")):
+        if not target:
+            continue
+        repo = parse_repo_url(target)
+        if repo is not None:
+            kind, repo_path, frag = repo
+            resolved = (ROOT / repo_path).resolve()
+            try:
+                resolved.relative_to(ROOT.resolve())
+            except ValueError:
+                errors.append(f"{rel}: missing file {target}")
+                continue
+            if kind == "tree":
+                if not resolved.is_dir():
+                    errors.append(f"{rel}: missing dir {target}")
+                continue
+            if not resolved.is_file():
+                errors.append(f"{rel}: missing file {target}")
+                continue
+            anchor_ok(resolved, frag, f"missing anchor {target}")
+            continue
+        if target.startswith(("http://", "https://", "mailto:", "irc:")):
             continue
         path_part, _, frag = target.partition("#")
         if path_part == "":
@@ -142,12 +214,15 @@ def check_file(path: Path, text: str, errors: list[str]) -> None:
                 errors.append(f"{rel}: missing anchor #{frag}")
             continue
         resolved = (path.parent / path_part).resolve()
+        try:
+            resolved.relative_to(ROOT.resolve())
+        except ValueError:
+            errors.append(f"{rel}: missing file {target}")
+            continue
         if not resolved.exists():
             errors.append(f"{rel}: missing file {target}")
             continue
-        if frag and resolved.suffix.lower() in {".md", ".txt"}:
-            if frag not in slugs_for(resolved):
-                errors.append(f"{rel}: missing anchor {target}")
+        anchor_ok(resolved, frag, f"missing anchor {target}")
 
     for rel_path in frontmatter_related(text if path.name != "README.md" else scanned):
         path_part, _, frag = rel_path.partition("#")
@@ -155,8 +230,7 @@ def check_file(path: Path, text: str, errors: list[str]) -> None:
         if not resolved.exists():
             errors.append(f"{rel}: frontmatter related missing {rel_path}")
             continue
-        if frag and frag not in slugs_for(resolved):
-            errors.append(f"{rel}: frontmatter related missing anchor {rel_path}")
+        anchor_ok(resolved, frag, f"frontmatter related missing anchor {rel_path}")
 
 
 def main() -> int:
@@ -167,8 +241,8 @@ def main() -> int:
         check_file(path, text, errors)
     if errors:
         print(f"{len(errors)} broken links")
-        for err in errors:
-            print(err)
+        for item in errors:
+            print(item)
         return 1
     print(f"ok ({len(files)} files)")
     return 0

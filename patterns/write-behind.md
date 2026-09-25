@@ -7,6 +7,7 @@ related:
   - cache-aside.md
   - write-through.md
   - cache-invalidation.md
+last_reviewed: 2026-09-25
 ---
 
 # Write-behind

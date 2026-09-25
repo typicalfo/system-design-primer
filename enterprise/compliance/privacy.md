@@ -10,6 +10,7 @@ related:
   - soc2.md
   - ../tenancy/lifecycle.md
   - ../data/governance.md
+last_reviewed: 2026-09-25
 ---
 
 # GDPR and CCPA basics

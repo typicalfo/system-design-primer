@@ -10,6 +10,7 @@ related:
   - ../observability/slos.md
   - ../../patterns/canary.md
   - ../../patterns/blue-green.md
+last_reviewed: 2026-09-25
 ---
 
 # Progressive delivery
